@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 import Questions from "./Questions";
 
-function QuizTaker({ quizzes }) {
+function QuizTaker({ quizzes, handleSubmitQuiz }) {
     const { quiz_name } = useParams();
     const [takingQuiz, setTakingQuiz] = useState(false);
 
@@ -12,12 +12,16 @@ function QuizTaker({ quizzes }) {
     console.log(quiz);
     console.log("taking a quiz")
 
+    function handleSubmitScore(score) {
+        handleSubmitQuiz(quiz.id, score);
+    }
+
 
     return (
         <div className="flex flex-col pt-10 items-center min-h-screen w-full pl-72">
             <h1 className="text-2xl text-sky-600 font-bold">{quiz.name}</h1>
             {takingQuiz ? (
-                    <Questions questions={quiz.questions}/> 
+                    <Questions questions={quiz.questions} onSubmitScore={handleSubmitScore}/> 
             ) : (
                 <button 
                     type="button" 

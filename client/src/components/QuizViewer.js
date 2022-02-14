@@ -21,7 +21,7 @@ function QuizViewer({ quizzes }) {
                                 {question.choices.map((choice, index) => {
                                     return (
                                         <div key={choice} className="">
-                                            <input type="radio" id={choice} name={question.question} checked={question.answer === index ? true : false}></input>
+                                            <input type="radio" id={choice} name={question.question} checked={question.answer === index ? true : false} readOnly></input>
                                             <label className="pl-1">{choice}</label>
                                         </div>
                                     )

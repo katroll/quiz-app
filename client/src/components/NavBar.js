@@ -37,20 +37,20 @@ function NavBar({ user, onSignOut, quizzes }) {
 
             {user.admin ? (
                 <>
-                    <ul className="relative px-1 mt-10">
-                        <li className="relative">
-                            <NavLink to="/uploadquiz" className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out">
-                                Upload Quiz
-                            </NavLink>
-                        </li>
-                    </ul>
-                    <ul className="relative px-1">
-                        <li className="relative">
-                            <a className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out">
-                                <span>Students</span>
-                            </a>
-                        </li>
-                    </ul>
+                <ul className="relative px-1 mt-10">
+                    <li class="relative" onClick={handleNewQuizClick}>
+                        <a class="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary">
+                            <span>Upload a Quiz</span>
+                        </a>
+                    </li>   
+                </ul>
+                <ul className="relative px-1">
+                    <li class="relative" onClick={handleNewQuizClick}>
+                        <a class="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary">
+                            <span>Students</span>
+                        </a>
+                    </li>   
+                </ul>
                 </>
             ): ( null )}
 
@@ -74,6 +74,16 @@ function NavBar({ user, onSignOut, quizzes }) {
                 })}
                 
             </li>
+
+            {!user.admin? (
+                <ul className="relative px-1">
+                    <li class="relative" onClick={handleNewQuizClick}>
+                        <a class="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary">
+                            <span>Grades</span>
+                        </a>
+                    </li>   
+                </ul>
+            ) : ( null )}
 
             {/* <ul className="relative px-1">
                 <li class="relative">

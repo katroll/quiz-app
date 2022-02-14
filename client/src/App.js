@@ -52,7 +52,21 @@ function App() {
     });
   }
 
-  console.log(quizzes.length)
+  function handleSubmitQuiz(quizId, score) {
+    console.log("score to submit: ", score);
+    fetch("/grades", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({user_id: currentUser.id, quiz_id: quizId, score: score})
+    })
+    .then(resp => resp.json())
+    .then(grade => {
+      const updatedGrades = [...currentUser.grades, grade];
+      setCurrentUser({...currentUser, grades: updatedGrades});
+    }) 
+  }
+
+  console.log(currentUser)
 
   if(loggedIn === false) {
     return (
@@ -96,7 +110,7 @@ function App() {
       ) : (
         <Routes>
           <Route path="/quiz/:quiz_name" 
-            element={<QuizTaker quizzes={quizzes} />}
+            element={<QuizTaker quizzes={quizzes} handleSubmitQuiz={handleSubmitQuiz} />}
           />
         </Routes>
       )}
