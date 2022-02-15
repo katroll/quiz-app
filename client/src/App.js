@@ -70,7 +70,7 @@ function App() {
 
   if(loggedIn === false) {
     return (
-      <div className="bg-gray-300 min-h-screen pt-20">
+      <div className="bg-slate-500 min-h-screen pt-20">
         <Routes>
           <Route 
             path="/signup" 
@@ -96,7 +96,7 @@ function App() {
   }
 
   return (
-    <div className="flex flex-row min-h-scren min-w-screen bg-blue-400">
+    <div className="flex flex-row min-h-scren min-w-screen bg-slate-400">
         <NavBar user={currentUser} onSignOut={handleSignOut} quizzes={quizzes}/>
       {currentUser.admin ? (
         <Routes>

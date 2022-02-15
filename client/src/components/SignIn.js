@@ -1,35 +1,7 @@
 import { useState } from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import { TextField } from '@mui/material';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Container from '@mui/material/Container';
 
 import { NavLink } from "react-router-dom";
 
-// function Copyright(props) {
-//   return (
-//     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-//       {'Copyright © '}
-//       <Link color="inherit" href="http://katherineroll.com">
-//         Katherine Roll
-//       </Link>{' '}
-//       {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// }
-
-const theme = createTheme();
 
 export default function SignIn({ onSignIn, setSignUp }) {
     const [signInData, setSignIndata] = useState({
@@ -47,7 +19,6 @@ export default function SignIn({ onSignIn, setSignUp }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log(signInData)
         fetch("/signin", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -64,81 +35,47 @@ export default function SignIn({ onSignIn, setSignUp }) {
     }
 
   return (
+    <div className="flex flex-col bg-slate-500 items-center">
+      <p className='text-2xl text-slate-900 font-bold mb-10'>Saint Paul's Computer Training Centre</p>
+      <div className="w-full lg:w-4/12 bg-slate-400 rounded-md shadow shodow-slate-600">
+        <div className="relative flex flex-col min-w-0 break-words w-full mb-6 rounded-lg">
+          <div className="flex flex-col items-center rounded-t mb-0 px-6 py-6">
+            <p className='text-2xl font-bold text-slate-200'>Sign In</p>
+          </div>
+          <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
+            <form onSubmit={handleSubmit}>
+              <div className="relative w-full mb-3">
+                <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">Username</label>
+                <input 
+                  type="text" 
+                  name="username"
+                  className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Username"
+                  onChange={handleSignInChange}/>
+              </div>
+              <div className="relative w-full mb-3">
+                <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">Password</label>
+                <input 
+                  type="text" 
+                  name="password"
+                  className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Password"
+                  onChange={handleSignInChange}/>
+              </div>
+              <div className="text-center mt-6">
+                <button 
+                  type="submit" 
+                  className="bg-slate-700 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"> 
+                    Sign In 
+                </button>
+              </div>
+            </form>
+            <div className='flex justify-end'>
+              <NavLink to="/signup">Don't have a account? Sign up.</NavLink>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  )
     
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="md">
-        <CssBaseline />
-        <Box
-        sx={{
-            marginTop: 0,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            mb: 8
-          }}>
-            <Typography component="h1" variant="h4">
-                Saint Paul's Computer Training Centre
-            </Typography>
-        </Box>
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            mx: "auto",
-            width: "50%"
-          }}
-        >
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              autoComplete="username"
-              autoFocus
-              onChange={handleSignInChange}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              onChange={handleSignInChange}
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <NavLink to="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </NavLink>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-        {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
-      </Container>
-    </ThemeProvider>
-  );
-}
+  }
