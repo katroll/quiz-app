@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :grades
 
   # resources :questions, only: []
   resources :quizzes, only: [:create, :index]

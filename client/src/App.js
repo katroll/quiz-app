@@ -96,7 +96,7 @@ function App() {
   }
 
   return (
-    <div className="flex flex-row min-h-scren min-w-screen bg-sky-200">
+    <div className="flex flex-row min-h-scren min-w-screen bg-blue-400">
         <NavBar user={currentUser} onSignOut={handleSignOut} quizzes={quizzes}/>
       {currentUser.admin ? (
         <Routes>
