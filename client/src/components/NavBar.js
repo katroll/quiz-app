@@ -1,20 +1,13 @@
 import "../index.css"
-import { NavLink, useNavigate } from "react-router-dom";
-import useCurrentColorScheme from "@mui/system/cssVars/useCurrentColorScheme";
+import { useNavigate } from "react-router-dom";
 import 'tw-elements';
 
 
 function NavBar({ user, onSignOut, quizzes }) {
     const navigate = useNavigate();
 
-    function handleNewQuizClick() {
-        navigate("/uploadquiz")
-    }
-
-    console.log("navbar: ", quizzes);
-
     return (
-        <div className="w-60 h-full shadow-md bg-slate-500 absolute" id="sidenavSecExample">
+        <div className="w-60 h-full shadow-md bg-slate-500 fixed z-10 overflow-y-scroll" id="sidenavSecExample">
             <div className="pt-4 pb-2 px-6">
                 <div className="flex items-center">
                     <div className="shrink-0">
@@ -38,7 +31,7 @@ function NavBar({ user, onSignOut, quizzes }) {
                     </li>   
                 </ul>
                 <ul className="relative px-1">
-                    <li class="relative">
+                    <li class="relative" onClick={() => navigate("/students")}>
                         <a class="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-slate-800 text-ellipsis whitespace-nowrap rounded hover:text-slate-400 hover:bg-slate-800 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
                             <span>Students</span>
                         </a>

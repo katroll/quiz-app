@@ -15,12 +15,12 @@ class QuizzesController < ApplicationController
 
   # POST /quizzes
   def create
-    @quiz = Quiz.new(quiz_params)
+    quiz = Quiz.create(quiz_params)
 
-    if @quiz.save
-      render json: @quiz, status: :created, location: @quiz
+    if quiz
+      render json: quiz, status: :created
     else
-      render json: @quiz.errors, status: :unprocessable_entity
+      render json: {errors: "unproccessable entity"}, status: :unprocessable_entity
     end
   end
 

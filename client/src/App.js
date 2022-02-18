@@ -8,6 +8,7 @@ import NavBar from './components/NavBar';
 import UplaodQuiz from './components/UploadQuiz';
 import QuizViewer from './components/QuizViewer';
 import QuizTaker from './components/QuizTaker';
+import StudentContainer from './components/StudentContainer';
 
 //import QuizContainer from './QuizContainer';
 //import NewQuizForm from './NewQuizForm';
@@ -66,6 +67,35 @@ function App() {
     }) 
   }
 
+  function handleSubmitNewQuiz(name, questions) {
+    
+    fetch("/quizzes", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({name: name})
+    })
+    .then(resp => resp.json())
+    .then(quiz => handleSubmitNewQuizQuestions(quiz.id, questions))
+  }
+
+  function handleSubmitNewQuizQuestions(quizId, questions) {
+    questions.forEach(question => {
+      fetch("/questions", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          question: question.question, 
+          choices: question.choices,
+          answer: question.answer, 
+          quiz_id: quizId
+        })
+      })
+      .then(resp => resp.json())
+      .then(question => console.log(question))
+      
+    });
+  }
+
   console.log(currentUser)
 
   if(loggedIn === false) {
@@ -101,10 +131,13 @@ function App() {
       {currentUser.admin ? (
         <Routes>
           <Route path="/uploadquiz" 
-            element={<UplaodQuiz />}
+            element={<UplaodQuiz handleSubmitNewQuiz={handleSubmitNewQuiz}/>}
           />
           <Route path="/quiz/:quiz_name" 
             element={<QuizViewer quizzes={quizzes} />}
+          />
+          <Route path="/students" 
+            element={<StudentContainer />}
           />
         </Routes>
       ) : (

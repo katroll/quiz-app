@@ -14,15 +14,17 @@ class QuestionsController < ApplicationController
   # end
 
   # POST /questions
-  # def create
-  #   @question = Question.new(question_params)
+  def create
+    question = Question.new(question_params)
+    question.choices = params[:choices]
+    question.save
 
-  #   if @question.save
-  #     render json: @question, status: :created, location: @question
-  #   else
-  #     render json: @question.errors, status: :unprocessable_entity
-  #   end
-  # end
+    if question.valid?
+      render json: question, status: :created
+    else
+      render json: {error: "unprocessable entity"}, status: :unprocessable_entity
+    end
+  end
 
   # PATCH/PUT /questions/1
   # def update
@@ -45,7 +47,7 @@ class QuestionsController < ApplicationController
     # end
 
     # Only allow a list of trusted parameters through.
-    # def question_params
-    #   params.require(:question).permit(:question, , :choices, :quiz_id)
-    # end
+    def question_params
+      params.permit(:question, :choices, :answer, :quiz_id)
+    end
 end
