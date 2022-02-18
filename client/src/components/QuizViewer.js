@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 
 function QuizViewer({ quizzes }) {
     const { quiz_name } = useParams();
-
     const quiz = quizzes.find(quiz => quiz.name === quiz_name);
 
     return (

@@ -43,7 +43,7 @@ export default function SignUp({ handleSignIn }) {
   return (
 
     <div className="flex flex-col bg-slate-500 items-center">
-      <p className='text-2xl text-slate-900 font-bold mb-10'>Saint Paul's Computer Training Centre</p>
+      <p className='text-5xl text-slate-900 font-bold mb-10'>Saint Paul's Computer Training Centre</p>
       <div className="w-full lg:w-4/12 bg-slate-400 rounded-md shadow shodow-slate-600">
         <div className="relative flex flex-col min-w-0 break-words w-full mb-6">
           <div className="flex flex-col items-center rounded-t mb-0 px-6 py-6">
@@ -82,7 +82,7 @@ export default function SignUp({ handleSignIn }) {
               <div className="relative w-full mb-3">
                 <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">Password</label>
                 <input 
-                  type="text" 
+                  type="password" 
                   name="password"
                   className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Password"
                   onChange={handleSignUpFormChange}/>

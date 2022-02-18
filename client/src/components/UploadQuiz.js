@@ -52,6 +52,7 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
         if(!quizName || questions.length === 0) {
             setError("Quiz name and file are required");
         } else {
+            setError("")
             handleSubmitNewQuiz(quizName, questions);
         }
     }
@@ -69,31 +70,36 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
                 </div>
                 <div htmlFor="upload" className="flex flex-row space-x-1 items-center mt-2">
                     <label className="p-2 text-stone-800">Upload Quiz: </label>
-                    <div className=" rounded-md p-2">
-                        <input type="file" id="upload" name="upload" onChange={loadQuizFile} className="" />
+                    <div>
+                        <input 
+                            type="file" 
+                            id="upload" 
+                            name="upload" 
+                            onChange={loadQuizFile} 
+                            className="rounded-md p-2" />
                     </div>
                 </div>
             </form>
 
-            <div className="flex space-x-5">            
+            {error ? (
+                <div className="pl-10">
+                    <p>{error}</p>
+                </div>
+            ) : null}
+
+            <div className="flex space-x-5 pl-10 mt-5">            
                 <button 
-                    className="bg-slate-500"
+                    className="bg-slate-500 p-2 rounded"
                     onClick={handleViewPreview}>
                         {preview ? "Hide Preview" : "View Preview"}
                 </button>
 
                 <button 
-                        className="bg-slate-500"
+                        className="bg-slate-500 p-2 rounded"
                         onClick={onSubmitQuiz}>
                             Submit Quiz
                 </button>
             </div>
-
-            {error ? (
-                <div>
-                    <p>{error}</p>
-                </div>
-            ) : null}
 
 
             {preview ? (

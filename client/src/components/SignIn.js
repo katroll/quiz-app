@@ -36,7 +36,7 @@ export default function SignIn({ onSignIn, setSignUp }) {
 
   return (
     <div className="flex flex-col bg-slate-500 items-center">
-      <p className='text-2xl text-slate-900 font-bold mb-10'>Saint Paul's Computer Training Centre</p>
+      <p className='text-5xl text-slate-900 font-bold mb-10'>Saint Paul's Computer Training Centre</p>
       <div className="w-full lg:w-4/12 bg-slate-400 rounded-md shadow shodow-slate-600">
         <div className="relative flex flex-col min-w-0 break-words w-full mb-6 rounded-lg">
           <div className="flex flex-col items-center rounded-t mb-0 px-6 py-6">
