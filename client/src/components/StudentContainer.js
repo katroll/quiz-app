@@ -1,39 +1,31 @@
 import { useEffect, useState } from "react";
 import "../index.css"
+import UserTable from "./UserTable";
 import UserCard from "./UserCard";
 
 
-function StudentContainer() {
-    const [students, setStudents] = useState([]);
-    const [admins, setAdmins] = useState([]);
-
-    useEffect(() => {
-        fetch("/users")
-        .then(resp => resp.json())
-        .then(users => {
-            const studentList = users.filter(user => !user.admin);
-            const adminList = users.filter(user => user.admin);
-
-            setStudents(studentList);
-            setAdmins(adminList);
-        })
-    }, []);
-
-    console.log("students: ", students);
-    console.log("admins: ", admins);
-
+function StudentContainer({ students, admins }) {
+    const [popUp, setPopUp] = useState(false);
+    const [selectedUser, setSelectedUser] = useState({});
 
     return (
-        <div className="h-full pl-72 pt-5">
-            <p>Students</p>
-            {students.map(student => {
-                return (
-                <div 
-                    key={student.id} 
-                    className="bg-slate-200 mb-2 border border-slate-500 p-1 rounded">
-                        <p>{student.first_name} {student.last_name}</p>
+        <div>
+            {popUp ? (
+                <div className="absolute w-full h-full ml-60 bg-gray-500/[.7] z-20 flex items-center pl-48">
+                    <UserCard user={selectedUser} setPopUp={setPopUp} />
                 </div>
-            )})}
+            ) : null }
+
+            <div className="h-full pl-72 pt-5 flex justify-center w-content">
+                <div className="flex flex-col items-center">
+                    <p className="font-bold text-2xl text-gray-800">Students</p>
+                    <UserTable users={students} setPopUp={setPopUp} setSelectedUser={setSelectedUser} />
+                </div>
+                <div className="flex flex-col items-center">
+                    <p className="font-bold text-2xl text-gray-800">Admins</p>
+                    <UserTable users={admins} setPopUp={setPopUp} setSelectedUser={setSelectedUser}/>
+                </div>
+            </div>
         </div>
     )
         

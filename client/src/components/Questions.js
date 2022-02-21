@@ -56,7 +56,7 @@ function Questions( { questions, onSubmitScore }) {
                     })}
                     <button 
                         type="button" 
-                        className="justify-end mt-5 text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                        className="justify-end mt-5 text-white bg-gradient-to-r from-slate-600 to-blue-600 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                         onClick={handleNextClick}>
                             {questionNumber < questions.length - 1 ? "Next Question" : "Submit Quiz"}
                     </button>

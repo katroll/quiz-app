@@ -82,17 +82,20 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
             </form>
 
             {error ? (
-                <div className="pl-10">
-                    <p>{error}</p>
+                <div className="ml-10 px-3 bg-red-400 rounded">
+                    <p className="text-white">{error}</p>
                 </div>
             ) : null}
 
-            <div className="flex space-x-5 pl-10 mt-5">            
-                <button 
-                    className="bg-slate-500 p-2 rounded"
-                    onClick={handleViewPreview}>
-                        {preview ? "Hide Preview" : "View Preview"}
-                </button>
+            <div className="flex space-x-5 pl-10 mt-5">   
+                {questions.length > 0 ? (
+                    <button 
+                        className="bg-slate-500 p-2 rounded"
+                        onClick={handleViewPreview}>
+                            {preview ? "Hide Preview" : "View Preview"}
+                    </button>
+                ) : null } 
+
 
                 <button 
                         className="bg-slate-500 p-2 rounded"

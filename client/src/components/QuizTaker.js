@@ -18,14 +18,14 @@ function QuizTaker({ quizzes, handleSubmitQuiz }) {
 
 
     return (
-        <div className="flex flex-col pt-10 items-center min-h-screen w-full pl-72">
-            <h1 className="text-2xl text-sky-600 font-bold">{quiz.name}</h1>
+        <div className="flex flex-col pt-10 min-h-screen w-2/3 items-center pl-72">
+            <h1 className="text-2xl text-slate-800 font-bold">{quiz.name}</h1>
             {takingQuiz ? (
                     <Questions questions={quiz.questions} onSubmitScore={handleSubmitScore}/> 
             ) : (
                 <button 
                     type="button" 
-                    className="mt-5 text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-md px-5 py-2.5 text-center mr-2 mb-2"
+                    className="mt-5 text-white w-48 bg-gradient-to-r from-slate-600 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-md px-5 py-2.5 text-center mr-2 mb-2"
                     onClick={() => setTakingQuiz(true)}>
                         Begin Quiz
                 </button>

@@ -24,15 +24,22 @@ function NavBar({ user, onSignOut, quizzes }) {
             {user.admin ? (
                 <>
                 <ul className="relative px-1 mt-10">
+                    <li className="relative" onClick={() =>  navigate("/")}>
+                        <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-slate-100 text-ellipsis whitespace-nowrap rounded hover:text-slate-200 hover:bg-slate-800 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
+                            <span>Home</span>
+                        </a>
+                    </li>   
+                </ul>
+                <ul className="relative px-1">
                     <li className="relative" onClick={() =>  navigate("/uploadquiz")}>
-                        <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-slate-100 text-ellipsis whitespace-nowrap rounded hover:text-slate-400 hover:bg-slate-800 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
+                        <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-slate-100 text-ellipsis whitespace-nowrap rounded hover:text-slate-200 hover:bg-slate-800 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
                             <span>Upload a Quiz</span>
                         </a>
                     </li>   
                 </ul>
                 <ul className="relative px-1">
                     <li className="relative" onClick={() => navigate("/students")}>
-                        <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-slate-100 text-ellipsis whitespace-nowrap rounded hover:text-slate-400 hover:bg-slate-800 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
+                        <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-slate-100 text-ellipsis whitespace-nowrap rounded hover:text-slate-200 hover:bg-slate-800 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
                             <span>Students</span>
                         </a>
                     </li>   
@@ -43,7 +50,7 @@ function NavBar({ user, onSignOut, quizzes }) {
 
 
             
-                <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-slate-100 text-ellipsis whitespace-nowrap rounded hover:text-slate-400 hover:bg-slate-800 transition duration-300 ease-in-out cursor-pointer" data-mdb-ripple="true" data-mdb-ripple-color="stone" data-bs-toggle="collapse" data-bs-target="#collapseSidenavSecEx2" aria-expanded="false" aria-controls="collapseSidenavSecEx2">
+                <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-slate-100 text-ellipsis whitespace-nowrap rounded hover:text-slate-200 hover:bg-slate-800 transition duration-300 ease-in-out cursor-pointer" data-mdb-ripple="true" data-mdb-ripple-color="stone" data-bs-toggle="collapse" data-bs-target="#collapseSidenavSecEx2" aria-expanded="false" aria-controls="collapseSidenavSecEx2">
                     <span>Quizzes</span>
                     <svg 
                         aria-hidden="true" 
@@ -59,7 +66,7 @@ function NavBar({ user, onSignOut, quizzes }) {
                     return (
                         <ul key={quiz.name} className="relative accordion-collapse collapse" id="collapseSidenavSecEx2" aria-labelledby="sidenavSecEx2" data-bs-parent="#sidenavSecExample">
                             <li className="relative" onClick={() => navigate(`/quiz/${quiz.name}`)}>
-                                <a className="flex items-center text-sm font-semibold mx-5 py-4 px-6 h-12 overflow-hidden text-slate-100 text-ellipsis whitespace-nowrap rounded hover:text-slate-400 hover:bg-slate-800 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
+                                <a className="flex items-center text-sm font-semibold mx-5 py-4 px-6 h-12 overflow-hidden text-slate-100 text-ellipsis whitespace-nowrap rounded hover:text-slate-200 hover:bg-slate-800 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
                                     <span>{quiz.name}</span>
                                 </a>
                             </li>   
@@ -72,7 +79,7 @@ function NavBar({ user, onSignOut, quizzes }) {
             {!user.admin? (
                 <ul className="relative px-1">
                     <li onClick={() => navigate("/mygrades")} className="relative">
-                    <a className="flex items-center text-sm font-semibold py-4 px-6 h-12 overflow-hidden text-slate-100 text-ellipsis whitespace-nowrap rounded hover:text-slate-400 hover:bg-slate-800 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
+                    <a className="flex items-center text-base font-semibold py-4 px-6 h-12 overflow-hidden text-slate-100 text-ellipsis whitespace-nowrap rounded hover:text-slate-200 hover:bg-slate-800 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
                         <span>Grades</span>
                     </a>
                     </li>
@@ -81,7 +88,7 @@ function NavBar({ user, onSignOut, quizzes }) {
 
             <ul className="relative px-1 mt-5">
                 <li onClick={onSignOut} className="relative">
-                  <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-slate-100 text-ellipsis whitespace-nowrap rounded hover:text-slate-400 hover:bg-slate-800 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
+                  <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-slate-100 text-ellipsis whitespace-nowrap rounded hover:text-slate-200 hover:bg-slate-800 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
                     <span>Logout</span>
                   </a>
                 </li>

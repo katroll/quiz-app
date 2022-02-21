@@ -9,6 +9,7 @@ import UplaodQuiz from './components/UploadQuiz';
 import QuizViewer from './components/QuizViewer';
 import QuizTaker from './components/QuizTaker';
 import StudentContainer from './components/StudentContainer';
+import AdminHome from './components/AdminHome';
 
 //import QuizContainer from './QuizContainer';
 //import NewQuizForm from './NewQuizForm';
@@ -19,6 +20,8 @@ function App() {
   
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
+  const [students, setStudents] = useState([]);
+  const [admins, setAdmins] = useState([]);
 
   const [quizzes, setQuizzes] = useState([]);
 
@@ -36,6 +39,16 @@ function App() {
     fetch("/quizzes")
     .then(resp => resp.json())
     .then(quizzes => setQuizzes(quizzes));
+
+    fetch("/users")
+        .then(resp => resp.json())
+        .then(users => {
+            const studentList = users.filter(user => !user.admin);
+            const adminList = users.filter(user => user.admin);
+
+            setStudents(studentList);
+            setAdmins(adminList);
+        })
   }, []);
 
   function handleSignIn(user) {
@@ -137,8 +150,12 @@ function App() {
             element={<QuizViewer quizzes={quizzes} />}
           />
           <Route path="/students" 
-            element={<StudentContainer />}
+            element={<StudentContainer students={students} admins={admins}/>}
           />
+          <Route path="/" 
+            element={<AdminHome />}
+          />
+
         </Routes>
       ) : (
         <Routes>

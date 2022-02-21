@@ -13,7 +13,7 @@
 
 ### Students Page
 
-*The nav bar doesnt change quizzes after taking one. hmmmmm
+* The nav bar doesnt change quizzes after taking one. hmmmmm
 
 
 *****
