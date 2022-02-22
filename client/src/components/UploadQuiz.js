@@ -34,7 +34,7 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
                         };
                         quizQuestions.push(questionObj);
                     });
-
+                    console.log(XL_row_object);
                     setQuestions(quizQuestions);
                 })
             }

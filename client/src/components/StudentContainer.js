@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "../index.css"
-import UserTable from "./UserTable";
+import StudentTable from "./StudentTable";
 import UserCard from "./UserCard";
 
 
-function StudentContainer({ students, admins }) {
+function StudentContainer({ students, admins, quizzes }) {
     const [popUp, setPopUp] = useState(false);
     const [selectedUser, setSelectedUser] = useState({});
+
 
     return (
         <div>
@@ -16,14 +17,10 @@ function StudentContainer({ students, admins }) {
                 </div>
             ) : null }
 
-            <div className="h-full pl-72 pt-5 flex justify-center w-content">
+            <div className=" pl-72 pt-5 flex justify-center h-screen w-content">
                 <div className="flex flex-col items-center">
                     <p className="font-bold text-2xl text-gray-800">Students</p>
-                    <UserTable users={students} setPopUp={setPopUp} setSelectedUser={setSelectedUser} />
-                </div>
-                <div className="flex flex-col items-center">
-                    <p className="font-bold text-2xl text-gray-800">Admins</p>
-                    <UserTable users={admins} setPopUp={setPopUp} setSelectedUser={setSelectedUser}/>
+                    <StudentTable users={students} setPopUp={setPopUp} setSelectedUser={setSelectedUser} quizzes={quizzes} />
                 </div>
             </div>
         </div>

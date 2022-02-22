@@ -10,6 +10,7 @@ import QuizViewer from './components/QuizViewer';
 import QuizTaker from './components/QuizTaker';
 import StudentContainer from './components/StudentContainer';
 import AdminHome from './components/AdminHome';
+import StudentGradesContainer from './components/StudentGradesContainer';
 
 //import QuizContainer from './QuizContainer';
 //import NewQuizForm from './NewQuizForm';
@@ -24,6 +25,7 @@ function App() {
   const [admins, setAdmins] = useState([]);
 
   const [quizzes, setQuizzes] = useState([]);
+  const [takingQuiz, setTakingQuiz] = useState(false);
 
 
   useEffect(() => {
@@ -66,12 +68,12 @@ function App() {
     });
   }
 
-  function handleSubmitQuiz(quizId, score) {
-    console.log("score to submit: ", score);
+  function handleSubmitQuiz(quizId, results, score) {
+    console.log("results to submit: ", results);
     fetch("/grades", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({user_id: currentUser.id, quiz_id: quizId, score: score})
+      body: JSON.stringify({user_id: currentUser.id, quiz_id: quizId, results: results, score: score})
     })
     .then(resp => resp.json())
     .then(grade => {
@@ -139,8 +141,12 @@ function App() {
   }
 
   return (
-    <div className="flex flex-row min-h-scren min-w-screen bg-slate-400">
+    <div className="flex flex-row min-h-screen min-w-screen bg-slate-400">
+
+      {!takingQuiz ? (
         <NavBar user={currentUser} onSignOut={handleSignOut} quizzes={quizzes}/>
+      ) : null }
+        
       {currentUser.admin ? (
         <Routes>
           <Route path="/uploadquiz" 
@@ -150,7 +156,7 @@ function App() {
             element={<QuizViewer quizzes={quizzes} />}
           />
           <Route path="/students" 
-            element={<StudentContainer students={students} admins={admins}/>}
+            element={<StudentContainer students={students} admins={admins} quizzes={quizzes}/>}
           />
           <Route path="/" 
             element={<AdminHome />}
@@ -160,7 +166,10 @@ function App() {
       ) : (
         <Routes>
           <Route path="/quiz/:quiz_name" 
-            element={<QuizTaker quizzes={quizzes} handleSubmitQuiz={handleSubmitQuiz} />}
+            element={<QuizTaker quizzes={quizzes} handleSubmitQuiz={handleSubmitQuiz} setTakingQuiz={setTakingQuiz} takingQuiz={takingQuiz} />}
+          />
+          <Route path="/mygrades" 
+            element={<StudentGradesContainer user={currentUser}/>}
           />
         </Routes>
       )}

@@ -3,7 +3,9 @@ import { useParams } from "react-router-dom";
 
 function QuizViewer({ quizzes }) {
     const { quiz_name } = useParams();
-    const quiz = quizzes.find(quiz => quiz.name === quiz_name);
+    console.log(quiz_name)
+    const quiz = quizzes.find(quiz => quiz.name.replace(/\s+/g, '') === quiz_name.replace(/\s+/g, ''));
+    console.log(quiz)
 
     return (
         <div className="flex flex-col pt-10 items-start min-h-screen w-full pl-72">

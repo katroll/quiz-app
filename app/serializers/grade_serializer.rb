@@ -1,5 +1,5 @@
 class GradeSerializer < ActiveModel::Serializer
-  attributes :id, :user, :quiz, :score
+  attributes :id, :user, :quiz, :score, :results, :updated_at
 
   def user
     User.find_by(id: self.object.user_id)
@@ -11,4 +11,5 @@ class GradeSerializer < ActiveModel::Serializer
 
   has_one :user
   has_one :quiz
+
 end

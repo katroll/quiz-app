@@ -1,5 +1,3 @@
-
-
 function AdminHome() {
     return (
         <div className="pl-72 pt-10 min-h-screen flex flex-col items-start">

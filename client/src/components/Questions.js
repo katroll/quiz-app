@@ -3,33 +3,54 @@ import { useState } from "react";
 function Questions( { questions, onSubmitScore }) {
     let [questionNumber, setQuestionNumber] = useState(0);
     let [score, setScore] = useState(0);
-    const [isCorrect, setIsCorrect] = useState(false);
+    const [results, setResults] = useState([]);
+    const [correctIndex, setCorrentIndex] = useState([]);
     const [complete, setComplete] = useState(false);
 
     function handleNextClick() {
-        if(isCorrect) {
-            setScore(score += 1);
-        }
 
         if(questionNumber < questions.length - 1) {
             setQuestionNumber(questionNumber += 1);
         }
         else {
             setComplete(true);
-            onSubmitScore(score);
+            console.log(results);
+            calculateScore();
+        }
+    }
+
+    function calculateScore() {
+        let correct = 0;
+        results.forEach((answer, index) => {
+            if(answer === correctIndex[index]) {
+                correct++;
+            }
+            return;
+        })
+        
+        setScore(correct);
+        onSubmitScore(results, correct);
+    }
+
+    function handlePreviousClick() {
+        if(questionNumber > 0) {
+            setQuestionNumber(questionNumber -= 1);
         }
     }
 
     function handleChecked(e, index) {
         e.target.checked = true;
-        console.log(questions[questionNumber].answer);
-        setIsCorrect(questions[questionNumber].answer === index);
-        if(questions[questionNumber].answer === index) {
-            
-        }
+
+        const correctAnswer = [...correctIndex];
+        correctAnswer[questionNumber] = questions[questionNumber].answer;
+        setCorrentIndex(correctAnswer);
+        
+        const newAnswer = [...results];
+        newAnswer[questionNumber] = index;
+        setResults(newAnswer);
     }
 
-    console.log("score: ", score);
+   
 
     return (
         <div className="p-10">
@@ -41,10 +62,11 @@ function Questions( { questions, onSubmitScore }) {
                 </div>
                
             ) : (
-                <>
-                    <div className="mb-5">
+                <div className="bg-slate-300 p-10 pb-3 rounded">
+                    <div className="mb-1">
                         <p className="font-semibold">{questionNumber + 1}. {questions[questionNumber].question}</p>
                     </div>
+                    
                 
                     {questions[questionNumber].choices.map((choice, index) => {
                         return (
@@ -54,13 +76,29 @@ function Questions( { questions, onSubmitScore }) {
                             </div>
                         )
                     })}
-                    <button 
-                        type="button" 
-                        className="justify-end mt-5 text-white bg-gradient-to-r from-slate-600 to-blue-600 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-                        onClick={handleNextClick}>
-                            {questionNumber < questions.length - 1 ? "Next Question" : "Submit Quiz"}
-                    </button>
-                </>
+                    <div className="w-full flex justify-center items-center">
+
+                        <button 
+                            type="button" 
+                            className="mt-5 text-white bg-slate-400 rounded-l border-r hover:bg-slate-600 font-medium text-sm px-5 py-2.5 text-center mb-4"
+                            onClick={handlePreviousClick}>
+                                ← Previous
+                        </button>
+                        <button 
+                            type="button" 
+                            className="mt-5 text-white bg-slate-400 rounded-r hover:bg-slate-600 font-medium text-sm px-5 py-2.5 text-center mb-4"
+                            onClick={handleNextClick}>
+                                {questionNumber < questions.length - 1 ? "Next →" : "Submit Quiz"}
+                        </button>
+                    </div>
+
+                        <button 
+                            type="button" 
+                            className="justify-end mt-1 mb-5 text-white bg-slate-400 rounded border-r hover:bg-slate-600 text-sm px-1 py-1 text-center"
+                            onClick={null}>
+                            Translate Question
+                        </button>
+                </div>
             )}
         </div>
     )

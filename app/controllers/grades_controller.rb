@@ -16,6 +16,7 @@ class GradesController < ApplicationController
   # POST /grades
   def create
     @grade = Grade.new(grade_params)
+    @grade.results = params[:results]
 
     if @grade.save
       render json: @grade, status: :created, location: @grade
@@ -46,6 +47,6 @@ class GradesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def grade_params
-      params.require(:grade).permit(:user_id, :quiz_id, :score)
+      params.require(:grade).permit(:user_id, :quiz_id, :score, :results)
     end
 end
