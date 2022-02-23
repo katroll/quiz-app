@@ -1,11 +1,14 @@
+import { Navigate, useNavigate } from "react-router-dom"
 
 
-function StudentGrades({ user }) {
+function QuizTable({ quizzes }) {
+    const navigate = useNavigate();
 
     return (
-        <div className="mt-2 m-10">
-                <div className="flex flex-col mt-8 max-h-[40vh]">
-                    <div className="py-2 -my-2 overflow-x-auto overflow-y-scroll sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+
+            <div className="">
+                <div className="flex flex-col mt-8 max-h-[80vh]">
+                    <div className="py-2 my-2  overflow-x-auto overflow-y-scroll sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                         <div className="inline-block overflow-hidden align-middle border-b border-light-gray shadow sm:rounded-lg">
                             <table className="reletive">
                                 <thead className="">
@@ -14,30 +17,32 @@ function StudentGrades({ user }) {
                                             Test
                                         </th>
                                         <th className="px-6 py-3 text-xs font-bold leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-white">
-                                            Score
+                                            Date Created
                                         </th>
                                         <th className="px-6 py-3 text-xs font-bold leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-white">
-                                            Date
+                                            Times Taken
                                         </th>
                                     </tr>
                                 </thead>
 
                                 <tbody className="bg-white">
-                                    {user.grades.map((grade) => {
+                                    {quizzes.map((quiz, index) => {
                                         return (
-                                            <tr key={grade.id}>
+                                            <tr key={quiz.id}>
                                                 <td className="px-6 py-4 whitespace-no-wrap border-b border-light-gray">
                                                     <button 
                                                         className="text-sm leading-5 text-gray"
-                                                        onClick={null}>
-                                                            {grade.quiz.name}
+                                                        value={index}
+                                                        onClick={() => navigate(`/test/${quiz.name}`)}>
+                                                            {quiz.name}
                                                     </button>
                                                 </td>
-                                                <td className="px-6 py-4 whitespace-no-wrap border-b border-light-gray text-sm leading-5 text-gray">
-                                                    {`${grade.score}/${grade.results.length}`}
+                                                <td className="px-6 py-4 whitespace-no-wrap border-b border-light-gray">
+                                                    <div className="text-sm leading-5 text-gray"></div>
+                                                            {quiz.created_at.slice(0,10)}
                                                 </td>
-                                                <td className="px-6 py-4 whitespace-no-wrap border-b border-light-gray text-sm leading-5 text-gray">
-                                                    {grade.updated_at.slice(0,10)}
+                                                <td className="px-6 py-4 whitespace-no-wrap border-b border-light-gray">
+                                                    <div className="text-sm leading-5 text-gray">{quiz.grades.length}</div>
                                                 </td>
                                             </tr>
                                     )})}
@@ -47,7 +52,9 @@ function StudentGrades({ user }) {
                     </div>
                 </div>
             </div>
+   
     )
+
 }
 
-export default StudentGrades;
+export default QuizTable;

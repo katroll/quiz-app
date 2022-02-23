@@ -1,10 +1,13 @@
 import { useParams } from "react-router-dom";
+import { useContext } from "react"
+import { QuizzesContext } from "../App";
 
 
-function QuizViewer({ quizzes }) {
-    const { quiz_name } = useParams();
-    console.log(quiz_name)
-    const quiz = quizzes.find(quiz => quiz.name.replace(/\s+/g, '') === quiz_name.replace(/\s+/g, ''));
+function QuizViewer({ }) {
+    const quizzes = useContext(QuizzesContext)
+    const { name } = useParams();
+    console.log(name)
+    const quiz = quizzes.find(quiz => quiz.name.replace(/\s+/g, '') === name.replace(/\s+/g, ''));
     console.log(quiz)
 
     return (
@@ -14,10 +17,13 @@ function QuizViewer({ quizzes }) {
                 {quiz.questions.map((question, index) => {
                     return (
                         <li key={question.question} className="mb-3">
-                            <div className="flex flex-row">
-                                <p className="font-bold mr-3 text-stone-800">{`${index + 1}.`}</p>
-                                <span className="texxt-stone-800">{`${question.question}`}</span>
-                            </div>
+                             <div className="flex flex-row">
+                                        <p className="font-bold mr-3 text-stone-800">{`${index + 1}.`}</p>
+                                        <div className="felx flex-col mb-2">
+                                            <p className="text-stone-800">{question.question}</p>
+                                            <p className="text-stone-800 mt-2 ">{question.bengali}</p>
+                                        </div>  
+                                    </div>
                             <div className="flex flex-col pl-10">
                                 {question.choices.map((choice, index) => {
                                     return (

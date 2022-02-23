@@ -1,6 +1,6 @@
 function AdminHome() {
     return (
-        <div className="pl-72 pt-10 min-h-screen flex flex-col items-start">
+        <div className="pt-10 pl-12 flex flex-col items-start">
             <h1 className="text-2xl text-slate-800 font-bold">This Weeks Activity</h1>
             <div className="flex">
                 <div className="text-slate-800 text-lg mt-5 pt-2 p-x-20">Recently Taken Quizzes</div>

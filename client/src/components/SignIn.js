@@ -8,7 +8,7 @@ export default function SignIn({ onSignIn, setSignUp }) {
         username: "",
         password: ""
     });
-    const [error, setError] = useState({});
+    const [error, setError] = useState("");
 
     function handleSignInChange(e) {
         setSignIndata({
@@ -29,18 +29,16 @@ export default function SignIn({ onSignIn, setSignUp }) {
                 resp.json().then(admin => onSignIn(admin))
             }
             else {
-                resp.json().then(error => setError(error))
+                resp.json().then(error => setError(error.error))
             }
         })
     }
 
   return (
-    <div className="flex flex-col bg-slate-500 items-center">
-      <p className='text-5xl text-slate-900 font-bold mb-10'>Saint Paul's Computer Training Centre</p>
-      <div className="w-full lg:w-4/12 bg-slate-400 rounded-md shadow shodow-slate-600">
+      <div className="w-3/4 lg:w-6/12 bg-light-blue rounded-md shadow-xl shadow-slate-600">
         <div className="relative flex flex-col min-w-0 break-words w-full mb-6 rounded-lg">
           <div className="flex flex-col items-center rounded-t mb-0 px-6 py-6">
-            <p className='text-2xl font-bold text-slate-200'>Sign In</p>
+            <p className='text-2xl font-bold text-slate-900'>Sign In</p>
           </div>
           <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
             <form onSubmit={handleSubmit}>
@@ -68,13 +66,18 @@ export default function SignIn({ onSignIn, setSignUp }) {
                 </button>
               </div>
             </form>
-            <div className='flex justify-end'>
-              <NavLink to="/signup">Don't have a account? Sign up.</NavLink>
+            <div className="flex justify-between">
+              <div className="flex items-start">
+                    <p className="bg-error-red px-2 my-1 rounded">{error}</p>
+              </div>
+              <div className='flex flex-col items-end'>
+                <NavLink to="/signup">Don't have a account? Sign up.</NavLink>
+                <NavLink to="/signup" className="bengali">বাংলা-মিডিয়াম</NavLink>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
   )
     

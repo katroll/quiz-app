@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import "../index.css"
 import StudentTable from "./StudentTable";
 import UserCard from "./UserCard";
+import { StudentsContext } from "../App";
+import { QuizzesContext } from "../App";
 
 
-function StudentContainer({ students, admins, quizzes }) {
+function StudentContainer() {
+    const students = useContext(StudentsContext);
+    const quizzes = useContext(QuizzesContext);
+
     const [popUp, setPopUp] = useState(false);
     const [selectedUser, setSelectedUser] = useState({});
 
@@ -12,14 +17,14 @@ function StudentContainer({ students, admins, quizzes }) {
     return (
         <div>
             {popUp ? (
-                <div className="absolute w-full h-full ml-60 bg-gray-500/[.7] z-20 flex items-center pl-48">
+                <div className="absolute w-full h-full bg-gray/[.7] z-20 flex items-center pl-48">
                     <UserCard user={selectedUser} setPopUp={setPopUp} />
                 </div>
             ) : null }
 
-            <div className=" pl-72 pt-5 flex justify-center h-screen w-content">
+            <div className="pt-5 flex justify-center w-content">
                 <div className="flex flex-col items-center">
-                    <p className="font-bold text-2xl text-gray-800">Students</p>
+                    <p className="font-bold text-2xl text-dark-gray">Students</p>
                     <StudentTable users={students} setPopUp={setPopUp} setSelectedUser={setSelectedUser} quizzes={quizzes} />
                 </div>
             </div>

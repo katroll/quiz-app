@@ -1,5 +1,5 @@
 import './index.css';
-import { useState, useEffect } from "react"
+import { useState, useEffect, createContext } from "react"
 import {Route, Routes, useNavigate } from "react-router-dom";
 
 import SignIn from './components/SignIn';
@@ -11,10 +11,12 @@ import QuizTaker from './components/QuizTaker';
 import StudentContainer from './components/StudentContainer';
 import AdminHome from './components/AdminHome';
 import StudentGradesContainer from './components/StudentGradesContainer';
+import TestList from './components/TestList';
 
-//import QuizContainer from './QuizContainer';
-//import NewQuizForm from './NewQuizForm';
+import banner from "./banner.jpg"
 
+export const StudentsContext = createContext();
+export const QuizzesContext = createContext();
 
 function App() {
   const navigate = useNavigate();
@@ -29,12 +31,14 @@ function App() {
 
 
   useEffect(() => {
-    fetch("/me").then((response) => {
-      if (response.ok) {
-        response.json().then((user) => {
+    fetch("/me").then((resp) => {
+      if (resp.ok) {
+        resp.json().then((user) => {
           setCurrentUser(user);
           setLoggedIn(true);
         });
+      } else {
+        resp.json().then(errors => console.log(errors))
       }
     });
 
@@ -82,12 +86,12 @@ function App() {
     }) 
   }
 
-  function handleSubmitNewQuiz(name, questions) {
+  function handleSubmitNewQuiz(name, questions, category) {
     
     fetch("/quizzes", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({name: name})
+      body: JSON.stringify({name: name, category: category})
     })
     .then(resp => resp.json())
     .then(quiz => handleSubmitNewQuizQuestions(quiz.id, questions))
@@ -102,6 +106,7 @@ function App() {
           question: question.question, 
           choices: question.choices,
           answer: question.answer, 
+          bengali: question.bengali,
           quiz_id: quizId
         })
       })
@@ -111,22 +116,29 @@ function App() {
     });
   }
 
-  console.log(currentUser)
+  console.log(quizzes)
 
   if(loggedIn === false) {
     return (
-      <div className="bg-slate-500 min-h-screen pt-20">
+      <div className="flex flex-col items-center justify-between bg-mid-blue w-screen min-h-screen pt-10">
+        <img 
+          src={banner}
+          className="w-100 mb-10 border-4 border-light-blue" 
+          alt="Avatar"/>
         <Routes>
           <Route 
-            path="/signup" 
-            element={<SignUp handleSignIn={handleSignIn} />}
+              path="/signup" 
+              element={<SignUp handleSignIn={handleSignIn} />}
+            />
+          
+          <Route exact path="/" 
+            element={<SignIn setCurrentUser={setCurrentUser} onSignIn={handleSignIn}/>}
           />
-        
-        <Route exact path="/" 
-          element={<SignIn setCurrentUser={setCurrentUser} onSignIn={handleSignIn}/>}
-        />
-      </Routes>
-    </div>
+        </Routes>
+        <div className='pl-20 pb-5 pt-20'>
+            <p className='text-slate-800'>© {new Date().getFullYear()} by St. Paul's Computer Training Center. info@spctc.org</p>
+        </div>
+  </div>
     )
   }
 
@@ -141,38 +153,56 @@ function App() {
   }
 
   return (
-    <div className="flex flex-row min-h-screen min-w-screen bg-slate-400">
+    <div className="flex flex-row min-h-screen min-w-screen bg-light-blue">
 
       {!takingQuiz ? (
         <NavBar user={currentUser} onSignOut={handleSignOut} quizzes={quizzes}/>
       ) : null }
-        
-      {currentUser.admin ? (
-        <Routes>
-          <Route path="/uploadquiz" 
-            element={<UplaodQuiz handleSubmitNewQuiz={handleSubmitNewQuiz}/>}
-          />
-          <Route path="/quiz/:quiz_name" 
-            element={<QuizViewer quizzes={quizzes} />}
-          />
-          <Route path="/students" 
-            element={<StudentContainer students={students} admins={admins} quizzes={quizzes}/>}
-          />
-          <Route path="/" 
-            element={<AdminHome />}
-          />
+      
+      <div className='flex flex-col pl-60 justify-between'>
+        {currentUser.admin ? (
+          <StudentsContext.Provider value={students}>
+            <QuizzesContext.Provider value={quizzes}>
+              <Routes>
+                <Route path="/uploadquiz" 
+                  element={<UplaodQuiz handleSubmitNewQuiz={handleSubmitNewQuiz}/>}
+                />
+                <Route exact path="/test/:name" 
+                  element={<QuizViewer />}
+                />
+                <Route exact path="/tests/:category" 
+                  element={<TestList />}
+                />
+                <Route path="/students" 
+                  element={<StudentContainer />}
+                />
+                <Route path="/" 
+                  element={<AdminHome />}
+                />
 
-        </Routes>
-      ) : (
-        <Routes>
-          <Route path="/quiz/:quiz_name" 
-            element={<QuizTaker quizzes={quizzes} handleSubmitQuiz={handleSubmitQuiz} setTakingQuiz={setTakingQuiz} takingQuiz={takingQuiz} />}
-          />
-          <Route path="/mygrades" 
-            element={<StudentGradesContainer user={currentUser}/>}
-          />
-        </Routes>
-      )}
+                </Routes>
+              </QuizzesContext.Provider>
+            </StudentsContext.Provider>
+        ) : (
+          <QuizzesContext.Provider value={quizzes}> 
+            <Routes>
+              <Route path="/test/:name" 
+                element={<QuizTaker handleSubmitQuiz={handleSubmitQuiz} setTakingQuiz={setTakingQuiz} takingQuiz={takingQuiz} />}
+              />
+              <Route exact path="/tests/:category" 
+                  element={<TestList />}
+                />
+              <Route path="/mygrades" 
+                element={<StudentGradesContainer user={currentUser}/>}
+              />
+            </Routes>
+          </QuizzesContext.Provider>
+        )}
+
+        <div className='pl-20 pb-5 pt-20'>
+          <p className='text-slate-800'>© {new Date().getFullYear()} by St. Paul's Computer Training Center. info@spctc.org</p>
+        </div>
+      </div>
       
     </div>
   )

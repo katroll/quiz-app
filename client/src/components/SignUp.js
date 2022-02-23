@@ -14,6 +14,7 @@ export default function SignUp({ handleSignIn }) {
         password: "",
         admin: 0
     })
+    const [errors, setErrors] = useState([])
 
  function handleSignUpFormChange(e) {
     setSignUpData({
@@ -31,60 +32,64 @@ export default function SignUp({ handleSignIn }) {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(signUpData)
       })
-      .then((resp) => resp.json())
-      .then(user => {
-        handleSignIn(user)
+      .then(resp => {
+        if (resp.ok) {
+          resp.json().then((user) => {
+            handleSignIn(user)
+          })
+          .then(navigate("/"))
+        } else {
+          resp.json().then(errorData => setErrors(errorData.error))
+        }
       })
-      .then(navigate("/"))
-
-
   }
+
+  console.log(errors)
+      
 
   return (
 
-    <div className="flex flex-col bg-slate-500 items-center">
-      <p className='text-5xl text-slate-900 font-bold mb-10'>Saint Paul's Computer Training Centre</p>
-      <div className="w-full lg:w-4/12 bg-slate-400 rounded-md shadow shodow-slate-600">
+      <div className="w-3/4 lg:w-6/12 bg-light-blue rounded-md shadow-xl shadow-slate-600">
         <div className="relative flex flex-col min-w-0 break-words w-full mb-6">
           <div className="flex flex-col items-center rounded-t mb-0 px-6 py-6">
-            <p className='text-2xl font-bold text-slate-200'>Sign Up</p>
+            <p className='text-2xl font-bold text-black'>Sign Up</p>
             <hr className="mt-6 border-b-1 border-blueGray-300"/>
           </div>
           <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
             <form onSubmit={handleSubmit}>
               <div className='flex space-x-2'>
                 <div className="relative w-full mb-3">
-                  <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">First Name</label>
+                  <label className="block uppercase text-black text-xs font-bold mb-2">First Name</label>
                   <input 
                     type="text" 
                     name="first_name"
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full" placeholder="First Name"
+                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-black bg-white rounded text-sm shadow focus:outline-none focus:ring w-full" placeholder="First Name"
                     onChange={handleSignUpFormChange}/>
                 </div>
                 <div className="relative w-full mb-3">
-                  <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">Last Name</label>
+                  <label className="block uppercase text-black text-xs font-bold mb-2">Last Name</label>
                   <input 
                     type="text" 
                     name="last_name"
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full" placeholder="Last Name"
+                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-black bg-white rounded text-sm shadow focus:outline-none focus:ring w-full" placeholder="Last Name"
                     onChange={handleSignUpFormChange}/>
                 </div>
               </div>
       
               <div className="relative w-full mb-3">
-                <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">Username</label>
+                <label className="block uppercase text-black text-xs font-bold mb-2">Username</label>
                 <input 
                   type="text" 
                   name="username"
-                  className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Username"
+                  className="border-0 px-3 py-3 placeholder-blueGray-300 text-black bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Username"
                   onChange={handleSignUpFormChange}/>
               </div>
               <div className="relative w-full mb-3">
-                <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">Password</label>
+                <label className="block uppercase text-black text-xs font-bold mb-2">Password</label>
                 <input 
                   type="password" 
                   name="password"
-                  className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Password"
+                  className="border-0 px-3 py-3 placeholder-blueGray-300 text-black bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Password"
                   onChange={handleSignUpFormChange}/>
               </div>
               <div className="text-center mt-6">
@@ -95,13 +100,24 @@ export default function SignUp({ handleSignIn }) {
                 </button>
               </div>
             </form>
-            <div className='flex justify-end'>
+            <div className="flex justify-between">
+            {errors ? (
+              <div className="flex flex-col items-start">
+                {errors.map(error => {
+                  return (
+                    <p key={error} className="bg-error-red px-2 my-1 rounded">{error}</p>
+                  )
+                })}
+              </div>
+            ) : null }
+            <div className='flex flex-col items-end'>
               <NavLink to="/">Already have an account? Sign in.</NavLink>
+              <NavLink to="/" className="bengali">বাংলা-মিডিয়াম</NavLink>
+            </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
 
   )
