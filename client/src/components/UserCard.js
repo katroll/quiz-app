@@ -5,7 +5,7 @@ function UserCard({ user, setPopUp }) {
 
     return (
         <div className="mt-2 m-10">
-                <div className="flex flex-col mt-8">
+                <div className="flex flex-col mt-8 max-h-[80vh]">
                     <div className="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                         <div className="inline-block min-w-full overflow-hidden align-middle border-b border-light-gray shadow sm:rounded-lg">
         
@@ -28,12 +28,21 @@ function UserCard({ user, setPopUp }) {
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td className="px-6 py-4 whitespace-no-wrap border-b border-light-gray">
-                                                <button 
-                                                    className="text-sm leading-5 text-gray bg-light-gray rounded p-1 border border-slate-300"
-                                                    onClick={null}>
-                                                        Reset Password
-                                                </button>
+                                            <td className="px-6 py-4 whitespace-no-wrap border-b border-light-gray flex justify-between">
+                                                <div>
+                                                    <button 
+                                                        className="text-sm leading-5 text-gray bg-light-gray hover:bg-gray hover:text-white rounded p-1 border border-slate-300"
+                                                        onClick={null}>
+                                                            Reset Password
+                                                    </button>
+                                                </div>
+                                                <div>
+                                                    <button 
+                                                        className="text-sm px-3 leading-5 text-gray bg-light-gray hover:bg-gray hover:text-white rounded p-1 border border-slate-300" 
+                                                        onClick={() => setPopUp(false)}>
+                                                            Close
+                                                    </button>
+                                                </div>
                                             </td>
                                         </tr>
                             </tbody>
@@ -47,19 +56,6 @@ function UserCard({ user, setPopUp }) {
                             <tbody className="bg-light-gray overflow-y-scroll">
                                 <StudentGrades user={user} />
                             </tbody>
-
-                            <thead>
-                                <tr>
-                                    <th className="px-6 py-3 text-sm font-bold leading-4 tracking-wider text-center text-gray uppercase border-b border-light-gray bg-white">
-                                        <button 
-                                            className="bg-transparent bg-slate-100 hover:bg-slate-400 text-slate-500 font-semibold hover:text-white py-2 px-4 border border-slate-300 hover:border-transparent rounded" 
-                                            onClick={() => setPopUp(false)}>
-                                                Close
-                                        </button>
-                                        
-                                    </th>
-                                </tr>
-                            </thead>
                             
                         </table>
                         </div>

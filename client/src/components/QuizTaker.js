@@ -19,7 +19,7 @@ function QuizTaker({ handleSubmitQuiz, setTakingQuiz, takingQuiz }) {
 
 
     return (
-        <div className="pl-0 flex flex-col pt-10 min-h-screen w-screen items-center pl-72">
+        <div className="flex flex-col w-full pt-10 items-center">
             <h1 className="text-2xl text-slate-800 font-bold">{quiz.name}</h1>
             {takingQuiz ? (
                 <div className="flex flex-col w-screen items-center">
@@ -27,7 +27,7 @@ function QuizTaker({ handleSubmitQuiz, setTakingQuiz, takingQuiz }) {
                     <Questions questions={quiz.questions} onSubmitScore={handleSubmitScore}/> 
                     <button 
                         type="button" 
-                        className="w-1/3 mt-1 mb-5 text-white bg-slate-500 rounded hover:bg-slate-600 text-sm px-1 py-1 text-center"
+                        className="w-1/3 mt-1 mb-5 text-white bg-green rounded hover:bg-hover-green text-sm px-1 py-1 text-center"
                         onClick={() => setTakingQuiz(false)}>
                             Exit Test 
                     </button>
@@ -37,7 +37,7 @@ function QuizTaker({ handleSubmitQuiz, setTakingQuiz, takingQuiz }) {
             ) : (
                 <button 
                     type="button" 
-                    className="justify-end mt-5 mb-5 text-white bg-slate-500 rounded hover:bg-slate-600 text-sm px-5 py-2.5 text-center"
+                    className="justify-end mt-5 mb-5 text-white bg-green rounded hover:bg-slate-600 text-sm px-5 py-2.5 text-center"
                     onClick={() => setTakingQuiz(true)}>
                         Begin Test
                 </button>

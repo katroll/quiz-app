@@ -53,7 +53,6 @@ export default function SignUp({ handleSignIn }) {
         <div className="relative flex flex-col min-w-0 break-words w-full mb-6">
           <div className="flex flex-col items-center rounded-t mb-0 px-6 py-6">
             <p className='text-2xl font-bold text-black'>Sign Up</p>
-            <hr className="mt-6 border-b-1 border-blueGray-300"/>
           </div>
           <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
             <form onSubmit={handleSubmit}>
@@ -105,7 +104,7 @@ export default function SignUp({ handleSignIn }) {
               <div className="flex flex-col items-start">
                 {errors.map(error => {
                   return (
-                    <p key={error} className="bg-error-red px-2 my-1 rounded">{error}</p>
+                    <p key={error} className="bg-error-red text-white px-2 my-1 rounded">{error}</p>
                   )
                 })}
               </div>

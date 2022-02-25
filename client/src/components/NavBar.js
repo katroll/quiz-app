@@ -14,7 +14,7 @@ function NavBar({ user, onSignOut, quizzes }) {
     }
 
     return (
-        <div className="w-60 h-full shadow-md bg-green fixed z-10 overflow-y-scroll" id="sidenavSecExample">
+        <div className="w-60 pb-20 h-full shadow-md bg-green fixed z-10 overflow-y-scroll" id="sidenavSecExample">
             <div className="pt-4 pb-2 px-6">
                 <div className="flex flex-col items-center">
                     <div className="shrink-0">
@@ -28,15 +28,16 @@ function NavBar({ user, onSignOut, quizzes }) {
                 </div>
             </div>
 
+            <ul className="relative px-1 mt-6">
+                <li className="relative" onClick={() =>  navigate("/")}>
+                    <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-white hover:bg-hover-green transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
+                        <span>Home</span>
+                    </a>
+                </li>   
+            </ul>
+
             {user.admin ? (
                 <>
-                <ul className="relative px-1 mt-10">
-                    <li className="relative" onClick={() =>  navigate("/")}>
-                        <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-white hover:bg-hover-green transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
-                            <span>Home</span>
-                        </a>
-                    </li>   
-                </ul>
                 <ul className="relative px-1">
                     <li className="relative" onClick={() =>  navigate("/uploadquiz")}>
                         <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-white hover:bg-hover-green transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
@@ -51,13 +52,20 @@ function NavBar({ user, onSignOut, quizzes }) {
                         </a>
                     </li>   
                 </ul>
+                <ul className="relative px-1">
+                    <li className="relative" onClick={() => navigate("/testdata")}>
+                        <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-white hover:bg-hover-green transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
+                            <span>Testing Data</span>
+                        </a>
+                    </li>   
+                </ul>
                 </>
             ): ( null )}
 
 
 
             
-                <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-white hover:bg-hover-green transition duration-300 ease-in-out cursor-pointer" data-mdb-ripple="true" data-mdb-ripple-color="stone" data-bs-toggle="collapse" data-bs-target="#collapseSidenavSecEx2" aria-expanded="false" aria-controls="collapseSidenavSecEx2">
+                <a className="flex items-center text-md font-semibold py-4 px-7 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-white hover:bg-hover-green transition duration-300 ease-in-out cursor-pointer" data-mdb-ripple="true" data-mdb-ripple-color="stone" data-bs-toggle="collapse" data-bs-target="#collapseSidenavSecEx2" aria-expanded="false" aria-controls="collapseSidenavSecEx2">
                     <span>Tests</span>
                     <svg 
                         aria-hidden="true" 
@@ -84,6 +92,7 @@ function NavBar({ user, onSignOut, quizzes }) {
             
 
             {!user.admin? (
+                
                 <ul className="relative px-1">
                     <li onClick={() => navigate("/mygrades")} className="relative">
                     <a className="flex items-center text-base font-semibold py-4 px-6 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-white hover:bg-hover-green transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">

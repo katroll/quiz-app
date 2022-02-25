@@ -14,6 +14,8 @@ import StudentGradesContainer from './components/StudentGradesContainer';
 import TestList from './components/TestList';
 
 import banner from "./banner.jpg"
+import TestDataContainer from './components/testData/TastDataContainer';
+import StudentHome from './components/students/StudentHome';
 
 export const StudentsContext = createContext();
 export const QuizzesContext = createContext();
@@ -98,7 +100,7 @@ function App() {
   }
 
   function handleSubmitNewQuizQuestions(quizId, questions) {
-    questions.forEach(question => {
+    questions.forEach((question, index) => {
       fetch("/questions", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
@@ -107,7 +109,8 @@ function App() {
           choices: question.choices,
           answer: question.answer, 
           bengali: question.bengali,
-          quiz_id: quizId
+          quiz_id: quizId,
+          number: index + 1
         })
       })
       .then(resp => resp.json())
@@ -120,23 +123,25 @@ function App() {
 
   if(loggedIn === false) {
     return (
-      <div className="flex flex-col items-center justify-between bg-mid-blue w-screen min-h-screen pt-10">
-        <img 
-          src={banner}
-          className="w-100 mb-10 border-4 border-light-blue" 
-          alt="Avatar"/>
-        <Routes>
-          <Route 
-              path="/signup" 
-              element={<SignUp handleSignIn={handleSignIn} />}
+      <div className="flex flex-col items-center justify-between bg-mid-blue w-screen min-h-screen pt-5">
+        <div className='flex flex-col items-center w-screen'>
+          <img 
+            src={banner}
+            className="w-100 mb-5 border-4 border-light-blue" 
+            alt="Avatar"/>
+          <Routes>
+            <Route 
+                path="/signup" 
+                element={<SignUp handleSignIn={handleSignIn} />}
+              />
+            
+            <Route exact path="/" 
+              element={<SignIn setCurrentUser={setCurrentUser} onSignIn={handleSignIn}/>}
             />
-          
-          <Route exact path="/" 
-            element={<SignIn setCurrentUser={setCurrentUser} onSignIn={handleSignIn}/>}
-          />
-        </Routes>
-        <div className='pl-20 pb-5 pt-20'>
-            <p className='text-slate-800'>© {new Date().getFullYear()} by St. Paul's Computer Training Center. info@spctc.org</p>
+          </Routes>
+        </div>
+        <div className='flex pb-5 pt-2 mt-5 justify-center'>
+          <p className='text-slate-800'>© {new Date().getFullYear()} by St. Paul's Computer Training Center. <a href="http://www.info@spctc.org">info@spctc.org</a></p>
         </div>
   </div>
     )
@@ -159,13 +164,16 @@ function App() {
         <NavBar user={currentUser} onSignOut={handleSignOut} quizzes={quizzes}/>
       ) : null }
       
-      <div className='flex flex-col pl-60 justify-between'>
+      <div className='flex flex-col pl-60 w-full justify-between'>
         {currentUser.admin ? (
           <StudentsContext.Provider value={students}>
             <QuizzesContext.Provider value={quizzes}>
               <Routes>
                 <Route path="/uploadquiz" 
                   element={<UplaodQuiz handleSubmitNewQuiz={handleSubmitNewQuiz}/>}
+                />
+                <Route path="/testdata" 
+                  element={<TestDataContainer/>}
                 />
                 <Route exact path="/test/:name" 
                   element={<QuizViewer />}
@@ -195,12 +203,15 @@ function App() {
               <Route path="/mygrades" 
                 element={<StudentGradesContainer user={currentUser}/>}
               />
+              <Route path="/" 
+                element={<StudentHome />}
+              />
             </Routes>
           </QuizzesContext.Provider>
         )}
 
-        <div className='pl-20 pb-5 pt-20'>
-          <p className='text-slate-800'>© {new Date().getFullYear()} by St. Paul's Computer Training Center. info@spctc.org</p>
+        <div className='flex pb-5 pt-2 mt-3 w-screen justify-center'>
+          <p className='text-slate-800'>© {new Date().getFullYear()} by St. Paul's Computer Training Center. <a href="http://www.info@spctc.org">info@spctc.org</a></p>
         </div>
       </div>
       

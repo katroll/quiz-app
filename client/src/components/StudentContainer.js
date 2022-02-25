@@ -22,9 +22,9 @@ function StudentContainer() {
                 </div>
             ) : null }
 
-            <div className="pt-5 flex justify-center w-content">
+            <div className="pt-5 flex justify-center w-full">
                 <div className="flex flex-col items-center">
-                    <p className="font-bold text-2xl text-dark-gray">Students</p>
+                    <p className="font-bold text-4xl text-dark-gray mb-5">Students</p>
                     <StudentTable users={students} setPopUp={setPopUp} setSelectedUser={setSelectedUser} quizzes={quizzes} />
                 </div>
             </div>

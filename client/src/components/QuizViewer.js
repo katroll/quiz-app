@@ -10,15 +10,17 @@ function QuizViewer({ }) {
     const quiz = quizzes.find(quiz => quiz.name.replace(/\s+/g, '') === name.replace(/\s+/g, ''));
     console.log(quiz)
 
+    const sortedQuestions = quiz.questions.sort((a, b) => a.number - b.number) 
+
     return (
-        <div className="flex flex-col pt-10 items-start min-h-screen w-full pl-72">
+        <div className="flex flex-col pt-10 items-start min-h-screen w-full pl-12">
             <h1 className="text-2xl text-stone-800 font-bold">{quiz.name}</h1>
             <ul className="flex flex-col justify-start mt-5 w-full">
-                {quiz.questions.map((question, index) => {
+                {sortedQuestions.map(question => {
                     return (
                         <li key={question.question} className="mb-3">
                              <div className="flex flex-row">
-                                        <p className="font-bold mr-3 text-stone-800">{`${index + 1}.`}</p>
+                                        <p className="font-bold mr-3 text-stone-800">{`${question.number}.`}</p>
                                         <div className="felx flex-col mb-2">
                                             <p className="text-stone-800">{question.question}</p>
                                             <p className="text-stone-800 mt-2 ">{question.bengali}</p>

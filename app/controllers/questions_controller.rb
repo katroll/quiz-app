@@ -19,7 +19,6 @@ class QuestionsController < ApplicationController
     question.choices = params[:choices]
     question.save
 
-
     if question.valid?
       render json: question, status: :created
     else
@@ -49,6 +48,6 @@ class QuestionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def question_params
-      params.permit(:question, :choices, :answer, :quiz_id, :bengali)
+      params.permit(:question, :choices, :answer, :quiz_id, :bengali, :number)
     end
 end

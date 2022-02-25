@@ -12,9 +12,9 @@ function StudentTable({ users, setPopUp, setSelectedUser, quizzes  }) {
 
     return (
 
-            <div className="mt-2 m-10 mb-0">
-                <div className="flex flex-col mt-8 max-h-[80vh]">
-                    <div className="pt-2 mt-2 overflow-y-scroll overflow-x-scroll sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+            <div className="mt-2 overflow-x-scroll overflow-y-scroll">
+                <div className="flex flex-col max-h-[80vh] max-w-[75vw]">
+                    <div className="sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                         <div className="inline-block overflow-hidden align-middle border-b border-light-gray shadow sm:rounded-lg">
                             <table className="reletive">
                                 <thead className="">

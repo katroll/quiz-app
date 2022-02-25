@@ -9,9 +9,9 @@ class GradesController < ApplicationController
   end
 
   # GET /grades/1
-  def show
-    render json: @grade
-  end
+  # def show
+  #   render json: @grade
+  # end
 
   # POST /grades
   def create
@@ -26,18 +26,18 @@ class GradesController < ApplicationController
   end
 
   # PATCH/PUT /grades/1
-  def update
-    if @grade.update(grade_params)
-      render json: @grade
-    else
-      render json: @grade.errors, status: :unprocessable_entity
-    end
-  end
+  # def update
+  #   if @grade.update(grade_params)
+  #     render json: @grade
+  #   else
+  #     render json: @grade.errors, status: :unprocessable_entity
+  #   end
+  # end
 
   # DELETE /grades/1
-  def destroy
-    @grade.destroy
-  end
+  # def destroy
+  #   @grade.destroy
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

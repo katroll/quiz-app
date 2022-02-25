@@ -4,7 +4,7 @@ function StudentGrades({ user }) {
 
     return (
         <div className="mt-2 m-10">
-                <div className="flex flex-col mt-8 max-h-[40vh]">
+                <div className="flex flex-col mt-8 max-h-[80vh]">
                     <div className="py-2 -my-2 overflow-x-auto overflow-y-scroll sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                         <div className="inline-block overflow-hidden align-middle border-b border-light-gray shadow sm:rounded-lg">
                             <table className="reletive">
@@ -23,7 +23,7 @@ function StudentGrades({ user }) {
                                 </thead>
 
                                 <tbody className="bg-white">
-                                    {user.grades.map((grade) => {
+                                    {user.grades.reverse().map((grade) => {
                                         return (
                                             <tr key={grade.id}>
                                                 <td className="px-6 py-4 whitespace-no-wrap border-b border-light-gray">

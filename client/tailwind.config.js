@@ -4,7 +4,10 @@ module.exports = {
     colors: {
       "light-blue": "#b3d8f1", 
       "mid-blue": "#5fc5f5",
-      "green": "#4CAF50",
+      "dark-blue": "#1a4fed",
+      "text-blue": "#0f3aba",
+      "green": "#4bb34f",
+      "hover-blue": "#0231bf",
       "hover-green": "#1e8222",
       'white': '#ffffff',
       "black": "#000000",
@@ -18,7 +21,8 @@ module.exports = {
       "slate-600": "#475569",
       "slate-700": "#334155",
       "slate-800": "#1e293b",
-      "error-red": "#ef4444"
+      "error-red": "#ef4444",
+      "yellow": "#f7ee81"
 
     },
     extend: {},

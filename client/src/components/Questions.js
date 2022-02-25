@@ -62,7 +62,7 @@ function Questions( { questions, onSubmitScore }) {
                 </div>
                
             ) : (
-                <div className="bg-slate-300 p-10 pb-3 rounded">
+                <div className="bg-mid-blue shadow-md p-10 pb-3 rounded">
                     <div className="mb-1 flex flex-col">
                         <p className="font-semibold">{questionNumber + 1}. {questions[questionNumber].question}</p>
                         <p className="font-semibold my-3">{questions[questionNumber].bengali}</p>
@@ -81,13 +81,13 @@ function Questions( { questions, onSubmitScore }) {
 
                         <button 
                             type="button" 
-                            className="mt-5 w-1/3 text-white bg-slate-400 rounded-l border-r hover:bg-slate-600 font-medium text-sm px-5 py-2.5 text-center mb-4"
+                            className="mt-5 w-1/3 text-white bg-green rounded-l border-r hover:bg-hover-green font-medium text-sm px-5 py-2.5 text-center mb-4"
                             onClick={handlePreviousClick}>
                                 ← Previous
                         </button>
                         <button 
                             type="button" 
-                            className="mt-5 w-1/3 text-white bg-slate-400 rounded-r hover:bg-slate-600 font-medium text-sm px-5 py-2.5 text-center mb-4"
+                            className="mt-5 w-1/3 text-white bg-green rounded-r hover:bg-hover-green font-medium text-sm px-5 py-2.5 text-center mb-4"
                             onClick={handleNextClick}>
                                 {questionNumber < questions.length - 1 ? "Next →" : "Submit Quiz"}
                         </button>
