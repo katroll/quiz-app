@@ -50,7 +50,7 @@ function StudentTable({ users, setPopUp, setSelectedUser, quizzes  }) {
                                                 {quizzes.map(quiz => {
                                                     return (
                                                         <td key={quiz.id} className="px-6 py-4 whitespace-no-wrap border-b border-light-gray">
-                                                            <div className="text-sm leading-5 text-gray">{user.grades.find(grade => grade.quiz.id === quiz.id) ? `${user.grades.find(grade => grade.quiz.id === quiz.id).score}/${quiz.questions.length}` : "-" }</div>
+                                                            <div className="text-sm leading-5 text-gray">{user.grades.find(grade => grade.quiz_data.quiz.id === quiz.id) ? `${user.grades.find(grade => grade.quiz_data.quiz.id === quiz.id).score}/${quiz.questions.length}` : "-" }</div>
                                                         </td>
                                                     )
                                                 })}

@@ -22,11 +22,11 @@ function AdminHome() {
                 <div className="flex flex-col mt-5 ml-5 border-l pl-5">
                     {grades.map(grade => {
                         return (
-                            <div key={grade.id} className="flex py-2 bg-yellow my-1 px-2 rounded">
+                            <div key={grade.id} className="flex py-2 bg-light-blue my-1 px-2 rounded">
                                 <div className="mx-2 py-1">{grade.user.first_name} {grade.user.last_name}</div>
-                                <div className="bg-mid-blue rounded px-3 py-1 mx-1">{grade.quiz.name}</div>
-                                <div className="bg-mid-blue rounded px-3 py-1 mx-1">{grade.score}/{grade.results.length}</div>
-                                <div className="bg-mid-blue rounded px-3 py-1 mx-1">{grade.updated_at.slice(0,10)} at {grade.updated_at.slice(11, 19)}</div>
+                                <div className="bg-light-blue border-l border-yellow px-3 py-1 mx-1">{grade.quiz_data.quiz.name}</div>
+                                <div className="bg-light-blue border-l border-yellow px-3 py-1 mx-1">{grade.score}/{grade.results.length}</div>
+                                <div className="bg-light-blue border-l border-yellow px-3 py-1 mx-1">{grade.updated_at.slice(0,10)} at {grade.updated_at.slice(11, 19)}</div>
 
                             </div>
                         )

@@ -1,20 +1,6 @@
-import { useEffect, useState } from "react";
 
-
-function TestDataTable() {
-
-    const [grades, setGrades] = useState([]);
-
-    useEffect(() => {
-        fetch("/grades")
-        .then(resp => resp.json())
-        .then(grades => {
-            const gradesByDate = grades.reverse();
-            setGrades(gradesByDate);
-        });
-    }, [])
-
-    console.log("grades: ", grades);
+function TestDataTable({ data, columns }) {
+    
 
     return (
         <div className="mt-2 overflow-x-scroll overflow-y-scroll">
@@ -24,60 +10,30 @@ function TestDataTable() {
                             <table className="reletive">
                                 <thead className="">
                                     <tr>
-                                        <th className="px-6 py-3 border-b text-gray border-light-gray bg-white">
-                                            Student Name
-                                        </th>
-                                        <th className="px-6 py-3 border-b text-gray border-light-gray bg-white">
-                                            Username
-                                        </th>
-                                        <th className="px-6 py-3 border-b text-gray border-light-gray bg-white">
-                                            Student ID
-                                        </th>
-                                        <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-white">
-                                            Test Name
-                                        </th>
-                                        <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-white">
-                                           Results Array
-                                        </th>
-                                        <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-white">
-                                           Score
-                                        </th>
-                                        <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-white">
-                                           Date
-                                        </th>
-                                        <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-white">
-                                            Computer used
-                                        </th>
+                                        {columns.map(name => {
+                                            return (
+                                                <th key={name} className="px-6 py-3 border-b text-gray border-light-gray bg-white">
+                                                    {name}
+                                                </th>
+                                            )
+                                        })}
                                     </tr>
                                 </thead>
 
                                 <tbody className="bg-white">
-                                    {grades.map((grade, index) => {
+                                    {data.map((row) => {
                                         return (
-                                            <tr key={grade.id}>
-                                                <td className="px-6 py-4 whitespace-no-wrap border-b border-light-gray text-sm leading-5 text-gray">
-                                                    {grade.user.first_name} {grade.user.last_name}
-                                                </td>
-                                                <td className="px-6 py-4 whitespace-no-wrap border-b border-light-gray text-sm leading-5 text-gray">
-                                                    {grade.user.username}
-                                                </td>
-                                                <td className="px-6 py-4 whitespace-no-wrap border-b border-light-gray text-sm leading-5 text-gray">
-                                                    {grade.user.id}
-                                                </td>
-                                                <td className="px-6 py-4 whitespace-no-wrap border-b border-light-gray text-sm leading-5 text-gray">
-                                                    {grade.quiz.name}
-                                                </td>
-                                                <td className="px-6 py-4 whitespace-no-wrap border-b border-light-gray">
-                                                    <div className="text-sm leading-5 text-gray">{grade.results}</div>
-                                                </td>
-                                                <td className="px-6 py-4 whitespace-no-wrap border-b border-light-gray">
-                                                    <div className="text-sm leading-5 text-gray">{grade.score}</div>
-                                                </td>
-                                                <td className="px-6 py-4 whitespace-no-wrap border-b border-light-gray">
-                                                    <div className="text-sm leading-5 text-gray">{grade.updated_at}</div>
-                                                </td>
-                                            </tr>
-                                    )})}
+                                            <tr key={data.key}>
+                                                {columns.map(column => {
+                                                    return (
+                                                        <td key={column} className="px-6 py-4 whitespace-no-wrap border-b border-light-gray text-sm leading-5 text-gray">
+                                                            {row[column]}
+                                                        </td>
+                                                    )
+                                                })}
+                                             </tr>
+                                        )
+                                    })}
                                 </tbody>
                             </table>
                         </div>

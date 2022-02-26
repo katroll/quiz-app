@@ -17,9 +17,8 @@ class QuestionsController < ApplicationController
   def create
     question = Question.new(question_params)
     question.choices = params[:choices]
-    question.save
 
-    if question.valid?
+    if question.save
       render json: question, status: :created
     else
       render json: {error: "unprocessable entity"}, status: :unprocessable_entity
@@ -48,6 +47,6 @@ class QuestionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def question_params
-      params.permit(:question, :choices, :answer, :quiz_id, :bengali, :number)
+      params.permit(:question, :choices, :answer, :quiz_id, :bengali, :number, :imageBase64)
     end
 end

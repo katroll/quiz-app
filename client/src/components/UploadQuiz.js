@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../index.css"
-import * as XLSX from "xlsx";
 import * as Excel from "exceljs";
+import * as Base64 from "base64-arraybuffer"
 
 
 function UplaodQuiz({ handleSubmitNewQuiz }) {
@@ -15,54 +15,43 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
 
     function loadQuizFile(e) {
         const selectedFile = e.target.files[0];
-        // if (selectedFile) {
-        //     const reader = new FileReader();
-        //     reader.onload = (e) => {
-        //         const data = e.target.result;
-        //         const workbook = XLSX.read(data, { type: "binary" });
-        //         workbook.SheetNames.forEach(sheetName => {
-        //             const XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
-        //             const json_object = JSON.stringify(XL_row_object);
-                    
-        //             console.log("rows: ", XL_row_object);
-                    //setQuizFile(XL_row_object)
-            const wb = new Excel.Workbook();
-            const reader = new FileReader();
+        const wb = new Excel.Workbook();
+        const reader = new FileReader();
 
-            reader.readAsArrayBuffer(selectedFile)
-            reader.onload = () => {
-                const buffer = reader.result;
-                wb.xlsx.load(buffer).then(workbook => {
+        reader.readAsArrayBuffer(selectedFile)
+        reader.onload = () => {
+            const buffer = reader.result;
+            wb.xlsx.load(buffer).then(workbook => {
                 console.log(workbook, 'workbook instance')
                 workbook.eachSheet((sheet, id) => {
-                    const image = sheet.getImages()[0];
-                    console.log(sheet.getImages()[0])
-                    const img = workbook.model.media.find(m => m.index === image.imageId);
-                    console.log(img);
-                    console.log("image row: ", image.range.tl.row)
+                    const quizQuestions = [];
                     sheet.eachRow((row, rowIndex) => {
-                    console.log(row.values, rowIndex)
+                        console.log(row.values, rowIndex)
+                        if(rowIndex === 1 ) return;                        
+                        const questionObj = {
+                            question: row.values[1],
+                            bengali: row.values[2],
+                            choices: [row.values[3], row.values[4], row.values[5], row.values[6]],
+                            answer: row.values[7],
+                            number: rowIndex - 1
+                            };
+                        quizQuestions.push(questionObj);
                     })
-                })
-                })
-            }
 
-            //         const quizQuestions = [];
-            //         XL_row_object.forEach(question => {
-            //             const questionObj = {
-            //             question: question.Question,
-            //             choices: [question.Choice0, question.Choice1, question.Choice2, question.Choice3],
-            //             answer: question.Answer,
-            //             bengali: question.Bengali
-            //             };
-            //             quizQuestions.push(questionObj);
-            //         });
-            //         console.log(XL_row_object);
-            //         setQuestions(quizQuestions);
-            //     })
-            // }
-            // reader.readAsArrayBuffer(selectedFile);
+                    const images = sheet.getImages();
+                    images.forEach(image => {
+                        const row = image.range.tl.row;
+                        const img = workbook.model.media.find(m => m.index === image.imageId);
+                        const imgBase64 = Base64.encode(img.buffer);
+                        quizQuestions[row - 1].imageBase64 = imgBase64;
+                    })
+
+                    console.log("image in questions: ", quizQuestions);
+                    setQuestions(quizQuestions);
+                })
+            })
         }
+    }
 
     function handleViewPreview(e) {
         e.preventDefault();
@@ -164,11 +153,11 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
                 <div className="flex flex-col pt-10 pl-12 items-center items-start min-h-screen w-full">
                     <h1 className="text-2xl text-stone-800 font-bold">{quizName}</h1>
                     <ul className="flex flex-col justify-start mt-5 w-full">
-                        {questions.map((question, index) => {
+                        {questions.map(question => {
                             return (
                                 <li key={question.question} className="mb-3">
                                     <div className="flex flex-row">
-                                        <p className="font-bold mr-3 text-stone-800">{`${index + 1}.`}</p>
+                                        <p className="font-bold mr-3 text-stone-800">{`${question.number}.`}</p>
                                         <div className="felx flex-col mb-2">
                                             <p className="text-stone-800">{question.question}</p>
                                             <p className="text-stone-800 mt-2 ">{question.bengali}</p>

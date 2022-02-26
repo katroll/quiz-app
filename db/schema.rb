@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_25_000104) do
+ActiveRecord::Schema[7.0].define(version: 2022_02_25_173705) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,6 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_25_000104) do
     t.integer "answer"
     t.string "bengali"
     t.integer "number"
+    t.string "imageBase64"
     t.index ["quiz_id"], name: "index_questions_on_quiz_id"
   end
 

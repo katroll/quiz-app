@@ -48,7 +48,7 @@ export default function SignIn({ onSignIn, setSignUp }) {
                 <input 
                   type="text" 
                   name="username"
-                  className="border-0 px-3 py-3 placeholder-blueGray-300 text-text-blue bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Username"
+                  className="border-0 px-3 py-3 placeholder-blueGray-300 text-black bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Username"
                   onChange={handleSignInChange}/>
               </div>
               <div className="relative w-full mb-3">
@@ -56,7 +56,7 @@ export default function SignIn({ onSignIn, setSignUp }) {
                 <input 
                   type="password" 
                   name="password"
-                  className="border-0 px-3 py-3 placeholder-blueGray-300 text-text-blue bg-white rounded text-sm shadow focus:ring w-full ease-linear transition-all duration-150" placeholder="Password"
+                  className="border-0 px-3 py-3 placeholder-blueGray-300 text-black bg-white rounded text-sm shadow focus:ring w-full ease-linear transition-all duration-150" placeholder="Password"
                   onChange={handleSignInChange}/>
               </div>
               <div className="text-center mt-6">

@@ -10,9 +10,6 @@ function QuizTaker({ handleSubmitQuiz, setTakingQuiz, takingQuiz }) {
 
     const quiz = quizzes.find(quiz => quiz.name === name);
 
-    console.log(quiz);
-    console.log("taking a quiz")
-
     function handleSubmitScore(results, score) {
         handleSubmitQuiz(quiz.id, results, score);
     }
@@ -20,7 +17,7 @@ function QuizTaker({ handleSubmitQuiz, setTakingQuiz, takingQuiz }) {
 
     return (
         <div className="flex flex-col w-full pt-10 items-center">
-            <h1 className="text-2xl text-slate-800 font-bold">{quiz.name}</h1>
+            <h1 className="text-4xl text-dark-blue font-bold">{quiz.name}</h1>
             {takingQuiz ? (
                 <div className="flex flex-col w-screen items-center">
                     

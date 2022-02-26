@@ -2,6 +2,8 @@ import './index.css';
 import { useState, useEffect, createContext } from "react"
 import {Route, Routes, useNavigate } from "react-router-dom";
 
+import * as Base64 from "base64-arraybuffer"
+
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import NavBar from './components/NavBar';
@@ -46,7 +48,22 @@ function App() {
 
     fetch("/quizzes")
     .then(resp => resp.json())
-    .then(quizzes => setQuizzes(quizzes));
+    .then(quizzes => {
+      const reader = new FileReader();
+      quizzes.map(quiz => {
+        const bufferPics = quiz.questions.map(question => {
+          if(question.imageBase64) {
+              const imageArrayBuffer = Base64.decode(question.imageBase64);
+              const blob = new Blob( [ imageArrayBuffer ], { type: "image/jpeg" } );
+              const urlCreator = window.URL || window.webkitURL;
+              const imageUrl = urlCreator.createObjectURL( blob );
+              question.imageUrl = imageUrl;
+          }
+      })
+      quiz.questions.sort((a, b) => a.number - b.number);  
+      })
+      setQuizzes(quizzes)
+    });
 
     fetch("/users")
         .then(resp => resp.json())
@@ -96,21 +113,21 @@ function App() {
       body: JSON.stringify({name: name, category: category})
     })
     .then(resp => resp.json())
-    .then(quiz => handleSubmitNewQuizQuestions(quiz.id, questions))
+    .then(quiz => {
+      handleSubmitNewQuizQuestions(quiz.id, questions);
+      setQuizzes([...quizzes, quiz]);
+    })
   }
 
   function handleSubmitNewQuizQuestions(quizId, questions) {
-    questions.forEach((question, index) => {
+    console.log("submitting questions: ", questions)
+    questions.forEach((question) => {
       fetch("/questions", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
-          question: question.question, 
-          choices: question.choices,
-          answer: question.answer, 
-          bengali: question.bengali,
-          quiz_id: quizId,
-          number: index + 1
+          ...question,
+          quiz_id: quizId
         })
       })
       .then(resp => resp.json())
@@ -158,7 +175,7 @@ function App() {
   }
 
   return (
-    <div className="flex flex-row min-h-screen min-w-screen bg-light-blue">
+    <div className="flex flex-row min-h-screen min-w-screen bg-mid-blue">
 
       {!takingQuiz ? (
         <NavBar user={currentUser} onSignOut={handleSignOut} quizzes={quizzes}/>

@@ -3,6 +3,7 @@ module.exports = {
   theme: {
     colors: {
       "light-blue": "#b3d8f1", 
+      "card-blue": "#97acc9",
       "mid-blue": "#5fc5f5",
       "dark-blue": "#1a4fed",
       "text-blue": "#0f3aba",
