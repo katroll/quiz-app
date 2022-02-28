@@ -108,7 +108,7 @@ function FilteredDataTable({ data, columns, handleExcelExport }) {
       <div className="flex flex-col">
         <div className="flex w-full justify-end">
             <button
-                className="p-2 rounded text-white bg-dark-blue hover:bg-hover-blue"
+                className="p-2 rounded text-white bg-th-button hover:bg-th-secondary text-th-light-text"
                 onClick={() => handleExcelExport(rows)}>
                 Export Table to Excel
             </button>
@@ -123,7 +123,7 @@ function FilteredDataTable({ data, columns, handleExcelExport }) {
                       {headerGroups.map(headerGroup => (
                           <tr {...headerGroup.getHeaderGroupProps()}>
                           {headerGroup.headers.map(column => (
-                            <th className="bg-gray-200 shadow px-1">
+                            <th className="bg-th-table-header-bg shadow px-1">
                                 <div {...column.getHeaderProps(column.getSortByToggleProps())}>
                                   {column.render("Header")}
                                   <span>
@@ -158,7 +158,7 @@ function FilteredDataTable({ data, columns, handleExcelExport }) {
                           return (
                           <tr {...row.getRowProps()} className="">
                               {row.cells.map(cell => {
-                              return <td {...cell.getCellProps()} className="px-6 py-4 whitespace-no-wrap border-b border-gray-100 text-sm leading-5 text-gray-900">{cell.render('Cell')}</td>
+                              return <td {...cell.getCellProps()} className="px-6 py-4 whitespace-no-wrap border-b bg-th-card-bg border-gray-100 text-sm leading-5 text-gray-900">{cell.render('Cell')}</td>
                               })}
                           </tr>
                           )
@@ -168,13 +168,6 @@ function FilteredDataTable({ data, columns, handleExcelExport }) {
                 </div>
               </div>
             </div>
-          <br />
-          <div>Showing the first 20 results of {rows.length} rows</div>
-          <div>
-              <pre>
-              <code>{JSON.stringify(state.filters, null, 2)}</code>
-              </pre>
-          </div>
       </div>
     </div>
     )

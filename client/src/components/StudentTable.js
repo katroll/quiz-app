@@ -7,11 +7,8 @@ function StudentTable({ users, setPopUp, setSelectedUser, quizzes  }) {
         setSelectedUser(users[e.target.value]);
     }
 
-    console.log(users[0])
-
 
     return (
-
             <div className="mt-2 overflow-x-scroll overflow-y-scroll">
                 <div className="flex flex-col max-h-[80vh] max-w-[75vw]">
                     <div className="sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
@@ -19,23 +16,23 @@ function StudentTable({ users, setPopUp, setSelectedUser, quizzes  }) {
                             <table className="reletive">
                                 <thead className="">
                                     <tr>
-                                        <th className="px-6 py-3 border-b text-gray border-light-gray bg-white">
+                                        <th className="px-6 py-3 border-b text-gray border-light-gray bg-th-table-header-bg">
                                             Name
                                         </th>
                                         {quizzes.map(quiz => {
                                             return (
-                                                <th key={quiz.id} className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-white">
+                                                <th key={quiz.id} className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-th-table-header-bg">
                                                     {quiz.name}
                                                 </th>
                                             )
                                         })}
-                                        <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-white">
+                                        <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-th-table-header-bg">
                                             Quizzes Taken
                                         </th>
                                     </tr>
                                 </thead>
 
-                                <tbody className="bg-white">
+                                <tbody className="bg-th-card-bg">
                                     {users.map((user, index) => {
                                         return (
                                             <tr key={user.id}>

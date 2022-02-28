@@ -36,15 +36,15 @@ export default function SignIn({ onSignIn, setSignUp }) {
     }
 
   return (
-      <div className="w-3/4 lg:w-6/12 bg-light-blue rounded-md shadow-xl shadow-slate-600">
+      <div className="w-3/4 lg:w-6/12 bg-th-secondary rounded-md shadow-xl shadow-slate-600">
         <div className="relative flex flex-col min-w-0 break-words w-full mb-6 rounded-lg">
           <div className="flex flex-col items-center rounded-t mb-0 px-6 py-6">
-            <p className='text-2xl font-bold text-text-blue'>Sign In</p>
+            <p className='text-4xl font-bold text-th-light-text'>Sign In</p>
           </div>
           <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
             <form onSubmit={handleSubmit}>
               <div className="relative w-full mb-3">
-                <label className="block uppercase text-text-blue text-xs font-bold mb-2">Username</label>
+                <label className="block uppercase text-th-light-text text-sm font-bold mb-2">Username</label>
                 <input 
                   type="text" 
                   name="username"
@@ -52,7 +52,7 @@ export default function SignIn({ onSignIn, setSignUp }) {
                   onChange={handleSignInChange}/>
               </div>
               <div className="relative w-full mb-3">
-                <label className="block uppercase text-text-blue text-xs font-bold mb-2">Password</label>
+                <label className="block uppercase text-th-light-text text-sm font-bold mb-2">Password</label>
                 <input 
                   type="password" 
                   name="password"
@@ -62,7 +62,7 @@ export default function SignIn({ onSignIn, setSignUp }) {
               <div className="text-center mt-6">
                 <button 
                   type="submit" 
-                  className="bg-text-blue text-white active:bg-text-blue text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-xl mr-1 mb-1 w-full ease-linear transition-all duration-150"> 
+                  className="bg-th-button text-th-light-text active:bg-text-blue text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-xl mr-1 mb-1 w-full ease-linear transition-all duration-150"> 
                     Sign In 
                 </button>
               </div>
@@ -72,8 +72,8 @@ export default function SignIn({ onSignIn, setSignUp }) {
                     <p className="bg-error-red text-white px-2 my-1 rounded">{error}</p>
               </div>
               <div className='flex flex-col items-end'>
-                <NavLink to="/signup" className="text-text-blue">Don't have a account? Sign up.</NavLink>
-                <NavLink to="/signup" className="bengali text-text-blue">বাংলা-মিডিয়াম</NavLink>
+                <NavLink to="/signup" className="text-th-light-text">Don't have a account? Sign up.</NavLink>
+                <NavLink to="/signup" className="bengali text-th-light-text">বাংলা-মিডিয়াম</NavLink>
               </div>
             </div>
           </div>

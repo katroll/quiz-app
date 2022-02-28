@@ -10,19 +10,19 @@ function StudentGrades({ user }) {
                             <table className="reletive">
                                 <thead className="">
                                     <tr>
-                                        <th className="px-6 py-3 text-xs font-bold leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-white">
+                                        <th className="px-6 py-3 text-xs font-bold leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-th-table-header-bg">
                                             Test
                                         </th>
-                                        <th className="px-6 py-3 text-xs font-bold leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-white">
+                                        <th className="px-6 py-3 text-xs font-bold leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-th-table-header-bg">
                                             Score
                                         </th>
-                                        <th className="px-6 py-3 text-xs font-bold leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-white">
+                                        <th className="px-6 py-3 text-xs font-bold leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-th-table-header-bg">
                                             Date
                                         </th>
                                     </tr>
                                 </thead>
 
-                                <tbody className="bg-white">
+                                <tbody className="bg-th-card-bg">
                                     {user.grades.reverse().map((grade) => {
                                         return (
                                             <tr key={grade.id}>
@@ -30,7 +30,7 @@ function StudentGrades({ user }) {
                                                     <button 
                                                         className="text-sm leading-5 text-gray"
                                                         onClick={null}>
-                                                            {grade.quiz.name}
+                                                            {grade.quiz_data.quiz.name}
                                                     </button>
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-no-wrap border-b border-light-gray text-sm leading-5 text-gray">

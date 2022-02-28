@@ -6,3 +6,16 @@
 .bengali {
   font-family: AdorshoLipi, sans-serif
 }
+
+:root {
+  --primary: theme("colors.navy.100");
+  --secondary: theme("colors.navy.300");
+  --card-bg: theme("colors.navy.50");
+  --light-text: theme("colors.navy.50");
+  --button: theme("colors.navy.400");
+  --title-text: theme("colors.navy.700");
+  --table-header-bg: theme("colors.viridian.200");
+  --warning: theme("colors.red.100");
+  
+}
+

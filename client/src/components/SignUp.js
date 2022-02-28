@@ -49,16 +49,16 @@ export default function SignUp({ handleSignIn }) {
 
   return (
 
-      <div className="w-3/4 lg:w-6/12 bg-light-blue rounded-md shadow-xl shadow-slate-600">
+      <div className="w-3/4 lg:w-6/12 bg-th-secondary rounded-md shadow-xl shadow-slate-600">
         <div className="relative flex flex-col min-w-0 break-words w-full mb-6">
           <div className="flex flex-col items-center rounded-t mb-0 px-6 py-6">
-            <p className='text-2xl font-bold text-black'>Sign Up</p>
+            <p className='text-4xl font-bold text-th-light-text'>Sign Up</p>
           </div>
           <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
             <form onSubmit={handleSubmit}>
               <div className='flex space-x-2'>
                 <div className="relative w-full mb-3">
-                  <label className="block uppercase text-black text-xs font-bold mb-2">First Name</label>
+                  <label className="block uppercase text-th-light-text text-sm font-bold mb-2">First Name</label>
                   <input 
                     type="text" 
                     name="first_name"
@@ -66,7 +66,7 @@ export default function SignUp({ handleSignIn }) {
                     onChange={handleSignUpFormChange}/>
                 </div>
                 <div className="relative w-full mb-3">
-                  <label className="block uppercase text-black text-xs font-bold mb-2">Last Name</label>
+                  <label className="block uppercase text-th-light-text text-sm font-bold mb-2">Last Name</label>
                   <input 
                     type="text" 
                     name="last_name"
@@ -76,7 +76,7 @@ export default function SignUp({ handleSignIn }) {
               </div>
       
               <div className="relative w-full mb-3">
-                <label className="block uppercase text-black text-xs font-bold mb-2">Username</label>
+                <label className="block uppercase text-th-light-text text-sm font-bold mb-2">Username</label>
                 <input 
                   type="text" 
                   name="username"
@@ -84,7 +84,7 @@ export default function SignUp({ handleSignIn }) {
                   onChange={handleSignUpFormChange}/>
               </div>
               <div className="relative w-full mb-3">
-                <label className="block uppercase text-black text-xs font-bold mb-2">Password</label>
+                <label className="block uppercase text-th-light-text text-sm font-bold mb-2">Password</label>
                 <input 
                   type="password" 
                   name="password"
@@ -94,7 +94,7 @@ export default function SignUp({ handleSignIn }) {
               <div className="text-center mt-6">
                 <button 
                   type="submit" 
-                  className="bg-slate-700 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"> 
+                  className="bg-th-button text-th-light-text active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"> 
                     Sign Up 
                 </button>
               </div>
@@ -110,8 +110,8 @@ export default function SignUp({ handleSignIn }) {
               </div>
             ) : null }
             <div className='flex flex-col items-end'>
-              <NavLink to="/">Already have an account? Sign in.</NavLink>
-              <NavLink to="/" className="bengali">বাংলা-মিডিয়াম</NavLink>
+              <NavLink to="/" className="text-th-light-text">Already have an account? Sign in.</NavLink>
+              <NavLink to="/" className="bengali text-th-light-text">বাংলা-মিডিয়াম</NavLink>
             </div>
             </div>
           </div>

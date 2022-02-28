@@ -62,7 +62,7 @@ function Questions( { questions, onSubmitScore }) {
                 </div>
                
             ) : (
-                <div className="bg-light-blue shadow-md p-10 pb-3 rounded border border-yellow flex flex-col items-center">
+                <div className="bg-th-card-bg shadow-md p-10 pb-3 rounded border border-yellow flex flex-col items-center">
                      {questions[questionNumber].imageUrl ? (
                                     <img
                                         src={questions[questionNumber].imageUrl}
@@ -90,13 +90,13 @@ function Questions( { questions, onSubmitScore }) {
 
                         <button 
                             type="button" 
-                            className="mt-5 w-1/3 text-white bg-green rounded-l border-r hover:bg-hover-green font-medium text-sm px-5 py-2.5 text-center mb-4"
+                            className="mt-5 w-1/3 text-th-light-text bg-th-button rounded-l border-r hover:bg-th-secondary font-medium text-sm px-5 py-2.5 text-center mb-4"
                             onClick={handlePreviousClick}>
                                 ← Previous
                         </button>
                         <button 
                             type="button" 
-                            className="mt-5 w-1/3 text-white bg-green rounded-r hover:bg-hover-green font-medium text-sm px-5 py-2.5 text-center mb-4"
+                            className="mt-5 w-1/3 text-th-light-text bg-th-button rounded-r hover:bg-th-secondary font-medium text-sm px-5 py-2.5 text-center mb-4"
                             onClick={handleNextClick}>
                                 {questionNumber < questions.length - 1 ? "Next →" : "Submit Quiz"}
                         </button>

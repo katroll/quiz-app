@@ -1,12 +1,10 @@
 import TestDataTable from "./testDataTable";
-import { useContext, useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import * as Excel from "exceljs";
 
 import {saveAs} from "file-saver";
 
 import SelectColumnFilter from "./SelectColumnFilter";
-import { StudentsContext } from "../../App";
-import { QuizzesContext } from "../../App";
 
 import FilteredDataTable from "./FilteredDataTable";
 
@@ -15,8 +13,6 @@ import FilteredDataTable from "./FilteredDataTable";
 
 
 function TestDataContainer() {
-    const students = useContext(StudentsContext);
-    const quizzes = useContext(QuizzesContext);
 
     const [grades, setGrades] = useState([]);
 
@@ -123,14 +119,8 @@ function TestDataContainer() {
 
       
         worksheet.addRows(exportData);
-
-        console.log(worksheet);
-        const tempFilePath = 'PATH/temp.xlsx'; // PATH is where you want to create your file
-
-
+    
         const buffer = await workbook.xlsx.writeBuffer();
-
-        console.log("buffer: ", buffer)
         const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
         const fileExtension = '.xlsx';
 
@@ -144,7 +134,7 @@ function TestDataContainer() {
     return (
         <div className="pt-10 flex justify-center">
         <div className="flex flex-col items-center">
-            <p className="font-bold text-4xl text-dark-gray">Testing Data</p>
+            <p className="font-bold text-4xl text-th-title-text">Testing Data</p>
             <div className="w-full overflow-x-hidden overflow-x-scroll">
                 <FilteredDataTable data={data} columns={columns} handleExcelExport={handleExcelExport}/>
             </div>

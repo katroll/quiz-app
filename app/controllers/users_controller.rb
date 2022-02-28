@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ update destroy ]
+  before_action :set_user, only: %i[ update destroy update_password]
 
   #GET /users
   def index
@@ -20,7 +20,6 @@ class UsersController < ApplicationController
   # POST /users
   def create
     @user = User.new(user_params)
-    puts "User: #{@user}"
 
     if @user.save
       render json: @user, status: :created, location: @user
@@ -31,8 +30,8 @@ class UsersController < ApplicationController
   end
 
   # PATCH/PUT /users/1
-  def update
-    if @user.update(user_params)
+  def update_password
+    if @user.update_attribute(:password_digest, BCrypt::Password.create(params[:password]))
       render json: @user
     else
       render json: @user.errors, status: :unprocessable_entity

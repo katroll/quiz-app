@@ -1,4 +1,4 @@
-import { Navigate, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 
 function QuizTable({ quizzes }) {
@@ -13,19 +13,19 @@ function QuizTable({ quizzes }) {
                             <table className="reletive">
                                 <thead className="">
                                     <tr>
-                                        <th className="px-6 py-3 text-xs font-bold leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-white">
+                                        <th className="px-6 py-3 text-sm font-bold leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-th-table-header-bg">
                                             Test
                                         </th>
-                                        <th className="px-6 py-3 text-xs font-bold leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-white">
+                                        <th className="px-6 py-3 text-sm font-bold leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-th-table-header-bg">
                                             Date Created
                                         </th>
-                                        <th className="px-6 py-3 text-xs font-bold leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-white">
+                                        <th className="px-6 py-3 text-sm font-bold leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-th-table-header-bg">
                                             Times Taken
                                         </th>
                                     </tr>
                                 </thead>
 
-                                <tbody className="bg-white">
+                                <tbody className="bg-th-card-bg">
                                     {quizzes.map((quiz, index) => {
                                         return (
                                             <tr key={quiz.id}>

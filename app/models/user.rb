@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-    has_many :grades
+    has_many :grades, dependent: :destroy
 
     validates :username, uniqueness: true
     validates :username, presence: true

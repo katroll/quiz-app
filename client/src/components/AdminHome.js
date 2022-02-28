@@ -16,13 +16,13 @@ function AdminHome() {
     return (
         <div className="pt-10 pl-12 flex flex-col justify-start">
             <div className="flex flex-col justify-start">
-            <h1 className="text-4xl text-slate-800 font-bold">This Weeks Activity</h1>
-            <div className="flex">
-                <div className="text-slate-800 text-lg mt-5 pt-2 p-x-20">Recently Taken Quizzes</div>
-                <div className="flex flex-col mt-5 ml-5 border-l pl-5">
+            <h1 className="text-4xl text-th-title-text font-bold mb-10">This Weeks Activity</h1>
+            <div className="flex bg-th-card-bg rounded-md p-5">
+                <div className="text-slate-800 text-lg">Recently Taken Quizzes</div>
+                <div className="flex flex-col ml-5 border-l pl-5">
                     {grades.map(grade => {
                         return (
-                            <div key={grade.id} className="flex py-2 bg-light-blue my-1 px-2 rounded">
+                            <div key={grade.id} className="flex py-2 bg-viridian-100 my-1 px-2 rounded">
                                 <div className="mx-2 py-1">{grade.user.first_name} {grade.user.last_name}</div>
                                 <div className="bg-light-blue border-l border-yellow px-3 py-1 mx-1">{grade.quiz_data.quiz.name}</div>
                                 <div className="bg-light-blue border-l border-yellow px-3 py-1 mx-1">{grade.score}/{grade.results.length}</div>

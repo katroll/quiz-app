@@ -136,15 +136,13 @@ function App() {
     });
   }
 
-  console.log(quizzes)
-
   if(loggedIn === false) {
     return (
-      <div className="flex flex-col items-center justify-between bg-mid-blue w-screen min-h-screen pt-5">
+      <div className="flex flex-col items-center justify-between bg-th-primary w-screen min-h-screen pt-5">
         <div className='flex flex-col items-center w-screen'>
           <img 
             src={banner}
-            className="w-100 mb-5 border-4 border-light-blue" 
+            className="w-100 mb-5 border-4 border-th-secondary" 
             alt="Avatar"/>
           <Routes>
             <Route 
@@ -175,7 +173,7 @@ function App() {
   }
 
   return (
-    <div className="flex flex-row min-h-screen min-w-screen bg-mid-blue">
+    <div className="flex flex-row min-h-screen min-w-screen bg-th-primary">
 
       {!takingQuiz ? (
         <NavBar user={currentUser} onSignOut={handleSignOut} quizzes={quizzes}/>

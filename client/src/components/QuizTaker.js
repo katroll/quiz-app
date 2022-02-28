@@ -24,7 +24,7 @@ function QuizTaker({ handleSubmitQuiz, setTakingQuiz, takingQuiz }) {
                     <Questions questions={quiz.questions} onSubmitScore={handleSubmitScore}/> 
                     <button 
                         type="button" 
-                        className="w-1/3 mt-1 mb-5 text-white bg-green rounded hover:bg-hover-green text-sm px-1 py-1 text-center"
+                        className="w-1/3 mt-1 mb-5 py-2 text-th-light-text bg-th-button rounded hover:bg-th-secondary text-md px-1 text-center"
                         onClick={() => setTakingQuiz(false)}>
                             Exit Test 
                     </button>
@@ -34,7 +34,7 @@ function QuizTaker({ handleSubmitQuiz, setTakingQuiz, takingQuiz }) {
             ) : (
                 <button 
                     type="button" 
-                    className="justify-end mt-5 mb-5 text-white bg-green rounded hover:bg-slate-600 text-sm px-5 py-2.5 text-center"
+                    className="justify-end mt-5 mb-5 text-th-light-text bg-th-button rounded hover:bg-th-secondary text-md font-semibold px-5 py-2.5 text-center"
                     onClick={() => setTakingQuiz(true)}>
                         Begin Test
                 </button>
