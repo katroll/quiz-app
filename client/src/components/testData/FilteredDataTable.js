@@ -1,5 +1,5 @@
 import ReactTable from "react-table";
-import { useTable, useFilters, useGlobalFilter, useAsyncDebounce } from "react-table";
+import { useTable, useFilters, useGlobalFilter, useAsyncDebounce, useSortBy } from "react-table";
 import { useMemo, useState } from "react";
 
 
@@ -51,7 +51,7 @@ function DefaultColumnFilter({
   }
 
 
-function FilteredDataTable({ data, columns }) {
+function FilteredDataTable({ data, columns, handleExcelExport }) {
 
     const filterTypes = useMemo(
         () => ({
@@ -99,64 +99,84 @@ function FilteredDataTable({ data, columns }) {
         filterTypes,
         },
         useFilters, // useFilters!
-        useGlobalFilter // useGlobalFilter!
+        useGlobalFilter, // useGlobalFilter!
+        useSortBy
     )
     
-    // We don't want to render all of the rows for this example, so cap
-    // it for this use case
-    const firstPageRows = rows.slice(0, 10)
-    
+  
     return (
-        <>
-        <table {...getTableProps()}>
-            <thead>
-            {headerGroups.map(headerGroup => (
-                <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map(column => (
-                    <th {...column.getHeaderProps()}>
-                    {column.render('Header')}
-                    {/* Render the columns filter UI */}
-                    <div>{column.canFilter ? column.render('Filter') : null}</div>
-                    </th>
-                ))}
-                </tr>
-            ))}
-            <tr>
-                <th
-                colSpan={visibleColumns.length}
-                style={{
-                    textAlign: 'left',
-                }}
-                >
-                <GlobalFilter
-                    preGlobalFilteredRows={preGlobalFilteredRows}
-                    globalFilter={state.globalFilter}
-                    setGlobalFilter={setGlobalFilter}
-                />
-                </th>
-            </tr>
-            </thead>
-            <tbody {...getTableBodyProps()}>
-            {firstPageRows.map((row, i) => {
-                prepareRow(row)
-                return (
-                <tr {...row.getRowProps()}>
-                    {row.cells.map(cell => {
-                    return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                    })}
-                </tr>
-                )
-            })}
-            </tbody>
-        </table>
-        <br />
-        <div>Showing the first 20 results of {rows.length} rows</div>
-        <div>
-            <pre>
-            <code>{JSON.stringify(state.filters, null, 2)}</code>
-            </pre>
+      <div className="flex flex-col">
+        <div className="flex w-full justify-end">
+            <button
+                className="p-2 rounded text-white bg-dark-blue hover:bg-hover-blue"
+                onClick={() => handleExcelExport(rows)}>
+                Export Table to Excel
+            </button>
         </div>
-        </>
+        <div className="mt-2 max-h-[75vh] max-w-[75vw] overflow-x-scroll overflow-y-scroll bg-gray-50 rounded">
+          <div className="flex flex-col">
+            <div className="sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+                <div className="inline-block overflow-hidden align-middle border-b border-gray-100 shadow sm:rounded-lg">
+                    
+                  <table {...getTableProps()} className="reletive">
+                      <thead>
+                      {headerGroups.map(headerGroup => (
+                          <tr {...headerGroup.getHeaderGroupProps()}>
+                          {headerGroup.headers.map(column => (
+                            <th className="bg-gray-200 shadow px-1">
+                                <div {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                  {column.render("Header")}
+                                  <span>
+                                    {column.disableSortBy ? "" : column.isSorted ? column.isSortedDesc ? "↑" : "↓" : "⇵"}
+                                  </span>
+                                </div>
+                                <div>
+                                  {column.canFilter ? column.render("Filter") : null}
+                                </div>
+                              </th>
+                          ))}
+                          </tr>
+                      ))}
+                      <tr>
+                          <th
+                          colSpan={visibleColumns.length}
+                          style={{
+                              textAlign: 'left',
+                          }}
+                          >
+                          <GlobalFilter
+                              preGlobalFilteredRows={preGlobalFilteredRows}
+                              globalFilter={state.globalFilter}
+                              setGlobalFilter={setGlobalFilter}
+                          />
+                          </th>
+                      </tr>
+                      </thead>
+                      <tbody {...getTableBodyProps()}>
+                      {rows.map((row, i) => {
+                          prepareRow(row)
+                          return (
+                          <tr {...row.getRowProps()} className="">
+                              {row.cells.map(cell => {
+                              return <td {...cell.getCellProps()} className="px-6 py-4 whitespace-no-wrap border-b border-gray-100 text-sm leading-5 text-gray-900">{cell.render('Cell')}</td>
+                              })}
+                          </tr>
+                          )
+                      })}
+                      </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          <br />
+          <div>Showing the first 20 results of {rows.length} rows</div>
+          <div>
+              <pre>
+              <code>{JSON.stringify(state.filters, null, 2)}</code>
+              </pre>
+          </div>
+      </div>
+    </div>
     )
     }
 

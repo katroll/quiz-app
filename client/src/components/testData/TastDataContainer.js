@@ -2,6 +2,8 @@ import TestDataTable from "./testDataTable";
 import { useContext, useState, useEffect, useMemo } from "react";
 import * as Excel from "exceljs";
 
+import {saveAs} from "file-saver";
+
 import SelectColumnFilter from "./SelectColumnFilter";
 import { StudentsContext } from "../../App";
 import { QuizzesContext } from "../../App";
@@ -26,8 +28,6 @@ function TestDataContainer() {
             setGrades(gradesByDate);
         });
     }, [])
-
-    console.log("grades: ", grades);
     
     //const columns = ["Student Name", "Username", "Student ID", "Test Name", "Test Score", "Question Number", "Correct", "Day/Time Completed"]
 
@@ -83,11 +83,11 @@ function TestDataContainer() {
 
     const data = grades.map(grade => {
         const results = grade.results;
-        return grade.quiz_data.questions.map((question, index) => {
+        return grade.quiz_data.questions.sort((a, b) => a.number - b.number).map((question, index) => {
             return {
                 key: `${grade.id}-${question.id}`,
-                firstname: `${grade.user.first_name}`,
-                lastname: `${grade.user.last_name}`,
+                firstName: grade.user.first_name,
+                lastName: grade.user.last_name,
                 username: grade.user.username,
                 studentId: grade.user.id,
                 testName: grade.quiz_data.quiz.name,
@@ -100,19 +100,53 @@ function TestDataContainer() {
         })
     }).flat();
 
+    async function handleExcelExport(rows) {
+        const exportData = rows.map(row => {
+            return row.values
+        })
+       
+        const workbook = new Excel.Workbook();
+        const worksheet = workbook.addWorksheet("My Sheet");
+
+        worksheet.columns = [
+            {header: 'First Name', key: 'firstName', width: 10},
+            {header: 'Last Name', key: 'lastName', width: 32}, 
+            {header: 'Username', key: 'username', width: 15,},
+            {header: 'Student ID', key: 'studentId', width: 15,},
+            {header: 'Test Name', key: 'testName', width: 15,},
+            {header: 'Test Category', key: 'testCategory', width: 15,},
+            {header: 'Test Score', key: 'testScore', width: 15,},
+            {header: 'Question Number', key: 'questionNumber', width: 15,},
+            {header: 'Correct?', key: 'correct', width: 15,},
+            {header: 'Day/Time Completed', key: 'completedAt', width: 15,},
+          ];
+
+      
+        worksheet.addRows(exportData);
+
+        console.log(worksheet);
+        const tempFilePath = 'PATH/temp.xlsx'; // PATH is where you want to create your file
+
+
+        const buffer = await workbook.xlsx.writeBuffer();
+
+        console.log("buffer: ", buffer)
+        const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+        const fileExtension = '.xlsx';
+
+        const blob = new Blob([buffer], {type: fileType});
+
+        saveAs(blob, 'test-data' + fileExtension);
+
+    }
+
 
     return (
-        <div className="pt-10 flex justify-center max-w-screen">
+        <div className="pt-10 flex justify-center">
         <div className="flex flex-col items-center">
             <p className="font-bold text-4xl text-dark-gray">Testing Data</p>
-            <div className="flex w-full justify-end">
-                <button
-                    className="p-2 rounded text-white bg-dark-blue hover:bg-hover-blue">
-                    Export All Testing Data to Excel
-                </button>
-            </div>
             <div className="w-full overflow-x-hidden overflow-x-scroll">
-                <FilteredDataTable data={data} columns={columns}/>
+                <FilteredDataTable data={data} columns={columns} handleExcelExport={handleExcelExport}/>
             </div>
         </div>
     </div>
