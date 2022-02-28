@@ -1,4 +1,3 @@
-import ReactTable from "react-table";
 import { useTable, useFilters, useGlobalFilter, useAsyncDebounce, useSortBy } from "react-table";
 import { useMemo, useState } from "react";
 
@@ -103,6 +102,8 @@ function FilteredDataTable({ data, columns, handleExcelExport }) {
         useSortBy
     )
     
+    console.log(rows)
+    console.log(headerGroups)
   
     return (
       <div className="flex flex-col">
@@ -121,9 +122,9 @@ function FilteredDataTable({ data, columns, handleExcelExport }) {
                   <table {...getTableProps()} className="reletive">
                       <thead>
                       {headerGroups.map(headerGroup => (
-                          <tr {...headerGroup.getHeaderGroupProps()}>
+                          <tr key={headerGroup} {...headerGroup.getHeaderGroupProps()}>
                           {headerGroup.headers.map(column => (
-                            <th className="bg-th-table-header-bg shadow px-1">
+                            <th key={column.Header} className="bg-th-table-header-bg shadow px-1">
                                 <div {...column.getHeaderProps(column.getSortByToggleProps())}>
                                   {column.render("Header")}
                                   <span>
@@ -156,9 +157,9 @@ function FilteredDataTable({ data, columns, handleExcelExport }) {
                       {rows.map((row, i) => {
                           prepareRow(row)
                           return (
-                          <tr {...row.getRowProps()} className="">
+                          <tr key={row.id} {...row.getRowProps()} className="">
                               {row.cells.map(cell => {
-                              return <td {...cell.getCellProps()} className="px-6 py-4 whitespace-no-wrap border-b bg-th-card-bg border-gray-100 text-sm leading-5 text-gray-900">{cell.render('Cell')}</td>
+                              return <td key={`${cell.value}-${row.id}`} {...cell.getCellProps()} className="px-6 py-4 whitespace-no-wrap border-b bg-th-card-bg border-gray-100 text-sm leading-5 text-gray-900">{cell.render('Cell')}</td>
                               })}
                           </tr>
                           )

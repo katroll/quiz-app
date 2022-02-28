@@ -12,8 +12,9 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
     const [quizCategory, setQuizCategory] = useState("");
     const [preview, setPreview] = useState(false);
     const [questions, setQuestions] = useState([]);
-    const [error, setError] = useState("");
+    const [error, setError] = useState([]);
 
+    const categories = ["Beginner", "Intermediate", "Advanced", "English", "Misc"];
 
     function loadQuizFile(e) {
         const selectedFile = e.target.files[0];
@@ -47,8 +48,6 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
                         const imgBase64 = Base64.encode(img.buffer);
                         quizQuestions[row - 1].imageBase64 = imgBase64;
                     })
-
-                    console.log("image in questions: ", quizQuestions);
                     setQuestions(quizQuestions);
                 })
             })
@@ -61,15 +60,13 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
     }
 
     function onSubmitQuiz() {
-        if(!quizName || questions.length === 0) {
-            setError("Quiz name and file are required");
+        if(!quizName || questions.length === 0 || !quizCategory) {
+            setError("All fields are required")
         } else {
             setError("")
             handleSubmitNewQuiz(quizName, questions, quizCategory);
         }
     }
-
-    console.log("category", quizCategory);
 
     return (
         <div className="flex flex-col pt-10" >
@@ -78,7 +75,6 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
                 <div>
                     <form className="mt-5 w-full">
                         <div className="flex flex-row">
-                            {/* <label className="p-2 text-stone-800">Test Name: </label> */}
                             <div className="w-full rounded-md p-2">
                                     <input 
                                         type="text" 
@@ -92,26 +88,14 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
                         <div className="flex">
                             <label className="p-2 text-stone-800">Choose Test Category: </label>
                             <div className="flex flex-col space-x-1">
-                                <div className="flex flex-row rounded-md pt-2 pl-3">
-                                        <input type="radio" name="category" id="beginner" onChange={(e) => setQuizCategory(e.target.id)} className=" bg-stone-100 px-2 mt-1 mr-2"/>
-                                        <label>Beginner</label>  
-                                </div>
-                                <div className="flex flex-row rounded-md pl-2">
-                                        <input type="radio" name="category" id="intermediate" onChange={(e) => setQuizCategory(e.target.id)} className=" bg-stone-100 px-2 mt-1 mr-2"/>
-                                        <label>Intermediate</label>  
-                                </div>
-                                <div className="flex flex-row rounded-md pl-2">
-                                        <input type="radio" name="category" id="advanced" onChange={(e) => setQuizCategory(e.target.id)} className=" bg-stone-100 px-2 mt-1 mr-2"/>
-                                        <label>Advanced</label>  
-                                </div>
-                                <div className="flex flex-row rounded-md pl-2">
-                                        <input type="radio" name="category" id="english" onChange={(e) => setQuizCategory(e.target.id)} className=" bg-stone-100 px-2 mt-1 mr-2"/>
-                                        <label>English</label>  
-                                </div>
-                                <div className="flex flex-row rounded-md pl-2">
-                                        <input type="radio" name="category" id="misc" onChange={(e) => setQuizCategory(e.target.id)} className=" bg-stone-100 px-2 mt-1 mr-2"/>
-                                        <label>Misc</label>  
-                                </div>
+                                {categories.map(category => {
+                                    return (
+                                        <div key={category} className="flex flex-row rounded-md pt-2 pl-3">
+                                            <input type="radio" name="category" id={category.toLowerCase()} onChange={(e) => setQuizCategory(e.target.id)} className=" bg-stone-100 px-2 mt-1 mr-2"/>
+                                            <label>{category}</label>  
+                                        </div>
+                                    )
+                                })}
                             </div>
                         </div>
                         <div htmlFor="upload" className="flex flex-row space-x-1 items-center mt-2">
@@ -129,7 +113,7 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
                 </div>
 
                 {error ? (
-                    <div className="ml-10 px-3 bg-error-red rounded">
+                    <div className="ml-10 px-3 bg-th-warning text-th-light-text rounded">
                         <p className="text-white">{error}</p>
                     </div>
                 ) : null}
@@ -154,12 +138,13 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
 
 
             {preview ? (
-                <div className="flex flex-col bg-th-card-bg rounded mt-10 mx-5 pl-12 items-start overflow-y-scroll">
+                <div className=""> 
+                <div className="flex flex-col bg-th-card-bg rounded my-10 mx-5 pl-12 items-start">
                     <h1 className="text-2xl font-bold">{quizName}</h1>
                     <ul className="flex flex-col justify-start mt-5 w-full">
                         {questions.map(question => {
                             return (
-                                <li key={question.question} className="mb-3">
+                                <li key={question.question} className="mb-3 flex flex-col items-start">
                                     <div className="flex flex-col items-center">
                                     {question.imageBase64 ? (
                                     <img
@@ -190,6 +175,7 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
                             )
                         })}
                     </ul>
+                    </div>
                 </div>
             ) : ( null )}
             

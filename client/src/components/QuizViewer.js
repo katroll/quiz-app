@@ -4,7 +4,7 @@ import { useContext } from "react"
 import { QuizzesContext } from "../App";
 
 
-function QuizViewer({ }) {
+function QuizViewer() {
     const quizzes = useContext(QuizzesContext)
     const { name } = useParams();
     const quiz = quizzes.find(quiz => quiz.name.replace(/\s+/g, '') === name.replace(/\s+/g, ''));
