@@ -69,7 +69,7 @@ export default function SignIn({ onSignIn, setSignUp }) {
             </form>
             <div className="flex justify-between">
               <div className="flex items-start">
-                    <p className="bg-error-red text-white px-2 my-1 rounded">{error}</p>
+                    <p className="bg-th-warning text-th-light-text px-2 my-1 rounded">{error}</p>
               </div>
               <div className='flex flex-col items-end'>
                 <NavLink to="/signup" className="text-th-light-text">Don't have a account? Sign up.</NavLink>

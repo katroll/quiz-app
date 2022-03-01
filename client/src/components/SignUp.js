@@ -104,7 +104,7 @@ export default function SignUp({ handleSignIn }) {
               <div className="flex flex-col items-start">
                 {errors.map(error => {
                   return (
-                    <p key={error} className="bg-error-red text-white px-2 my-1 rounded">{error}</p>
+                    <p key={error} className="bg-th-warning text-th-light-text px-2 my-1 rounded">{error}</p>
                   )
                 })}
               </div>

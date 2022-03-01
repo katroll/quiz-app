@@ -164,8 +164,8 @@ function App() {
 
   if(quizzes.length === 0) {
     return (
-      <div className="flex justify-center items-center">
-        <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
+      <div className="flex justify-center items-center mt-20">
+        <div className="spinner-border animate-spin inline-block w-10 h-10 border-4 rounded-full" role="status">
           <span className="visually-hidden">Loading...</span>
         </div>
       </div>
