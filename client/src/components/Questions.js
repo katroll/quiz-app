@@ -1,4 +1,5 @@
 import { useState } from "react";
+import QuizViewer from "./QuizViewer";
 
 function Questions( { questions, onSubmitScore }) {
     let [questionNumber, setQuestionNumber] = useState(0);
@@ -59,6 +60,7 @@ function Questions( { questions, onSubmitScore }) {
                 <div>
                      <p>You got {score} out of {questionNumber + 1} correct!</p>
                      <p className="text-2xl font-bold">{(score / (questionNumber + 1) * 100 )} %</p>
+                     <QuizViewer />
                 </div>
                
             ) : (

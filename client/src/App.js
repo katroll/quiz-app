@@ -21,6 +21,7 @@ import StudentHome from './components/students/StudentHome';
 
 export const UsersContext = createContext();
 export const QuizzesContext = createContext();
+export const UserContext = createContext();
 
 function App() {
   const navigate = useNavigate();
@@ -175,48 +176,52 @@ function App() {
       
       <div className='flex flex-col pl-60 w-full justify-between'>
         {currentUser.admin ? (
-          <UsersContext.Provider value={users}>
-            <QuizzesContext.Provider value={quizzes}>
+          <UserContext.Provider value={currentUser}>
+            <UsersContext.Provider value={users}>
+              <QuizzesContext.Provider value={quizzes}>
+                <Routes>
+                  <Route path="/uploadquiz" 
+                    element={<UplaodQuiz handleSubmitNewQuiz={handleSubmitNewQuiz}/>}
+                  />
+                  <Route path="/testdata" 
+                    element={<TestDataContainer/>}
+                  />
+                  <Route exact path="/test/:name" 
+                    element={<QuizViewer />}
+                  />
+                  <Route exact path="/tests/:category" 
+                    element={<TestList />}
+                  />
+                  <Route path="/students" 
+                    element={<UserContainer />}
+                  />
+                  <Route path="/" 
+                    element={<AdminHome />}
+                  />
+
+                  </Routes>
+                </QuizzesContext.Provider>
+              </UsersContext.Provider>
+           </UserContext.Provider>
+        ) : (
+          <UserContext.Provider value={currentUser}>
+            <QuizzesContext.Provider value={quizzes}> 
               <Routes>
-                <Route path="/uploadquiz" 
-                  element={<UplaodQuiz handleSubmitNewQuiz={handleSubmitNewQuiz}/>}
-                />
-                <Route path="/testdata" 
-                  element={<TestDataContainer/>}
-                />
-                <Route exact path="/test/:name" 
-                  element={<QuizViewer />}
+                <Route path="/test/:name" 
+                  element={<QuizTaker handleSubmitQuiz={handleSubmitQuiz} setTakingQuiz={setTakingQuiz} takingQuiz={takingQuiz} />}
                 />
                 <Route exact path="/tests/:category" 
-                  element={<TestList />}
-                />
-                <Route path="/students" 
-                  element={<UserContainer />}
+                    element={<TestList />}
+                  />
+                <Route path="/mygrades" 
+                  element={<StudentGradesContainer user={currentUser}/>}
                 />
                 <Route path="/" 
-                  element={<AdminHome />}
+                  element={<StudentHome />}
                 />
-
-                </Routes>
-              </QuizzesContext.Provider>
-            </UsersContext.Provider>
-        ) : (
-          <QuizzesContext.Provider value={quizzes}> 
-            <Routes>
-              <Route path="/test/:name" 
-                element={<QuizTaker handleSubmitQuiz={handleSubmitQuiz} setTakingQuiz={setTakingQuiz} takingQuiz={takingQuiz} />}
-              />
-              <Route exact path="/tests/:category" 
-                  element={<TestList />}
-                />
-              <Route path="/mygrades" 
-                element={<StudentGradesContainer user={currentUser}/>}
-              />
-              <Route path="/" 
-                element={<StudentHome />}
-              />
-            </Routes>
-          </QuizzesContext.Provider>
+              </Routes>
+            </QuizzesContext.Provider>
+          </UserContext.Provider>
         )}
 
         <div className='flex pb-5 pt-2 mt-3 justify-center'>

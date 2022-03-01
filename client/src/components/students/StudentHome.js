@@ -6,7 +6,7 @@ function StudentHome() {
         <div className="pt-10 flex flex-col items-center">
            <img 
             src={banner}
-            className="w-100 mb-10 shadow border-4 border-light-blue" 
+            className="w-100 mb-10 shadow border-4 border-th-secondary" 
             alt="Avatar"/>
         </div>
     )

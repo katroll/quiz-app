@@ -19,7 +19,7 @@ class GradesController < ApplicationController
     @grade.results = params[:results]
 
     if @grade.save
-      render json: @grade, status: :created, location: @grade
+      render json: @grade, status: :created
     else
       render json: @grade.errors, status: :unprocessable_entity
     end

@@ -38,11 +38,13 @@ module.exports = {
           '800': '#1e314b',
           '900': '#121e31',
         },
-       
         red: {
           "100": "#E13203",
-
         }, 
+        green: {
+          "100": "#08ff4a",
+        }, 
+
 
         'th-primary': 'var(--primary)',
         'th-secondary': 'var(--secondary)',
@@ -51,7 +53,8 @@ module.exports = {
         "th-button": "var(--button)",
         "th-title-text": "var(--title-text)",
         "th-table-header-bg": "var(--table-header-bg)",
-        "th-warning": "var(--warning)"
+        "th-warning": "var(--warning)",
+        "th-correct": "var(--correct)"
         
 
       }
