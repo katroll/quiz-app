@@ -173,7 +173,7 @@ function App() {
   }
 
   return (
-    <div className="flex flex-row min-h-screen min-w-screen bg-th-primary">
+    <div className="flex flex-row min-h-screen max-w-[100vw] bg-th-primary">
 
       {!takingQuiz ? (
         <NavBar user={currentUser} onSignOut={handleSignOut} quizzes={quizzes}/>
@@ -225,7 +225,7 @@ function App() {
           </QuizzesContext.Provider>
         )}
 
-        <div className='flex pb-5 pt-2 mt-3 w-screen justify-center'>
+        <div className='flex pb-5 pt-2 mt-3 justify-center'>
           <p className='text-slate-800'>© {new Date().getFullYear()} by St. Paul's Computer Training Center. <a href="http://www.info@spctc.org">info@spctc.org</a></p>
         </div>
       </div>

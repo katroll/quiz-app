@@ -31,20 +31,17 @@ function StudentContainer() {
 
     function filterStudents() {
         const filteredStudents =  students.filter(student => {
-            return ((student.first_name.includes(nameSearch) || student.last_name.includes(nameSearch)) && student.username.includes(setUsernameSearch))
+            return ((student.first_name.includes(nameSearch) || student.last_name.includes(nameSearch)) && student.username.includes(usernameSearch))
         })
-
-        console.log(filteredStudents)
-
+        return filteredStudents;
     }
 
-    filterStudents()
 
 
     return (
         <div>
             {popUp ? (
-                <div className="absolute w-full h-full bg-th-primary/[.5] z-20 flex items-center pl-48">
+                <div className="absolute w-full h-full bg-th-primary z-20 flex items-center pl-48">
                     <UserCard user={selectedUser} setPopUp={setPopUp} />
                 </div>
             ) : null }
@@ -72,7 +69,7 @@ function StudentContainer() {
                             />
                         </form>
                     </div>
-                    <StudentTable users={students} setPopUp={setPopUp} setSelectedUser={setSelectedUser} quizzes={quizzes} />
+                    <StudentTable users={filterStudents()} setPopUp={setPopUp} setSelectedUser={setSelectedUser} quizzes={quizzes} />
                 </div>
             </div>
         </div>
