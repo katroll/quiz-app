@@ -14,7 +14,7 @@ function UserCard({ user, setPopUp }) {
     function handleUpdateUserPassword(e) {
         e.preventDefault();
 
-        fetch(`/update_password/${user.id}`, {
+        fetch(`users/${user.id}`, {
             method: "PATCH",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({password: newPassword})
@@ -32,6 +32,16 @@ function UserCard({ user, setPopUp }) {
         } else {
             console.log("type the username as exact mathc")
         }
+    }
+
+    function handleAdminToggle() {
+        fetch(`users/${user.id}`, {
+            method: "PATCH",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({admin: !user.admin})
+        })
+        .then(resp => resp.json())
+        .then(user => console.log(user));
     }
 
     return (
@@ -65,6 +75,13 @@ function UserCard({ user, setPopUp }) {
                                                         className="text-sm leading-5 text-th-light-text bg-th-button hover:bg-th-secondary rounded p-1 border border-slate-300"
                                                         onClick={() => setUpdatePassword(true)}>
                                                             Reset Password
+                                                    </button>
+                                                </div>
+                                                <div>
+                                                    <button 
+                                                        className="text-sm px-3 leading-5 text-th-light-text bg-th-button hover:bg-th-secondary rounded p-1 " 
+                                                        onClick={handleAdminToggle}>
+                                                            Make Admin
                                                     </button>
                                                 </div>
                                                 <div>
