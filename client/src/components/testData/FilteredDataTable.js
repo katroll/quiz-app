@@ -101,9 +101,6 @@ function FilteredDataTable({ data, columns, handleExcelExport }) {
         useGlobalFilter, // useGlobalFilter!
         useSortBy
     )
-    
-    console.log(rows)
-    console.log(headerGroups)
   
     return (
       <div className="flex flex-col">
@@ -124,8 +121,8 @@ function FilteredDataTable({ data, columns, handleExcelExport }) {
                       {headerGroups.map(headerGroup => (
                           <tr key={headerGroup} {...headerGroup.getHeaderGroupProps()}>
                           {headerGroup.headers.map(column => (
-                            <th key={column.Header} className="bg-th-table-header-bg shadow px-1">
-                                <div {...column.getHeaderProps(column.getSortByToggleProps())}>
+                            <th key={column.Header} className="bg-th-table-header-bg shadow px-3">
+                                <div {...column.getHeaderProps(column.getSortByToggleProps())} className="">
                                   {column.render("Header")}
                                   <span>
                                     {column.disableSortBy ? "" : column.isSorted ? column.isSortedDesc ? "↑" : "↓" : "⇵"}
