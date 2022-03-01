@@ -138,45 +138,45 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
 
 
             {preview ? (
-                <div className=""> 
-                <div className="flex flex-col bg-th-card-bg rounded my-10 mx-5 pl-12 items-start">
-                    <h1 className="text-2xl font-bold">{quizName}</h1>
-                    <ul className="flex flex-col justify-start mt-5 w-full">
-                        {questions.map(question => {
-                            return (
-                                <li key={question.question} className="mb-3 flex flex-col items-start">
-                                    <div className="flex flex-col items-center">
-                                    {question.imageBase64 ? (
-                                    <img
-                                        src={urlCreator.createObjectURL(new Blob( [ Base64.decode(question.imageBase64) ], { type: "image/jpeg" } ))}
-                                        alt="question pic"
-                                        className="w-1/3 mb-8 mt-2 rounded">
-                                    </img>
-                                ) : null }
-                                <div className="flex">
-                                    <p className="font-bold mr-3 text-stone-800">{`${question.number}.`}</p>
-                                    <div className="felx flex-col mb-2">
-                                        <p className="text-stone-800">{question.question}</p>
-                                        <p className="text-stone-800 mt-2 ">{question.bengali}</p>
-                                    </div>  
+                <div className="flex flex-col pt-10 items-center min-h-screen w-full pl-12 pr-10">
+                <h1 className="text-4xl text-th-title-text font-bold">{quizName}</h1>
+                <ul className="flex flex-col justify-start mt-5 w-full">
+                    {questions.map(question => {
+                        return (
+                            <li key={question.question} className="mb-3">
+                                <div className="flex flex-col w-full p-2 bg-th-card-bg items-center border rounded border-yellow">
+                                {question.imageBase64 ? (
+                                        <img
+                                            src={urlCreator.createObjectURL(new Blob( [ Base64.decode(question.imageBase64) ], { type: "image/jpeg" } ))}
+                                            alt="question pic"
+                                            className="w-1/3 mb-8 mt-2 rounded">
+                                        </img>
+                                    ) : null }
+                                    <div className="flex flex-col justify-start pb-2 pt-2">
+                                        <div className="flex flex-row">
+                                            <p className="font-bold mr-3 text-stone-800">{`${question.number}.`}</p>
+                                            <div className="felx flex-col mb-2">
+                                                <p className="text-stone-800">{question.question}</p>
+                                                <p className="text-stone-800 mt-2">{question.bengali}</p>
+                                            </div>  
+                                        </div>
+                                            <div className="flex flex-col pl-10">
+                                                {question.choices.map((choice, index) => {
+                                                    return (
+                                                        <div key={choice} className="">
+                                                            <input type="radio" id={choice} name={question.question} checked={question.answer === index ? true : false} readOnly></input>
+                                                            <label className="pl-1 text-stone-800">{choice}</label>
+                                                        </div>
+                                                    )
+                                                })}
+                                            </div>
+                                    </div>
                                 </div>
-                                    </div>
-                                    <div className="flex flex-col pl-10 mb-5">
-                                        {question.choices.map((choice, index) => {
-                                            return (
-                                                <div key={choice} className="">
-                                                    <input type="radio" id={choice} name={question.question} checked={question.answer === index ? true : false} readOnly></input>
-                                                    <label className="pl-1 text-stone-800">{choice}</label>
-                                                </div>
-                                            )
-                                        })}
-                                    </div>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                    </div>
-                </div>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </div>
             ) : ( null )}
             
         </div>
@@ -184,3 +184,6 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
 }
 
 export default UplaodQuiz;
+
+
+

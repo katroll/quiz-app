@@ -17,6 +17,7 @@
   --table-header-bg: theme("colors.viridian.200");
   --warning: theme("colors.red.100");
   --correct: theme("colors.green.100");
+  --border: theme("colors.gray.100");
 }
 
 

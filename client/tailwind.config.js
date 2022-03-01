@@ -44,6 +44,9 @@ module.exports = {
         green: {
           "100": "#08ff4a",
         }, 
+        gray: {
+          "100": "#a6aba7",
+        },
 
 
         'th-primary': 'var(--primary)',
@@ -54,7 +57,9 @@ module.exports = {
         "th-title-text": "var(--title-text)",
         "th-table-header-bg": "var(--table-header-bg)",
         "th-warning": "var(--warning)",
-        "th-correct": "var(--correct)"
+        "th-correct": "var(--correct)",
+        "th-border": "var(--border)",
+
         
 
       }

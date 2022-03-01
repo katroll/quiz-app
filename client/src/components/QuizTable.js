@@ -1,8 +1,13 @@
 import { useNavigate } from "react-router-dom"
 
+import { useContext } from "react"
+import { UserContext } from "../App"
+
 
 function QuizTable({ quizzes }) {
     const navigate = useNavigate();
+
+    const user = useContext(UserContext);
 
     return (
 
@@ -16,11 +21,13 @@ function QuizTable({ quizzes }) {
                                         <th className="px-6 py-3 text-sm font-bold leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-th-table-header-bg">
                                             Test
                                         </th>
+                                        {user.admin ? (
+                                            <th className="px-6 py-3 text-sm font-bold leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-th-table-header-bg">
+                                                Date Created
+                                            </th>
+                                        ) : null}
                                         <th className="px-6 py-3 text-sm font-bold leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-th-table-header-bg">
-                                            Date Created
-                                        </th>
-                                        <th className="px-6 py-3 text-sm font-bold leading-4 tracking-wider text-left text-gray uppercase border-b border-light-gray bg-th-table-header-bg">
-                                            Times Taken
+                                            {user.admin? "Times Taken" : "Completed"}
                                         </th>
                                     </tr>
                                 </thead>
@@ -37,12 +44,25 @@ function QuizTable({ quizzes }) {
                                                             {quiz.name}
                                                     </button>
                                                 </td>
+                                                {user.admin ? (
+                                                     <td className="px-6 py-4 whitespace-no-wrap border-b border-light-gray">
+                                                        <div className="text-sm leading-5 text-gray"></div>
+                                                                {quiz.created_at.slice(0,10)}
+                                                    </td>
+                                                ) : null}
+                                               
                                                 <td className="px-6 py-4 whitespace-no-wrap border-b border-light-gray">
-                                                    <div className="text-sm leading-5 text-gray"></div>
-                                                            {quiz.created_at.slice(0,10)}
-                                                </td>
-                                                <td className="px-6 py-4 whitespace-no-wrap border-b border-light-gray">
-                                                    <div className="text-sm leading-5 text-gray">{quiz.grades.length}</div>
+                                                    <div 
+                                                        className="text-sm leading-5">
+                                                        {user.adimn ? (
+                                                            <div>{quiz.grades.length}</div>
+                                                         ) : (
+                                                             user.grades.find(grade => grade.quiz_data.quiz.name === quiz.name) ? (
+                                                                <div className="text-xl">✔</div> 
+                                                                ) : (
+                                                                <div className="text-xl">-</div> 
+                                                            ))} 
+                                                    </div>
                                                 </td>
                                             </tr>
                                     )})}

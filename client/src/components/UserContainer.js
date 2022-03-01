@@ -29,7 +29,7 @@ function UserContainer() {
 
     function filterStudents() {
         const filteredStudents =  students.filter(student => {
-            return ((student.first_name.includes(nameSearch) || student.last_name.includes(nameSearch)) && student.username.includes(usernameSearch))
+            return ((student.first_name.toLowerCase().includes(nameSearch.toLowerCase()) || student.last_name.toLowerCase().includes(nameSearch.toLowerCase())) && student.username.toLowerCase().includes(usernameSearch.toLowerCase()))
         })
         return filteredStudents;
     }
@@ -75,6 +75,7 @@ function UserContainer() {
                                         name="name"
                                         className="mx-3 pl-3"
                                         onChange={handleStudentSearch}
+                                        value={nameSearch}
                                     />
                                     <label>OR</label>
                                     <input
@@ -83,6 +84,7 @@ function UserContainer() {
                                         name="username"
                                         className="mx-3 pl-3"
                                         onChange={handleStudentSearch}
+                                        value={usernameSearch}
                                     />
                                 </form>
                             </div>

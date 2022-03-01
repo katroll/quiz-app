@@ -7,11 +7,17 @@ function Questions( { questions, onSubmitScore }) {
     const [results, setResults] = useState([]);
     const [correctIndex, setCorrentIndex] = useState([]);
     const [complete, setComplete] = useState(false);
+    const [error, setError] = useState(false);
 
     function handleNextClick() {
+        if(results.length <= questionNumber) {
+            setError("Answer required to move on");
+            return;
+        }
 
         if(questionNumber < questions.length - 1) {
             setQuestionNumber(questionNumber += 1);
+            setError("");
         }
         else {
             setComplete(true);
@@ -51,6 +57,9 @@ function Questions( { questions, onSubmitScore }) {
         setResults(newAnswer);
     }
 
+    console.log("results: ", results)
+    console.log("correct index array: ", correctIndex)
+
    
 
     return (
@@ -58,8 +67,10 @@ function Questions( { questions, onSubmitScore }) {
             
             {complete ? (
                 <div>
-                     <p>You got {score} out of {questionNumber + 1} correct!</p>
-                     <p className="text-2xl font-bold">{(score / (questionNumber + 1) * 100 )} %</p>
+                    <div className="flex flex-col items-center bg-th-secondary py-3 rounded">
+                        <p className="text-2xl text-th-title-text">You got {score} out of {questionNumber + 1} correct!</p>
+                        <p className="text-3xl font-bold text-th-light-text">{Math.floor(score / (questionNumber + 1) * 100 )} %</p>
+                     </div>
                      <QuizViewer />
                 </div>
                
@@ -88,20 +99,25 @@ function Questions( { questions, onSubmitScore }) {
                             )
                         })}
                     </div>
-                    <div className="w-full flex justify-center items-center">
-
-                        <button 
-                            type="button" 
-                            className="mt-5 w-1/3 text-th-light-text bg-th-button rounded-l border-r hover:bg-th-secondary font-medium text-sm px-5 py-2.5 text-center mb-4"
-                            onClick={handlePreviousClick}>
-                                ← Previous
-                        </button>
-                        <button 
-                            type="button" 
-                            className="mt-5 w-1/3 text-th-light-text bg-th-button rounded-r hover:bg-th-secondary font-medium text-sm px-5 py-2.5 text-center mb-4"
-                            onClick={handleNextClick}>
-                                {questionNumber < questions.length - 1 ? "Next →" : "Submit Quiz"}
-                        </button>
+                    <div className="flex flex-col w-full items-center">
+                            {error ? (
+                                <div className="p-1 px-2 bg-th-warning text-th-light-text rounded">{error}</div>
+                            ) : null }
+                       
+                        <div className="w-full flex justify-center items-center">
+                            <button 
+                                type="button" 
+                                className="mt-5 w-1/3 text-th-light-text bg-th-button rounded-l border-r hover:bg-th-secondary font-medium text-sm px-5 py-2.5 text-center mb-4"
+                                onClick={handlePreviousClick}>
+                                    ← Previous
+                            </button>
+                            <button 
+                                type="button" 
+                                className="mt-5 w-1/3 text-th-light-text bg-th-button rounded-r hover:bg-th-secondary font-medium text-sm px-5 py-2.5 text-center mb-4"
+                                onClick={handleNextClick}>
+                                    {questionNumber < questions.length - 1 ? "Next →" : "Submit Quiz"}
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}
