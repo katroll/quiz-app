@@ -53,7 +53,7 @@ function NavBar({ user, onSignOut, quizzes }) {
                 <ul className="relative px-1">
                     <li className="relative" onClick={() => navigate("/students")}>
                         <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
-                            <span>Students</span>
+                            <span>Users</span>
                         </a>
                     </li>   
                 </ul>

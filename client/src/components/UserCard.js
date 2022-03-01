@@ -6,7 +6,7 @@ function UserCard({ user, setPopUp }) {
     const [updatePassword, setUpdatePassword] = useState(false);
     const [newPassword, setNewPassword] = useState("");
     const [deleteWarning, setDeleteWarning] = useState(false);
-    const [userToDelete, setUserToDelete] = useState("")
+    const [userToDelete, setUserToDelete] = useState("");
 
     console.log(userToDelete)
 
@@ -41,7 +41,7 @@ function UserCard({ user, setPopUp }) {
             body: JSON.stringify({admin: !user.admin})
         })
         .then(resp => resp.json())
-        .then(user => console.log(user));
+      
     }
 
     return (
@@ -53,8 +53,18 @@ function UserCard({ user, setPopUp }) {
                         <table className="min-w-content rounded-md">
                             <thead>
                                 <tr>
-                                    <th className="px-6 py-3 text-sm font-bold leading-4 tracking-wider text-center text-gray uppercase border-b border-light-gray bg-th-table-header-bg">
-                                        {user.first_name} {user.last_name}</th>
+                                    <th className="flex justify-between items-center px-6 py-3 text-sm font-bold leading-4 tracking-wider text-center text-gray uppercase border-b border-light-gray bg-th-table-header-bg">
+                                        <div className="">
+                                            {user.first_name} {user.last_name}
+                                        </div>
+                                        <div>
+                                            <button 
+                                                className="text-sm px-3 leading-5 text-th-light-text bg-th-button hover:bg-th-secondary rounded p-1 " 
+                                                onClick={() => setPopUp(false)}>
+                                                    Close
+                                            </button>
+                                        </div>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody className="bg-th-card-bg">
@@ -82,13 +92,6 @@ function UserCard({ user, setPopUp }) {
                                                         className="text-sm px-3 leading-5 text-th-light-text bg-th-button hover:bg-th-secondary rounded p-1 " 
                                                         onClick={handleAdminToggle}>
                                                             Make Admin
-                                                    </button>
-                                                </div>
-                                                <div>
-                                                    <button 
-                                                        className="text-sm px-3 leading-5 text-th-light-text bg-th-button hover:bg-th-secondary rounded p-1 " 
-                                                        onClick={() => setPopUp(false)}>
-                                                            Close
                                                     </button>
                                                 </div>
                                             </td>

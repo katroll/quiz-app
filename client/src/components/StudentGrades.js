@@ -23,8 +23,7 @@ function StudentGrades({ user }) {
                                 </thead>
 
                                 <tbody className="bg-th-card-bg">
-                                    {user.grades.reverse().map((grade) => {
-                                        return (
+                                    {user.grades.reverse().map((grade) => (
                                             <tr key={grade.id}>
                                                 <td className="px-6 py-4 whitespace-no-wrap border-b border-light-gray">
                                                     <button 
@@ -40,7 +39,7 @@ function StudentGrades({ user }) {
                                                     {grade.updated_at.slice(0,10)}
                                                 </td>
                                             </tr>
-                                    )})}
+                                    ))}
                                 </tbody>
                             </table>
                         </div>

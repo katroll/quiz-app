@@ -10,7 +10,7 @@ import NavBar from './components/NavBar';
 import UplaodQuiz from './components/UploadQuiz';
 import QuizViewer from './components/QuizViewer';
 import QuizTaker from './components/QuizTaker';
-import StudentContainer from './components/StudentContainer';
+import UserContainer from './components/UserContainer';
 import AdminHome from './components/AdminHome';
 import StudentGradesContainer from './components/StudentGradesContainer';
 import TestList from './components/TestList';
@@ -19,7 +19,7 @@ import banner from "./banner.jpg"
 import TestDataContainer from './components/testData/TastDataContainer';
 import StudentHome from './components/students/StudentHome';
 
-export const StudentsContext = createContext();
+export const UsersContext = createContext();
 export const QuizzesContext = createContext();
 
 function App() {
@@ -27,8 +27,8 @@ function App() {
   
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
-  const [students, setStudents] = useState([]);
-  const [admins, setAdmins] = useState([]);
+  const [users, setUsers] = useState([]);
+
 
   const [quizzes, setQuizzes] = useState([]);
   const [takingQuiz, setTakingQuiz] = useState(false);
@@ -67,13 +67,7 @@ function App() {
 
     fetch("/users")
         .then(resp => resp.json())
-        .then(users => {
-            const studentList = users.filter(user => !user.admin);
-            const adminList = users.filter(user => user.admin);
-
-            setStudents(studentList);
-            setAdmins(adminList);
-        })
+        .then(users => setUsers(users))
   }, []);
 
   function handleSignIn(user) {
@@ -181,7 +175,7 @@ function App() {
       
       <div className='flex flex-col pl-60 w-full justify-between'>
         {currentUser.admin ? (
-          <StudentsContext.Provider value={students}>
+          <UsersContext.Provider value={users}>
             <QuizzesContext.Provider value={quizzes}>
               <Routes>
                 <Route path="/uploadquiz" 
@@ -197,7 +191,7 @@ function App() {
                   element={<TestList />}
                 />
                 <Route path="/students" 
-                  element={<StudentContainer />}
+                  element={<UserContainer />}
                 />
                 <Route path="/" 
                   element={<AdminHome />}
@@ -205,7 +199,7 @@ function App() {
 
                 </Routes>
               </QuizzesContext.Provider>
-            </StudentsContext.Provider>
+            </UsersContext.Provider>
         ) : (
           <QuizzesContext.Provider value={quizzes}> 
             <Routes>
