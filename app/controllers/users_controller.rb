@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ update destroy update_password]
+  before_action :set_user, only: %i[ destroy update_password]
+
+  before_action :check_admin, only: %i[ destroy update_password update_admin]
+
 
   #GET /users
   def index
@@ -29,9 +32,17 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /users/1
+  
   def update_password
     if @user.update_attribute(:password_digest, BCrypt::Password.create(params[:password]))
+      render json: @user
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
+  end
+
+  def update_admin
+    if @user.update(admin: params[:admin])
       render json: @user
     else
       render json: @user.errors, status: :unprocessable_entity
@@ -52,5 +63,15 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def user_params
       params.permit(:first_name, :last_name, :username, :password, :admin)
+    end
+
+    def check_admin
+      user = User.find_by(id: session[:user_id])
+      
+      if user.admin 
+        return true 
+      else 
+        render json: {error: "This action is not permitted for this account"}, status: :unprocessable_entity
+      end
     end
 end

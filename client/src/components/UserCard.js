@@ -120,7 +120,7 @@ function UserCard({ user, setPopUp }) {
                                         </button>
                                         {deleteWarning ? (
                                             <div className="bg-th-secondary p-3 rounded mt-2 mx-2">
-                                                <p>Are you sure you would like to delete this user? All data associated data will be deleted.</p>
+                                                <p>Are you sure you would like to delete this user? All associated data will be deleted.</p>
                                                 <label>To confirm, type username: </label>
                                                 <input 
                                                     type="text" 
