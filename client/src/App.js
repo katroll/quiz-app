@@ -50,26 +50,30 @@ function App() {
     fetch("/quizzes")
     .then(resp => resp.json())
     .then(quizzes => {
-      const reader = new FileReader();
       quizzes.map(quiz => {
-        const bufferPics = quiz.questions.map(question => {
+        quiz.questions.map(question => {
           if(question.imageBase64) {
-              const imageArrayBuffer = Base64.decode(question.imageBase64);
-              const blob = new Blob( [ imageArrayBuffer ], { type: "image/jpeg" } );
-              const urlCreator = window.URL || window.webkitURL;
-              const imageUrl = urlCreator.createObjectURL( blob );
-              question.imageUrl = imageUrl;
+            question.imageUrl = createImgUrl(question);
           }
+          return question;
       })
-      quiz.questions.sort((a, b) => a.number - b.number);  
+      return quiz.questions.sort((a, b) => a.number - b.number);  
       })
-      setQuizzes(quizzes)
+      setQuizzes(quizzes);
     });
 
     fetch("/users")
         .then(resp => resp.json())
         .then(users => setUsers(users))
   }, []);
+
+  function createImgUrl(question) {
+    const imageArrayBuffer = Base64.decode(question.imageBase64);
+    const blob = new Blob( [ imageArrayBuffer ], { type: "image/jpeg" } );
+    const urlCreator = window.URL || window.webkitURL;
+    const imageUrl = urlCreator.createObjectURL( blob );
+    return imageUrl;
+  }
 
   function handleSignIn(user) {
     setCurrentUser(user);
@@ -109,15 +113,13 @@ function App() {
     })
     .then(resp => resp.json())
     .then(quiz => {
-      handleSubmitNewQuizQuestions(quiz.id, questions);
-      setQuizzes([...quizzes, quiz]);
+      handleSubmitNewQuizQuestions(quiz.id, questions, quiz);
     })
   }
 
-  function handleSubmitNewQuizQuestions(quizId, questions) {
-    console.log("submitting questions: ", questions)
-    questions.forEach((question) => {
-      fetch("/questions", {
+  function handleSubmitNewQuizQuestions(quizId, questions, quiz) {
+    const allFetches = questions.map((question) => {
+      return fetch("/questions", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
@@ -126,10 +128,24 @@ function App() {
         })
       })
       .then(resp => resp.json())
-      .then(question => console.log(question))
       
+    })
+
+    Promise.all(allFetches).then(resp => {
+      const questions = resp.sort((a, b) => a.number - b.number);
+      quiz.questions = questions;
+
+      quiz.questions.map(question => {
+        if(question.imageBase64) {
+          question.imageUrl = createImgUrl(question);
+        }
+        return question;
+      })
+
+      setQuizzes([...quizzes, quiz]);
     });
   }
+
 
   if(loggedIn === false) {
     return (
@@ -157,7 +173,7 @@ function App() {
     )
   }
 
-  if(quizzes.length === 0) {
+  if(users.length === 0) {
     return (
       <div className="flex justify-center items-center mt-20">
         <div className="spinner-border animate-spin inline-block w-10 h-10 border-4 rounded-full" role="status">

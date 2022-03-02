@@ -14,6 +14,16 @@ function QuizTaker({ handleSubmitQuiz, setTakingQuiz, takingQuiz }) {
         handleSubmitQuiz(quiz.id, results, score);
     }
 
+    if(!quiz) {
+        return (
+          <div className="flex justify-center items-center mt-20 bg-th-primary w-full h-full">
+            <div className="spinner-border animate-spin inline-block w-10 h-10 border-4 rounded-full" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        )
+      }
+
 
     return (
         <div className="flex flex-col w-full pt-10 items-center">

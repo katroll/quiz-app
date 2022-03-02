@@ -29,7 +29,6 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
                 workbook.eachSheet((sheet, id) => {
                     const quizQuestions = [];
                     sheet.eachRow((row, rowIndex) => {
-                        console.log(row.values, rowIndex)
                         if(rowIndex === 1 ) return;                        
                         const questionObj = {
                             question: row.values[1],
@@ -163,7 +162,7 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
                                             <div className="flex flex-col pl-10">
                                                 {question.choices.map((choice, index) => {
                                                     return (
-                                                        <div key={choice} className="">
+                                                        <div key={`${choice}-${index}`} className="">
                                                             <input type="radio" id={choice} name={question.question} checked={question.answer === index ? true : false} readOnly></input>
                                                             <label className="pl-1 text-stone-800">{choice}</label>
                                                         </div>

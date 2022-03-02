@@ -1,7 +1,6 @@
 import "../index.css"
 
-import { useNavigate } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import { useState } from "react";
 
 
@@ -44,8 +43,6 @@ export default function SignUp({ handleSignIn }) {
       })
   }
 
-  console.log(errors)
-      
 
   return (
 

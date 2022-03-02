@@ -1,11 +1,10 @@
-import { useNavigate } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 
 import { useContext } from "react"
 import { UserContext } from "../App"
 
 
 function QuizTable({ quizzes }) {
-    const navigate = useNavigate();
 
     const user = useContext(UserContext);
 
@@ -37,12 +36,12 @@ function QuizTable({ quizzes }) {
                                         return (
                                             <tr key={quiz.id}>
                                                 <td className="px-6 py-4 whitespace-no-wrap border-b border-light-gray">
-                                                    <button 
+                                                    <NavLink
+                                                        to={`/test/${quiz.name}`}
                                                         className="text-sm leading-5 text-gray"
-                                                        value={index}
-                                                        onClick={() => navigate(`/test/${quiz.name}`)}>
+                                                        value={index}>
                                                             {quiz.name}
-                                                    </button>
+                                                    </NavLink>
                                                 </td>
                                                 {user.admin ? (
                                                      <td className="px-6 py-4 whitespace-no-wrap border-b border-light-gray">

@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom"
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { QuizzesContext } from "../App"
 import QuizTable from "./QuizTable"
 

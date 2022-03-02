@@ -10,22 +10,28 @@ function QuizViewer() {
 
     const { name } = useParams();
     const quiz = quizzes.find(quiz => quiz.name.replace(/\s+/g, '') === name.replace(/\s+/g, ''));
-    console.log(quiz);
 
     const [answers, setAnswers] = useState([])
 
     useEffect(() => {
-        if(!user.admin) {
-            setAnswers(user.grades[user.grades.length - 1].results)
-        } else {
-            const correct = quiz.questions.map(question => question.answer)
-            setAnswers(correct);
+        if(user) {
+            if(!user.admin) {
+                if(user.grades.length > 0) {
+                    console.log(user.grades);
+                    setAnswers(user.grades[user.grades.length - 1].results)
+                }
+            } else {
+                if(quiz) {
+                    const correct = quiz.questions.map(question => question.answer)
+                    setAnswers(correct);
+                }
+            }
         }
-    }, [user])
+    }, [user, quiz])
 
-    console.log("user in quizviewer: ", user)
+    console.log(user)
 
-    if(answers.length === 0) {
+    if(answers.length === 0 || !quiz) {
         return (
           <div className="flex justify-center items-center mt-20 bg-th-primary w-full h-full">
             <div className="spinner-border animate-spin inline-block w-10 h-10 border-4 rounded-full" role="status">

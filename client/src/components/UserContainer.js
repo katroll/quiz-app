@@ -73,7 +73,7 @@ function UserContainer() {
                                         type="text"
                                         placeholder="Student's Name"
                                         name="name"
-                                        className="mx-3 pl-3"
+                                        className="mx-3 pl-3 rounded"
                                         onChange={handleStudentSearch}
                                         value={nameSearch}
                                     />
@@ -82,7 +82,7 @@ function UserContainer() {
                                         type="text"
                                         placeholder="Student's Username"
                                         name="username"
-                                        className="mx-3 pl-3"
+                                        className="mx-3 pl-3 rounded"
                                         onChange={handleStudentSearch}
                                         value={usernameSearch}
                                     />

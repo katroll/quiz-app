@@ -10,7 +10,7 @@ function SelectColumnFilter({ column: { filterValue, setFilter, preFilteredRows,
         })
 
         return [...options.values()]
-    }, [id, preFilteredRows])
+    }, [preFilteredRows])
 
 
     // Render a multi-select box
@@ -20,6 +20,7 @@ function SelectColumnFilter({ column: { filterValue, setFilter, preFilteredRows,
         onChange={e => {
             setFilter(e.target.value || undefined)
         }}
+        className="rounded ml-8 hidden group-hover:block"
         >
         <option value="">All</option>
         {options.map((option, i) => (

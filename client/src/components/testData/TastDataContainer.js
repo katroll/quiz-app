@@ -57,6 +57,10 @@ function TestDataContainer() {
                 Filter: SelectColumnFilter,
             },
             {
+                Header: 'Grade ID',
+                accessor: 'gradeId',
+            },
+            {
                 Header: 'Test Score',
                 accessor: 'testScore',
             },
@@ -87,6 +91,7 @@ function TestDataContainer() {
                 studentId: grade.user.id,
                 testName: grade.quiz_data.quiz.name,
                 testCategory: grade.quiz_data.quiz.category,
+                gradeId: grade.id,
                 testScore: grade.score,
                 questionNumber: index + 1,
                 correct: results[index] === question.answer ? "Yes" : "No",
