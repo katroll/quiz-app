@@ -52,6 +52,9 @@ module.exports = {
         gray: {
           "100": "#a6aba7",
         },
+        transparent: {
+          "100": "rgba(150, 152, 153, 0.6)"
+        },
 
 
         'th-primary': 'var(--primary)',
@@ -64,6 +67,7 @@ module.exports = {
         "th-warning": "var(--warning)",
         "th-correct": "var(--correct)",
         "th-border": "var(--border)",
+        "th-transparent-bg": "var(--transparent-bg)"
 
         
 

@@ -18,6 +18,7 @@
   --warning: theme("colors.red.100");
   --correct: theme("colors.green.100");
   --border: theme("colors.gray.100");
+  --transparent-bg: theme("colors.transparent.100");
 }
 
 

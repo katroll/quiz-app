@@ -1,10 +1,11 @@
 import "../index.css"
-import { NavLink } from "react-router-dom";
+import { useNavigate  } from "react-router-dom";
 import 'tw-elements';
 import logo from "../circleLogo.png"
 
 
 function NavBar({ user, onSignOut }) {
+    const navigate = useNavigate();
 
     const categories = ["beginner", "intermediate", "advanced", "english", "misc"]
 
@@ -33,50 +34,34 @@ function NavBar({ user, onSignOut }) {
             </div>
 
             <ul className="relative px-1 mt-5">
-                <li className="relative">
-                <NavLink 
-                    to="/" 
-                    className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out"  
-                    data-mdb-ripple="true" 
-                    data-mdb-ripple-color="stone">
-                    Home
-                </NavLink>
+                <li className="relative" onClick={() =>  navigate("/")}>
+                    <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
+                        <span>Home</span>
+                    </a>
                 </li>   
             </ul>
 
             {user.admin ? (
                 <>
                 <ul className="relative px-1">
-                    <li className="relative">
-                        <NavLink 
-                            to="/uploadquiz" 
-                            className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out"  
-                            data-mdb-ripple="true" 
-                            data-mdb-ripple-color="stone">
-                            Upload a Test
-                        </NavLink>
+                    <li className="relative" onClick={() =>  navigate("/uploadquiz")}>
+                        <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
+                            <span>Upload a Test</span>
+                        </a>
                     </li>   
                 </ul>
                 <ul className="relative px-1">
-                    <li className="relative">
-                        <NavLink 
-                            to="/students" 
-                            className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out"  
-                            data-mdb-ripple="true" 
-                            data-mdb-ripple-color="stone">
-                            Users
-                        </NavLink>
+                    <li className="relative" onClick={() => navigate("/students")}>
+                        <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
+                            <span>Users</span>
+                        </a>
                     </li>   
                 </ul>
                 <ul className="relative px-1">
-                    <li className="relative">
-                        <NavLink 
-                            to="/testdata" 
-                            className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out"  
-                            data-mdb-ripple="true" 
-                            data-mdb-ripple-color="stone">
-                            Testing Data
-                        </NavLink>
+                    <li className="relative" onClick={() => navigate("/testdata")}>
+                        <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
+                            <span>Testing Data</span>
+                        </a>
                     </li>   
                 </ul>
                 </>
@@ -100,16 +85,11 @@ function NavBar({ user, onSignOut }) {
                 {categories.map(category => {
                     return (
                         <ul key={category} className="relative accordion-collapse collapse" id="collapseSidenavSecEx2" aria-labelledby="sidenavSecEx2" data-bs-parent="#sidenavSecExample">
-                            <li className="relative">
-                                <NavLink 
-                                    to={`/tests/${category}`}
-                                    className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out"  
-                                    data-mdb-ripple="true" 
-                                    data-mdb-ripple-color="stone">
-                                    {capitalizeFirstLetter(category)}
-                                </NavLink>
-                                        
-                            </li>  
+                            <li className="relative" onClick={() => navigate(`/tests/${category}`)}>
+                                <a className="flex items-center text-sm font-semibold mx-5 py-4 px-6 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
+                                    <span>{capitalizeFirstLetter(category)}</span>
+                                </a>
+                            </li>   
                         </ul>
                     )
                 })}
@@ -119,14 +99,10 @@ function NavBar({ user, onSignOut }) {
             {!user.admin? (
                 
                 <ul className="relative px-1">
-                    <li className="relative">
-                    <NavLink 
-                        to={`/mygrades`}
-                        className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out"  
-                        data-mdb-ripple="true" 
-                        data-mdb-ripple-color="stone">
-                        Grades
-                    </NavLink>
+                    <li onClick={() => navigate("/mygrades")} className="relative">
+                    <a className="flex items-center text-base font-semibold py-4 px-6 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
+                        <span>Grades</span>
+                    </a>
                     </li>
                 </ul>
             ) : ( null )}

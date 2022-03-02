@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import 'tw-elements';
 
 
-export default function SignIn({ onSignIn, setSignUp }) {
+export default function SignIn({ onSignIn }) {
     const [signInData, setSignIndata] = useState({
         username: "",
         password: ""

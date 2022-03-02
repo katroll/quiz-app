@@ -24,9 +24,6 @@ function UserContainer() {
         }
     }
 
-    console.log(nameSearch);
-    console.log(usernameSearch)
-
     function filterStudents() {
         const filteredStudents =  students.filter(student => {
             return ((student.first_name.toLowerCase().includes(nameSearch.toLowerCase()) || student.last_name.toLowerCase().includes(nameSearch.toLowerCase())) && student.username.toLowerCase().includes(usernameSearch.toLowerCase()))
@@ -39,7 +36,7 @@ function UserContainer() {
     return (
         <div>
             {popUp ? (
-                <div className="absolute w-full h-full bg-th-primary z-20 flex items-center pl-48">
+                <div className="absolute w-full h-full bg-th-transparent-bg z-20 flex items-center pl-48">
                     <UserCard user={selectedUser} setPopUp={setPopUp} />
                 </div>
             ) : null }

@@ -19,9 +19,11 @@ import banner from "./banner.jpg"
 import TestDataContainer from './components/testData/TastDataContainer';
 import StudentHome from './components/students/StudentHome';
 
+import { UserProvider } from "./context/user"
+
 export const UsersContext = createContext();
 export const QuizzesContext = createContext();
-export const UserContext = createContext();
+//export const UserContext = createContext();
 
 function App() {
   const navigate = useNavigate();
@@ -192,7 +194,7 @@ function App() {
       
       <div className='flex flex-col pl-60 w-full justify-between'>
         {currentUser.admin ? (
-          <UserContext.Provider value={currentUser}>
+          <UserProvider setLoggedIn={setLoggedIn}>
             <UsersContext.Provider value={users}>
               <QuizzesContext.Provider value={quizzes}>
                 <Routes>
@@ -218,9 +220,9 @@ function App() {
                   </Routes>
                 </QuizzesContext.Provider>
               </UsersContext.Provider>
-           </UserContext.Provider>
+           </UserProvider>
         ) : (
-          <UserContext.Provider value={currentUser}>
+          <UserProvider>
             <QuizzesContext.Provider value={quizzes}> 
               <Routes>
                 <Route path="/test/:name" 
@@ -237,7 +239,7 @@ function App() {
                 />
               </Routes>
             </QuizzesContext.Provider>
-          </UserContext.Provider>
+          </UserProvider>
         )}
 
         <div className='flex pb-5 pt-2 mt-3 justify-center'>
