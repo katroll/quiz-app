@@ -35,7 +35,7 @@ function AdminTable({ admins  }) {
     }
 
     return (
-        <div className="w-full flex flex-col">
+        <div className="w-full flex flex-col items-center">
             <div className="flex flex-col">
                 <div>
                     <button 

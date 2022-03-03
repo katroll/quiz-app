@@ -45,7 +45,7 @@ function DefaultColumnFilter({
           setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
         }}
         placeholder={`Search ${count} records...`}
-        className="rounded ml-3 hidden group-hover:block"
+        className="rounded ml-3"
       />
     )
   }
@@ -122,7 +122,7 @@ function FilteredDataTable({ data, columns, handleExcelExport }) {
                       {headerGroups.map(headerGroup => (
                           <tr key={headerGroup} {...headerGroup.getHeaderGroupProps()}>
                           {headerGroup.headers.map(column => (
-                            <th key={column.Header} className="bg-th-table-header-bg shadow px-3 group h-14">
+                            <th key={column.Header} className="bg-th-table-header-bg shadow px-3 h-14">
                                 <div {...column.getHeaderProps(column.getSortByToggleProps())} className="w-48">
                                   {column.render("Header")}
                                   <span className="ml-3">
@@ -136,7 +136,7 @@ function FilteredDataTable({ data, columns, handleExcelExport }) {
                           ))}
                           </tr>
                       ))}
-                      <tr>
+                      {/* <tr>
                           <th
                           colSpan={visibleColumns.length}
                           style={{
@@ -149,7 +149,7 @@ function FilteredDataTable({ data, columns, handleExcelExport }) {
                               setGlobalFilter={setGlobalFilter}
                           />
                           </th>
-                      </tr>
+                      </tr> */}
                       </thead>
                       <tbody {...getTableBodyProps()}>
                       {rows.map((row, i) => {

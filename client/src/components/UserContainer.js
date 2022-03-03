@@ -91,10 +91,8 @@ function UserContainer() {
                         </div>
 
                     ) : (
-                        <div className="w-full px-8">
-                            <div className="flex w-full justify-start pl-8 py-2">
+                        <div className="w-full pl-8 py-2 flex w-full items-center">
                                 <AdminTable admins={admins}/>
-                            </div>
                         </div>
                     )}
                    
