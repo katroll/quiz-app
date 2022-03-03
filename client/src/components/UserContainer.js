@@ -4,10 +4,12 @@ import StudentTable from "./StudentTable";
 import UserCard from "./UserCard";
 import { UsersContext } from "../App";
 import { QuizzesContext } from "../App";
+import AdminTable from "./AdminTable";
 
 
 function UserContainer() {
     const students = useContext(UsersContext).filter(user => !user.admin);
+    const admins = useContext(UsersContext).filter(user => user.admin);
     const quizzes = useContext(QuizzesContext);
 
     const [nameSearch, setNameSearch] = useState(""); 
@@ -42,9 +44,9 @@ function UserContainer() {
             ) : null }
 
             <div className="pt-5 flex justify-center w-full">
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center w-full">
                     <p className="font-bold text-4xl text-th-title-text mb-5">{showStudents ? "Students" : "Admins"}</p>
-                    <div className="flex justify-start w-full pl-5">
+                    <div className="flex justify-start w-full pl-5 mb-5 ml-5">
                         <input 
                             type="radio" 
                             name="userType" 
@@ -89,8 +91,9 @@ function UserContainer() {
                         </div>
 
                     ) : (
-                        <div>
-                            <div className="flex w-full pl-5 py-2 bg-th-secondary rounded">
+                        <div className="w-full px-8">
+                            <div className="flex w-full justify-start pl-8 py-2">
+                                <AdminTable admins={admins}/>
                             </div>
                         </div>
                     )}

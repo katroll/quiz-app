@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom"
 
 import { useContext } from "react"
-import { UserContext } from "../context/user"
+import { UserContext } from "../App"
 
 
 function QuizTable({ quizzes }) {
 
-    const user = useContext(UserContext).user;
+    const user = useContext(UserContext);
 
     return (
 

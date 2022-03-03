@@ -2,12 +2,12 @@ import { useParams } from "react-router-dom";
 
 import { useContext, useEffect, useState } from "react"
 import { QuizzesContext } from "../App";
-import { UserContext } from "../context/user";
+import { UserContext } from "../App";
 
 
 function QuizViewer() {
     const quizzes = useContext(QuizzesContext);
-    const user = useContext(UserContext).user;
+    const user = useContext(UserContext);
 
     const { name } = useParams();
     const quiz = quizzes.find(quiz => quiz.name.replace(/\s+/g, '') === name.replace(/\s+/g, ''));
@@ -15,19 +15,18 @@ function QuizViewer() {
     const [answers, setAnswers] = useState([])
 
     useEffect(() => {
-        if(user) {
-            if(!user.admin) {
-                if(user.grades.length > 0) {
-                    console.log(user.grades);
-                    setAnswers(user.grades[user.grades.length - 1].results)
-                }
-            } else {
-                if(quiz) {
-                    const correct = quiz.questions.map(question => question.answer)
-                    setAnswers(correct);
-                }
+        if(!user.admin) {
+            if(user.grades.length > 0) {
+                console.log(user.grades);
+                setAnswers(user.grades[user.grades.length - 1].results)
+            }
+        } else {
+            if(quiz) {
+                const correct = quiz.questions.map(question => question.answer)
+                setAnswers(correct);
             }
         }
+    
     }, [user, quiz])
 
     console.log(user)
@@ -50,7 +49,7 @@ function QuizViewer() {
                 {quiz.questions.map((question, i) => {
                     return (
                         <li key={question.question} className="mb-3">
-                            <div className="flex flex-col w-full p-2 bg-th-card-bg items-center border rounded border-yellow">
+                            <div className="flex flex-col w-full p-2 bg-th-card-bg items-center border-2 rounded border-th-table-header-bg">
                                 {question.imageUrl ? (
                                     <img
                                         src={question.imageUrl}

@@ -4,7 +4,7 @@ import { createContext, useState } from "react";
 
 const UserContext = createContext();
 
-function UserProvider({ children, setLoggedIn }) {
+function QuizzesProvider({ children, setLoggedIn }) {
     const [user, setUser] = useState({})
 
     useEffect(() => {
@@ -31,8 +31,6 @@ function UserProvider({ children, setLoggedIn }) {
     
     const context = userContext(user, setUser);
 
-    console.log("setting user")
-
 
     return (
         <UserContext.Provider value={context}>
@@ -50,4 +48,4 @@ function UserProvider({ children, setLoggedIn }) {
     
 }
 
-export { UserContext, UserProvider };
+export { QuizzesContext, QuizzesProvider };
