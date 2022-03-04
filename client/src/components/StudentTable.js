@@ -1,14 +1,63 @@
+import { useState, useContext } from "react";
+import { UsersContext } from "../App";
+import { QuizzesContext } from "../App";
 
-function StudentTable({ users, setPopUp, setSelectedUser, quizzes  }) {
 
 
-    function onUserClick(e) {
+
+function StudentTable({ setPopUp, setSelectedUser }) {
+    const students = useContext(UsersContext).filter(user => !user.admin);
+    const quizzes = useContext(QuizzesContext);
+
+    const [nameSearch, setNameSearch] = useState(""); 
+    const [usernameSearch, setUsernameSearch] = useState(""); 
+
+
+    function onUserClick(user) {
         setPopUp(true);
-        setSelectedUser(users[e.target.value]);
+        setSelectedUser(user);
+    }
+
+    function handleStudentSearch(e) {
+        if(e.target.name === "name") {
+            setNameSearch(e.target.value);
+        } else {
+            setUsernameSearch(e.target.value);
+        }
+    }
+
+    function filterStudents() {
+        const filteredStudents =  students.filter(student => {
+            return ((student.first_name.toLowerCase().includes(nameSearch.toLowerCase()) || student.last_name.toLowerCase().includes(nameSearch.toLowerCase())) && student.username.toLowerCase().includes(usernameSearch.toLowerCase()))
+        })
+        return filteredStudents;
     }
 
 
     return (
+        <div>
+            <div className="flex w-full pl-5 py-2 bg-th-secondary rounded">
+                <form className="">
+                    <label>Search For A Student:</label>
+                    <input
+                        type="text"
+                        placeholder="Student's Name"
+                        name="name"
+                        className="mx-3 pl-3 rounded"
+                        onChange={handleStudentSearch}
+                        value={nameSearch}
+                    />
+                    <label>OR</label>
+                    <input
+                        type="text"
+                        placeholder="Student's Username"
+                        name="username"
+                        className="mx-3 pl-3 rounded"
+                        onChange={handleStudentSearch}
+                        value={usernameSearch}
+                    />
+                </form>
+            </div>
             <div className="mt-2 overflow-x-scroll overflow-y-scroll">
                 <div className="flex flex-col max-h-[70vh] max-w-[75vw]">
                     <div className="sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
@@ -33,14 +82,13 @@ function StudentTable({ users, setPopUp, setSelectedUser, quizzes  }) {
                                 </thead>
 
                                 <tbody className="bg-th-card-bg">
-                                    {users.map((user, index) => {
+                                    {filterStudents().map((user, index) => {
                                         return (
                                             <tr key={user.id}>
                                                 <td className="px-6 pb-3 whitespace-no-wrap border-b border-th-border">
                                                     <button 
                                                         className="text-sm leading-5 text-gray bg-th-card-bg"
-                                                        value={index}
-                                                        onClick={onUserClick}>
+                                                        onClick={() => onUserClick(user)}>
                                                             {user.first_name} {user.last_name}
                                                     </button>
                                                 </td>
@@ -63,6 +111,7 @@ function StudentTable({ users, setPopUp, setSelectedUser, quizzes  }) {
                     </div>
                 </div>
             </div>
+        </div>
    
     )
 

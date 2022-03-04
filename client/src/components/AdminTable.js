@@ -1,8 +1,9 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
+import { UsersContext } from "../App";
 
-
-function AdminTable({ admins  }) {
-    const sorted = admins.sort((a, b) => a.first_name - b.first_name)
+function AdminTable() {
+    const users = useContext(UsersContext);
+    //const admins = users.filter(user => user.admin);
 
     const [selected, setSelected] = useState({});
     const [deleteWarning, setDeleteWarning] = useState(false);
@@ -19,7 +20,11 @@ function AdminTable({ admins  }) {
             body: JSON.stringify({admin: false})
         })
         .then(resp => resp.json())
-        .then(user => console.log(user))
+        .then(user => {
+            //admins[admins.indexOf(admins.find(admin => admin.id === user.id))] = user;
+            users[users.indexOf(users.find(admin => admin.id === user.id))] = user;
+            
+        })
     }
 
     function handleDeleteAdmin() {
@@ -37,35 +42,39 @@ function AdminTable({ admins  }) {
     return (
         <div className="w-full flex flex-col items-center">
             <div className="flex flex-col">
-                <div>
-                    <button 
-                        className="bg-th-secondary rounded py-1 px-4 mr-3"
-                        onClick={handleRemoveAdmin}>
-                        Remove as Admin
-                    </button>
-                    <button 
-                        className="bg-th-secondary rounded py-1 px-4"
-                        onClick={() => setDeleteWarning(true)}>
-                        Delete User
-                    </button>
-                </div>
-                {deleteWarning ? (
-                        <div className="flex space-y-2 mt-2 items-center">
-                            <input 
-                                type="text" 
-                                placeholder="Enter Username to Delete"
-                                className="rounded mr-2 w-60 p-1"
-                                onChange={(e) => setUserToDelete(e.target.value)}>
-                            </input>
+                {selected.id ? (
+                    <div>
+                        <div>
                             <button 
-                                className="bg-th-warning rounded w-60 p-1"
-                                onClick={handleDeleteAdmin}>
-                                Confirm 
+                                className="bg-th-secondary rounded py-1 px-4 mr-3"
+                                onClick={handleRemoveAdmin}>
+                                Remove as Admin
+                            </button>
+                            <button 
+                                className="bg-th-secondary rounded py-1 px-4"
+                                onClick={() => setDeleteWarning(true)}>
+                                Delete User
                             </button>
                         </div>
+                        {deleteWarning ? (
+                                <div className="flex space-y-2 mt-2 items-center">
+                                    <input 
+                                        type="text" 
+                                        placeholder="Enter Username to Delete"
+                                        className="rounded mr-2 w-60 p-1"
+                                        onChange={(e) => setUserToDelete(e.target.value)}>
+                                    </input>
+                                    <button 
+                                        className="bg-th-warning rounded w-60 p-1"
+                                        onClick={handleDeleteAdmin}>
+                                        Confirm 
+                                    </button>
+                                </div>
+                        ) : null }
+                    </div>
                 ) : null }
             </div>
-            <div className="mt-2 overflow-x-scroll overflow-y-scroll w-full">
+            <div className="mt-2 overflow-x-scroll overflow-y-scroll w-full flex flex-col items-center">
                 <div className="flex flex-col max-h-[70vh] max-w-[75vw]">
                     <div className="sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                         <div className="inline-block overflow-hidden align-middle border-b border-th-border shadow sm:rounded-lg">
@@ -85,7 +94,7 @@ function AdminTable({ admins  }) {
                                 </thead>
 
                                 <tbody className="bg-th-card-bg">
-                                    {sorted.map(admin => {
+                                    {users.filter(user => user.admin).map(admin => {
                                         return (
                                             <tr key={admin.id}>
                                                 <td className="px-6 pb-3 whitespace-no-wrap border-b border-th-border">

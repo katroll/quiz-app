@@ -1,44 +1,21 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import "../index.css"
 import StudentTable from "./StudentTable";
 import UserCard from "./UserCard";
-import { UsersContext } from "../App";
-import { QuizzesContext } from "../App";
 import AdminTable from "./AdminTable";
 
 
 function UserContainer() {
-    const students = useContext(UsersContext).filter(user => !user.admin);
-    const admins = useContext(UsersContext).filter(user => user.admin);
-    const quizzes = useContext(QuizzesContext);
-
-    const [nameSearch, setNameSearch] = useState(""); 
-    const [usernameSearch, setUsernameSearch] = useState(""); 
+    
     const [popUp, setPopUp] = useState(false);
     const [selectedUser, setSelectedUser] = useState({});
     const [showStudents, setShowStudents] = useState(true);
-
-    function handleStudentSearch(e) {
-        if(e.target.name === "name") {
-            setNameSearch(e.target.value);
-        } else {
-            setUsernameSearch(e.target.value);
-        }
-    }
-
-    function filterStudents() {
-        const filteredStudents =  students.filter(student => {
-            return ((student.first_name.toLowerCase().includes(nameSearch.toLowerCase()) || student.last_name.toLowerCase().includes(nameSearch.toLowerCase())) && student.username.toLowerCase().includes(usernameSearch.toLowerCase()))
-        })
-        return filteredStudents;
-    }
-
 
 
     return (
         <div>
             {popUp ? (
-                <div className="absolute w-full h-full bg-th-transparent-bg z-20 flex items-center pl-48">
+                <div className="absolute w-full h-full bg-th-transparent-bg flex justify-center items-center">
                     <UserCard user={selectedUser} setPopUp={setPopUp} />
                 </div>
             ) : null }
@@ -65,34 +42,12 @@ function UserContainer() {
                    
                     {showStudents ? (
                         <div>
-                            <div className="flex w-full pl-5 py-2 bg-th-secondary rounded">
-                                <form className="">
-                                    <label>Search For A Student:</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Student's Name"
-                                        name="name"
-                                        className="mx-3 pl-3 rounded"
-                                        onChange={handleStudentSearch}
-                                        value={nameSearch}
-                                    />
-                                    <label>OR</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Student's Username"
-                                        name="username"
-                                        className="mx-3 pl-3 rounded"
-                                        onChange={handleStudentSearch}
-                                        value={usernameSearch}
-                                    />
-                                </form>
-                            </div>
-                            <StudentTable users={filterStudents()} setPopUp={setPopUp} setSelectedUser={setSelectedUser} quizzes={quizzes} />
+                            <StudentTable setPopUp={setPopUp} setSelectedUser={setSelectedUser} />
                         </div>
 
                     ) : (
-                        <div className="w-full pl-8 py-2 flex w-full items-center">
-                                <AdminTable admins={admins}/>
+                        <div className="w-full pl-8 py-2 flex w-full">
+                                <AdminTable />
                         </div>
                     )}
                    
