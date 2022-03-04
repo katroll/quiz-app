@@ -7,6 +7,8 @@ function UserCard({ user, setPopUp }) {
     const [newPassword, setNewPassword] = useState("");
     const [deleteWarning, setDeleteWarning] = useState(false);
     const [userToDelete, setUserToDelete] = useState("");
+    const [updateAdminSuccess, setUpdateAdminSuccess] = useState(false);
+    const [updatePasswordSuccess, setUpdatePasswordSuccess] = useState(false);
 
     console.log(userToDelete)
 
@@ -19,8 +21,15 @@ function UserCard({ user, setPopUp }) {
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({password: newPassword})
         })
-        .then(resp => resp.json())
-        .then(user => console.log(user));
+        .then((resp) => {
+            if (resp.ok) {
+              resp.json().then((user) => {
+                setUpdatePasswordSuccess(true);
+              });
+            } else {
+              resp.json().then(errors => console.log(errors))
+            }
+          });
     }
 
     function handleDeleteUser() {
@@ -38,9 +47,17 @@ function UserCard({ user, setPopUp }) {
         fetch(`users/${user.id}`, {
             method: "PATCH",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({admin: !user.admin})
+            body: JSON.stringify({admin: true})
         })
-        .then(resp => resp.json())
+        .then((resp) => {
+            if (resp.ok) {
+              resp.json().then((user) => {
+                setUpdateAdminSuccess(true);
+              });
+            } else {
+              resp.json().then(errors => console.log(errors))
+            }
+          });
       
     }
 
@@ -63,33 +80,49 @@ function UserCard({ user, setPopUp }) {
                 
             
                     <div className="bg-th-card-bg h-full">
-                        <div className="px-6 py-4 whitespace-no-wrap border-b border-th-border">
+                        <div className="px-6 py-4 border-b border-th-border">
                             <div className="text-sm leading-5 text-gray"> <strong>Username: </strong>{user.username}</div>
                         </div>  
-                        <div className="px-6 py-4 whitespace-no-wrap border-b border-th-border">
+                        <div className="px-6 py-4 border-b border-th-border">
                             <div className="text-sm leading-5 text-gray"> <strong>User ID: </strong>{user.id}</div>
                         </div> 
-                        <div className="px-6 py-4 whitespace-no-wrap border-b border-th-border">
+                        <div className="px-6 py-4 border-b border-th-border">
                             <div className="text-sm leading-5 text-gray"> <strong>Joined: </strong>{user.created_at.slice(0,10)}</div>
                         </div> 
-                        <div className="px-3 py-4 border-th-border flex justify-center">
-                            <button 
-                                className="text-sm text-th-light-text bg-th-button hover:bg-th-secondary rounded-l p-1 border-r border-th-border"
-                                onClick={() => setUpdatePassword(true)}>
-                                    Reset Password
-                            </button>
-                            <button 
-                                className="text-sm text-th-light-text bg-th-button hover:bg-th-secondary rounded-r p-1 " 
-                                onClick={handleAdminToggle}>
-                                    Make Admin
-                            </button>
+                        <div className="flex flex-col">
+                            <div className="px-3 py-2 border-th-border flex justify-center">
+                                <button 
+                                    className="text-sm text-th-light-text bg-th-button hover:bg-th-secondary rounded-l p-1 border-r border-th-border"
+                                    onClick={() => setUpdatePassword(true)}>
+                                        Reset Password
+                                </button>
+                                <button 
+                                    className="text-sm text-th-light-text bg-th-button hover:bg-th-secondary rounded-r p-1 " 
+                                    onClick={handleAdminToggle}>
+                                        Make Admin
+                                </button>
+                            </div>
+                                {updateAdminSuccess ? (
+                                    <div className="w-full flex justify-center mb-1">
+                                        <div className="text-xs bg-th-border text-th-light-text w-1/2 text-center rounded">
+                                            Admin Updated!
+                                        </div>
+                                    </div>
+                                ) : null }
+                                {updatePasswordSuccess ? (
+                                    <div className="w-full flex justify-center mb-1">
+                                    <div className="text-xs bg-th-border text-th-light-text w-1/2 text-center rounded">
+                                        Password Updated!
+                                    </div>
+                                </div>
+                                ) : null }
                         </div>
                             {updatePassword ? (
                                 <td>
                                     <div className="px-6 pb-3">
                                         <form className="flex" onSubmit={handleUpdateUserPassword}>
                                             <input 
-                                                type="text" 
+                                                type="password" 
                                                 placeholder="Enter New Password"
                                                 className="p-1 border border-th-secondary rounded text-xs mr-2"
                                                 onChange={(e) => setNewPassword(e.target.value)}
