@@ -6,7 +6,6 @@ import AdminTable from "./AdminTable";
 
 
 function UserContainer() {
-    
     const [popUp, setPopUp] = useState(false);
     const [selectedUser, setSelectedUser] = useState({});
     const [showStudents, setShowStudents] = useState(true);
@@ -47,7 +46,7 @@ function UserContainer() {
 
                     ) : (
                         <div className="w-full pl-8 py-2 flex w-full">
-                                <AdminTable />
+                            <AdminTable />
                         </div>
                     )}
                    

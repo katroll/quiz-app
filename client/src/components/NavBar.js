@@ -3,10 +3,14 @@ import { useNavigate  } from "react-router-dom";
 import 'tw-elements';
 import logo from "../circleLogo.png"
 
+import { useContext } from "react"
+import { UserContext } from "../context/User"
 
-function NavBar({ user, onSignOut }) {
+function NavBar({ onSignOut }) {
     const navigate = useNavigate();
+    const user = useContext(UserContext).user;
 
+    
     const categories = ["beginner", "intermediate", "advanced", "english", "misc"]
 
     function capitalizeFirstLetter(string) {

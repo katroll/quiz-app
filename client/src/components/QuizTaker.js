@@ -1,18 +1,33 @@
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
-import { QuizzesContext } from "../App";
+import { QuizzesContext } from "../context/Quizzes";
+import { UserContext } from "../context/User";
 
 import Questions from "./Questions";
 
-function QuizTaker({ handleSubmitQuiz, setTakingQuiz, takingQuiz }) {
-    const quizzes = useContext(QuizzesContext);
+function QuizTaker({ setTakingQuiz, takingQuiz }) {
+    const quizzes = useContext(QuizzesContext).quizzes;
+    const userContext = useContext(UserContext);
     const { name } = useParams();
+
+    console.log(quizzes);
 
     const quiz = quizzes.find(quiz => quiz.name === name);
 
     function handleSubmitScore(results, score) {
-        handleSubmitQuiz(quiz.id, results, score);
+        fetch("/grades", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({user_id: userContext.user.id, quiz_id: quiz.id, results: results, score: score})
+          })
+          .then(resp => resp.json())
+          .then(grade => {
+            console.log(userContext)
+            const updatedGrades = [...userContext.user.grades, grade];
+            userContext.setValue({...userContext.user, grades: updatedGrades});
+          }) 
     }
+    
 
     if(!quiz) {
         return (

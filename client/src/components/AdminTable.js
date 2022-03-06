@@ -1,61 +1,115 @@
 import { useState, useContext } from "react"
-import { UsersContext } from "../App";
+import { UsersContext } from "../context/Users";
 
 function AdminTable() {
-    const users = useContext(UsersContext);
-    //const admins = users.filter(user => user.admin);
 
-    const [selected, setSelected] = useState({});
+    const usersContext = useContext(UsersContext);
+    const users = usersContext.users;
+
+    const [selectedUser, setSelectedUser] = useState({});
     const [deleteWarning, setDeleteWarning] = useState(false);
     const [userToDelete, setUserToDelete] = useState("");
+    const [newPassword, setNewPassword] = useState("");
+    const [updatePassword, setUpdatePassword] = useState(false);
+    const [passwordUpdateResult, setPasswordUpdateResult] = useState("");
+    const [adminUpdateResult, setAdminUpdateResult] = useState("");
+
+    function setUpdatePasswordResult(result) {
+        if(result) {
+            setPasswordUpdateResult("Password Updated!");
+        } else {
+            setPasswordUpdateResult("Password Update Failed.");
+        }
+        setTimeout(() => setPasswordUpdateResult(""), 3000);
+    }
+
+    function setUpdateAdminResult(result) {
+        if(result) {
+            setAdminUpdateResult(`${selectedUser.first_name} ${selectedUser.last_name} removed as admin.`);
+        } else {
+            setAdminUpdateResult(`Failed to remove ${selectedUser.first_name} ${selectedUser.last_name} as admin.`);
+        }
+        setTimeout(() => setAdminUpdateResult(""), 3000);
+    }
 
 
-    console.log(selected)
+    function handleUpdateUserPassword(e) {
+        e.preventDefault();
+        usersContext.updatePassword(selectedUser, newPassword, setUpdatePasswordResult);
+        setUpdatePassword(false);
+    }
 
-    function handleRemoveAdmin() {
-        console.log(selected);
-        fetch(`users/${selected.id}`, {
-            method: "PATCH",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({admin: false})
-        })
-        .then(resp => resp.json())
-        .then(user => {
-            //admins[admins.indexOf(admins.find(admin => admin.id === user.id))] = user;
-            users[users.indexOf(users.find(admin => admin.id === user.id))] = user;
-            
-        })
+    function handleAdminToggle() {
+        usersContext.updateAdmin(selectedUser, setUpdateAdminResult);
     }
 
     function handleDeleteAdmin() {
         console.log(userToDelete);
-        if (userToDelete.replace(/\s+/g, '') === selected.username.replace(/\s+/g, '')) {
-            fetch(`/users/${selected.id}`, {
-                method: "DELETE",
-            })
-            .then(console.log("deleted"))
+        if (userToDelete.replace(/\s+/g, '') === selectedUser.username.replace(/\s+/g, '')) {
+            usersContext.deleteUser(selectedUser);
         } else {
-            console.log("type the username as exact mathc")
+            console.log("type the username as exact match")
         }
     }
+
+
 
     return (
         <div className="w-full flex flex-col items-center">
             <div className="flex flex-col">
-                {selected.id ? (
+                {selectedUser.id ? (
                     <div>
                         <div>
                             <button 
                                 className="bg-th-secondary rounded py-1 px-4 mr-3"
-                                onClick={handleRemoveAdmin}>
+                                onClick={handleAdminToggle}>
                                 Remove as Admin
                             </button>
                             <button 
-                                className="bg-th-secondary rounded py-1 px-4"
+                                className="bg-th-secondary rounded py-1 px-4 mr-3"
                                 onClick={() => setDeleteWarning(true)}>
                                 Delete User
                             </button>
+                            <button 
+                                className="bg-th-secondary rounded py-1 px-4"
+                                onClick={() => setUpdatePassword(true)}>
+                                Reset Password
+                            </button>
                         </div>
+                        {updatePassword ? (
+                                    <div className="w-full flex justify-center mb-1 mt-2">
+                                        <form className="flex" onSubmit={handleUpdateUserPassword}>
+                                            <input 
+                                                type="password" 
+                                                placeholder="Enter New Password"
+                                                className="p-1 border border-th-secondary rounded text-xs mr-2"
+                                                onChange={(e) => setNewPassword(e.target.value)}
+                                            />
+                                            <button
+                                                type="submit"
+                                                className="bg-th-button hover:bg-th-secondary text-th-light-text p-1 rounded text-sm">
+                                                Update
+                                            </button>
+                                        </form>
+                                    </div>
+                            ) : null} 
+
+                        {passwordUpdateResult ? (
+                                <div className="w-full flex justify-center mb-1 mt-2">
+                                    <div className="text-sm bg-th-border text-th-light-text w-1/2 text-center rounded">
+                                        {passwordUpdateResult}
+                                    </div>
+                                </div>
+                                ) : null }
+
+                        {adminUpdateResult ? (
+                            <div className="w-full flex justify-center mb-1 mt-2">
+                                <div className="text-sm bg-th-border text-th-light-text w-1/2 text-center rounded">
+                                    {adminUpdateResult}
+                                </div>
+                            </div>
+                            ) : null }      
+
                         {deleteWarning ? (
                                 <div className="flex space-y-2 mt-2 items-center">
                                     <input 
@@ -102,7 +156,7 @@ function AdminTable() {
                                                         type="radio"
                                                         name="select"
                                                         className="mt-2 bg-th-card-bg"
-                                                        onChange={() => setSelected(admin)}/>                                           
+                                                        onChange={() => setSelectedUser(admin)}/>                                           
                                                 </td>
                                                 <td className="px-6 pb-3 whitespace-no-wrap border-b border-th-border">
                                                     <div className="text-sm font-semibold leading-5 text-gray bg-th-card-bg">

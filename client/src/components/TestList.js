@@ -1,14 +1,14 @@
 import { useParams } from "react-router-dom"
 import { useContext } from "react"
-import { QuizzesContext } from "../App"
+import { QuizzesContext } from "../context/Quizzes"
 import QuizTable from "./QuizTable"
 
 
 function TestList() {
-    const allQuizzes = useContext(QuizzesContext)
+    const quizzes = useContext(QuizzesContext).quizzes;
     const { category } = useParams();
 
-    const filteredQuizzes = allQuizzes.filter(quiz => quiz.category === category)
+    const filteredQuizzes = quizzes.filter(quiz => quiz.category === category)
 
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);

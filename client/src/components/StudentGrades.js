@@ -1,5 +1,4 @@
 
-
 function StudentGrades({ user }) {
 
     return (

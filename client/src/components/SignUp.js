@@ -3,8 +3,11 @@ import "../index.css"
 import { useNavigate, NavLink } from "react-router-dom";
 import { useState } from "react";
 
+import { useContext } from "react"
+import { UserContext } from "../context/User"
 
-export default function SignUp({ handleSignIn }) {
+
+export default function SignUp({ setLoggedIn }) {
     const navigate = useNavigate();
     const [signUpData, setSignUpData] = useState({
         first_name: "",
@@ -13,7 +16,8 @@ export default function SignUp({ handleSignIn }) {
         password: "",
         admin: 0
     })
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState([]);
+    const setUser = useContext(UserContext).setValue;
 
  function handleSignUpFormChange(e) {
     setSignUpData({
@@ -34,7 +38,8 @@ export default function SignUp({ handleSignIn }) {
       .then(resp => {
         if (resp.ok) {
           resp.json().then((user) => {
-            handleSignIn(user)
+            setUser(user);
+            setLoggedIn(true);
           })
           .then(navigate("/"))
         } else {

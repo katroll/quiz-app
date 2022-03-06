@@ -1,13 +1,10 @@
 import { useState, useContext } from "react";
-import { UsersContext } from "../App";
-import { QuizzesContext } from "../App";
-
-
-
+import { UsersContext } from "../context/Users";
+import { QuizzesContext } from "../context/Quizzes";
 
 function StudentTable({ setPopUp, setSelectedUser }) {
-    const students = useContext(UsersContext).filter(user => !user.admin);
-    const quizzes = useContext(QuizzesContext);
+    const students = useContext(UsersContext).users.filter(user => !user.admin);
+    const quizzes = useContext(QuizzesContext).quizzes;
 
     const [nameSearch, setNameSearch] = useState(""); 
     const [usernameSearch, setUsernameSearch] = useState(""); 

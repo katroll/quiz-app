@@ -3,13 +3,17 @@ import { useState } from 'react';
 import { NavLink } from "react-router-dom";
 import 'tw-elements';
 
+import { useContext } from "react"
+import { UserContext } from "../context/User"
 
-export default function SignIn({ onSignIn }) {
+
+export default function SignIn({ setLoggedIn }) {
     const [signInData, setSignIndata] = useState({
         username: "",
         password: ""
     });
     const [error, setError] = useState("");
+    const setUser = useContext(UserContext).setValue;
 
     function handleSignInChange(e) {
         setSignIndata({
@@ -27,7 +31,10 @@ export default function SignIn({ onSignIn }) {
         })
         .then(resp => {
             if(resp.ok){
-                resp.json().then(admin => onSignIn(admin))
+                resp.json().then(user => {
+                  setUser(user);
+                  setLoggedIn(true);
+                })
             }
             else {
                 resp.json().then(error => setError(error.error))

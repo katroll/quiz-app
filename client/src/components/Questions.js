@@ -4,16 +4,17 @@ import QuizViewer from "./QuizViewer";
 function Questions( { questions, onSubmitScore }) {
     let [questionNumber, setQuestionNumber] = useState(0);
     let [score, setScore] = useState(0);
-    const [results, setResults] = useState([]);
+    const [results, setResults] = useState((new Array(questions.length)).fill(-1));
     const [correctIndex, setCorrentIndex] = useState([]);
     const [complete, setComplete] = useState(false);
     const [error, setError] = useState(false);
 
+
     function handleNextClick() {
-        if(results.length <= questionNumber) {
-            setError("Answer required to move on");
-            return;
-        }
+        // if(results.length <= questionNumber) {
+        //     setError("Answer required to move on");
+        //     return;
+        // }
 
         if(questionNumber < questions.length - 1) {
             setQuestionNumber(questionNumber += 1);
@@ -93,7 +94,7 @@ function Questions( { questions, onSubmitScore }) {
                         {questions[questionNumber].choices.map((choice, index) => {
                             return (
                                 <div key={choice} className="mb-1">
-                                    <input type="radio" id={choice} name={questions[questionNumber].id}  onChange={(e) => handleChecked(e, index)}></input>
+                                    <input type="radio" id={choice} name={questions[questionNumber].id}  onChange={(e) => handleChecked(e, index)} checked={index === results[questionNumber]}></input>
                                     <label className="pl-1">{choice}</label>
                                 </div>
                             )

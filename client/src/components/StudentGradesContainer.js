@@ -1,6 +1,11 @@
 import StudentGrades from "./StudentGrades";
 
-function StudentGradesContainer({ user }) {
+import { useContext } from "react";
+import { UserContext } from "../context/User";
+
+
+function StudentGradesContainer() {
+    const user = useContext(UserContext).user;
 
     return (
         <div className="pt-5 flex w-content">

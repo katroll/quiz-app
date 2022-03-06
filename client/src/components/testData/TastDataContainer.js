@@ -16,12 +16,21 @@ function TestDataContainer() {
     const [grades, setGrades] = useState([]);
 
     useEffect(() => {
-        fetch("/grades")
+        const controller = new AbortController();
+        const signal = controller.signal;
+
+        fetch("/grades", {
+            signal: signal
+        })
         .then(resp => resp.json())
         .then(grades => {
             const gradesByDate = grades.reverse();
             setGrades(gradesByDate);
         });
+
+        return () => {
+            controller.abort();
+        };
     }, [])
     
     //const columns = ["Student Name", "Username", "Student ID", "Test Name", "Test Score", "Question Number", "Correct", "Day/Time Completed"]

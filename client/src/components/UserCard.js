@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import StudentGrades from "./StudentGrades";
+import { UsersContext } from "../context/Users"
+
+
 
 
 function UserCard({ user, setPopUp }) {
@@ -10,55 +13,27 @@ function UserCard({ user, setPopUp }) {
     const [updateAdminSuccess, setUpdateAdminSuccess] = useState(false);
     const [updatePasswordSuccess, setUpdatePasswordSuccess] = useState(false);
 
-    console.log(userToDelete)
-
-
+    const usersContext = useContext(UsersContext);
+   
     function handleUpdateUserPassword(e) {
         e.preventDefault();
-
-        fetch(`users/${user.id}`, {
-            method: "PATCH",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({password: newPassword})
-        })
-        .then((resp) => {
-            if (resp.ok) {
-              resp.json().then((user) => {
-                setUpdatePasswordSuccess(true);
-              });
-            } else {
-              resp.json().then(errors => console.log(errors))
-            }
-          });
+        usersContext.updatePassword(user, newPassword);
+        setUpdatePasswordSuccess(true);
+        setUpdatePassword(false);
     }
 
     function handleDeleteUser() {
         if (userToDelete.replace(/\s+/g, '') === user.username.replace(/\s+/g, '')) {
-            fetch(`/users/${user.id}`, {
-                method: "DELETE",
-            })
-            .then(console.log("deleted"))
+            usersContext.deleteUser(user);
+            setPopUp(false);
         } else {
-            console.log("type the username as exact mathc")
+            console.log("type the username as exact match")
         }
     }
 
     function handleAdminToggle() {
-        fetch(`users/${user.id}`, {
-            method: "PATCH",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({admin: true})
-        })
-        .then((resp) => {
-            if (resp.ok) {
-              resp.json().then((user) => {
-                setUpdateAdminSuccess(true);
-              });
-            } else {
-              resp.json().then(errors => console.log(errors))
-            }
-          });
-      
+        usersContext.updateAdmin(user);
+        setUpdateAdminSuccess(true);
     }
 
     return (

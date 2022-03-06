@@ -3,8 +3,12 @@ import "../index.css"
 import * as Excel from "exceljs";
 import * as Base64 from "base64-arraybuffer"
 
+import {useContext} from "react"
+import { QuizzesContext } from "../context/Quizzes"
+
 
 function UplaodQuiz({ handleSubmitNewQuiz }) {
+    const quizzesContext = useContext(QuizzesContext);
 
     const urlCreator = window.URL || window.webkitURL;
 
@@ -25,7 +29,6 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
         reader.onload = () => {
             const buffer = reader.result;
             wb.xlsx.load(buffer).then(workbook => {
-                console.log(workbook, 'workbook instance')
                 workbook.eachSheet((sheet, id) => {
                     const quizQuestions = [];
                     sheet.eachRow((row, rowIndex) => {
@@ -66,6 +69,56 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
             handleSubmitNewQuiz(quizName, questions, quizCategory);
         }
     }
+
+    function handleSubmitNewQuiz(name, questions, category) {
+    
+        fetch("/quizzes", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({name: name, category: category})
+        })
+        .then(resp => resp.json())
+        .then(quiz => {
+          handleSubmitNewQuizQuestions(quiz.id, questions, quiz);
+        })
+      }
+    
+      function handleSubmitNewQuizQuestions(quizId, questions, quiz) {
+        const allFetches = questions.map((question) => {
+          return fetch("/questions", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+              ...question,
+              quiz_id: quizId
+            })
+          })
+          .then(resp => resp.json())
+          
+        })
+    
+        Promise.all(allFetches).then(resp => {
+          const questions = resp.sort((a, b) => a.number - b.number);
+          quiz.questions = questions;
+    
+          quiz.questions.map(question => {
+            if(question.imageBase64) {
+              question.imageUrl = createImgUrl(question);
+            }
+            return question;
+          })
+    
+          quizzesContext.setValue([...quizzesContext.quizzes, quiz]);
+        });
+      }
+
+      function createImgUrl(question) {
+        const imageArrayBuffer = Base64.decode(question.imageBase64);
+        const blob = new Blob( [ imageArrayBuffer ], { type: "image/jpeg" } );
+        const urlCreator = window.URL || window.webkitURL;
+        const imageUrl = urlCreator.createObjectURL( blob );
+        return imageUrl;
+      }
 
     return (
         <div className="flex flex-col pt-10" >
