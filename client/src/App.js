@@ -23,7 +23,7 @@ import { UserProvider } from "./context/User"
 
 export const UsersContext = createContext();
 export const QuizzesContext = createContext();
-export const UserContext = createContext();
+//export const UserContext = createContext();
 
 function App() {
   const navigate = useNavigate();
@@ -38,16 +38,16 @@ function App() {
 
 
   useEffect(() => {
-    fetch("/me").then((resp) => {
-      if (resp.ok) {
-        resp.json().then((user) => {
-          setCurrentUser(user);
-          setLoggedIn(true);
-        });
-      } else {
-        resp.json().then(errors => console.log(errors))
-      }
-    });
+    // fetch("/me").then((resp) => {
+    //   if (resp.ok) {
+    //     resp.json().then((user) => {
+    //       setCurrentUser(user);
+    //       setLoggedIn(true);
+    //     });
+    //   } else {
+    //     resp.json().then(errors => console.log(errors))
+    //   }
+    // });
 
     fetch("/quizzes")
     .then(resp => resp.json())
@@ -185,6 +185,8 @@ function App() {
     )
   }
 
+  console.log("loading app.js")
+
   return (
     <div className="flex flex-row min-h-screen max-w-[100vw] bg-th-primary">
 
@@ -194,7 +196,7 @@ function App() {
       
       <div className='flex flex-col pl-60 w-full justify-between'>
         {currentUser.admin ? (
-          <UserContext.Provider value={currentUser}>
+          <UserProvider setLoggedIn={setLoggedIn}>
             <UsersContext.Provider value={users}>
               <QuizzesContext.Provider value={quizzes}>
                 <Routes>
@@ -220,9 +222,9 @@ function App() {
                   </Routes>
                 </QuizzesContext.Provider>
               </UsersContext.Provider>
-           </UserContext.Provider>
+           </UserProvider>
         ) : (
-          <UserContext.Provider value={currentUser}>
+          <UserProvider setLoggedIn={setLoggedIn}>
             <QuizzesContext.Provider value={quizzes}> 
               <Routes>
                 <Route path="/test/:name" 
@@ -239,7 +241,7 @@ function App() {
                 />
               </Routes>
             </QuizzesContext.Provider>
-          </UserContext.Provider>
+          </UserProvider>
         )}
 
         <div className='flex pb-5 pt-2 mt-3 justify-center'>

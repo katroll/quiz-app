@@ -2,12 +2,12 @@ import { useParams } from "react-router-dom";
 
 import { useContext, useEffect, useState } from "react"
 import { QuizzesContext } from "../App";
-import { UserContext } from "../App";
+import { UserContext } from "../context/User";
 
 
 function QuizViewer() {
     const quizzes = useContext(QuizzesContext);
-    const user = useContext(UserContext);
+    const user = useContext(UserContext).user;
 
     const { name } = useParams();
     const quiz = quizzes.find(quiz => quiz.name.replace(/\s+/g, '') === name.replace(/\s+/g, ''));

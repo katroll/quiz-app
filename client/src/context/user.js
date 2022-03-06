@@ -13,6 +13,7 @@ function UserProvider({ children, setLoggedIn }) {
               resp.json().then((user) => {
                 setUser(user);
                 setLoggedIn(true);
+                console.log("fetching session")
               });
             } else {
               resp.json().then(errors => console.log(errors))
@@ -31,7 +32,7 @@ function UserProvider({ children, setLoggedIn }) {
     
     const context = userContext(user, setUser);
 
-    console.log("setting user")
+    console.log("setting user: ", user)
 
 
     return (
