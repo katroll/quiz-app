@@ -17,7 +17,6 @@ function QuizViewer() {
     useEffect(() => {
         if(!user.admin) {
             if(user.grades.length > 0) {
-                console.log(user.grades);
                 setAnswers(user.grades[user.grades.length - 1].results)
             }
         } else {
@@ -27,9 +26,7 @@ function QuizViewer() {
             }
         }
     
-    }, [user, quiz])
-
-    console.log(user)
+    }, [user, quiz]);
 
     if(answers.length === 0 || !quiz) {
         return (

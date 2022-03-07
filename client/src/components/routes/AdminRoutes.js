@@ -11,10 +11,8 @@ import { UsersProvider } from "../../context/Users"
 
 function AdminRoutes({  }) {
 
-    console.log("admin routes")
-
     return (
-        <div className="pl-60">
+        <div className="pl-60 w-full">
             <UsersProvider>
                 <Routes>
                     <Route path="/uploadquiz" 

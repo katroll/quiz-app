@@ -8,8 +8,6 @@ function QuizTable({ quizzes }) {
 
     const user = useContext(UserContext).user;
 
-    console.log(user)
-
     return (
 
             <div className="">

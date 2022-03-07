@@ -52,9 +52,6 @@ function QuizzesProvider({ children }) {
     
     const context = quizzesContext(quizzes, setQuizzes);
 
-    console.log(quizzes);
-    console.log(context)
-
 
     return (
         <QuizzesContext.Provider value={context}>

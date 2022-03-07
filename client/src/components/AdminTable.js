@@ -20,7 +20,7 @@ function AdminTable() {
         } else {
             setPasswordUpdateResult("Password Update Failed.");
         }
-        setTimeout(() => setPasswordUpdateResult(""), 3000);
+        setTimeout(() => setPasswordUpdateResult(""), 2000);
     }
 
     function setUpdateAdminResult(result) {
@@ -29,7 +29,7 @@ function AdminTable() {
         } else {
             setAdminUpdateResult(`Failed to remove ${selectedUser.first_name} ${selectedUser.last_name} as admin.`);
         }
-        setTimeout(() => setAdminUpdateResult(""), 3000);
+        setTimeout(() => setAdminUpdateResult(""), 2000);
     }
 
 
