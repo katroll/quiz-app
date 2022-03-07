@@ -14,7 +14,7 @@ function UserContainer() {
     return (
         <div>
             {popUp ? (
-                <div className="absolute w-full h-full bg-th-transparent-bg flex justify-center items-center">
+                <div className="absolute w-full h-full bg-th-transparent-bg flex justify-center">
                     <UserCard user={selectedUser} setPopUp={setPopUp} />
                 </div>
             ) : null }

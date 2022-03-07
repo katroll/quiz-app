@@ -3,7 +3,7 @@ function StudentGrades({ user }) {
 
     return (
         <div className="mt-2 m-10">
-                <div className="flex flex-col mt-8 max-h-[80vh]">
+                <div className="flex flex-col mt-8 max-h-[30vh]">
                     <div className="py-2 -my-2 overflow-x-auto overflow-y-scroll sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                         <div className="inline-block overflow-hidden align-middle border-b border-light-gray shadow sm:rounded-lg">
                             <table className="reletive">
