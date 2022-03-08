@@ -1,6 +1,9 @@
 
 function StudentGrades({ user, height }) {
 
+    const sortedGrades = user.grades.sort((a,b) => (b.updated_at > a.updated_at) ? 1 : ((a.updated_at > b.updated_at) ? -1 : 0));
+
+
     return (
         <div className="mt-2 m-10">
                 <div className={`flex flex-col mt-8 ${height}`}>
@@ -22,7 +25,7 @@ function StudentGrades({ user, height }) {
                                 </thead>
 
                                 <tbody className="bg-th-card-bg">
-                                    {user.grades.reverse().map((grade) => (
+                                    {sortedGrades.map((grade) => (
                                             <tr key={grade.id}>
                                                 <td className="px-6 py-4 whitespace-no-wrap border-b border-light-gray">
                                                     <button 

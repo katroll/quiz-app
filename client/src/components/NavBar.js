@@ -18,7 +18,7 @@ function NavBar({ onSignOut }) {
     }
 
     return (
-        <div className="w-60 pb-20 h-full shadow-md bg-navy-300 fixed z-10 overflow-y-scroll" id="sidenavSecExample">
+        <div className="w-60 pb-20 h-full shadow-md bg-th-secondary fixed z-10 overflow-y-scroll" id="sidenavSecExample">
             <div className="pt-4 pb-2 px-6">
                 <div className="flex flex-col items-center">
                     <div className="shrink-0">
@@ -27,10 +27,10 @@ function NavBar({ onSignOut }) {
                             alt="Avatar"/>
                     </div>
                     <div className="grow mt-3">
-                        <p className="text-xl font-semibold text-white">{`${user.first_name} ${user.last_name}`}</p>
+                        <p className="text-xl font-semibold text-th-light-text">{`${user.first_name} ${user.last_name}`}</p>
                     </div>
                     <button onClick={onSignOut} className="">
-                        <a className="flex items-center bg-th-button text-md font-semibold mt-2 px-10 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-th-light-text transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
+                        <a className="flex items-center bg-th-button text-md font-semibold mt-2 px-10 h-12 overflow-hidden text-th-title-text text-ellipsis whitespace-nowrap rounded hover:text-th-light-text transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
                             <span>Logout</span>
                         </a>
                     </button>
@@ -39,7 +39,7 @@ function NavBar({ onSignOut }) {
 
             <ul className="relative px-1 mt-5">
                 <li className="relative" onClick={() =>  navigate("/")}>
-                    <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
+                    <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-th-light-text text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
                         <span>Home</span>
                     </a>
                 </li>   
@@ -49,21 +49,21 @@ function NavBar({ onSignOut }) {
                 <>
                 <ul className="relative px-1">
                     <li className="relative" onClick={() =>  navigate("/uploadquiz")}>
-                        <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
+                        <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-th-light-text text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
                             <span>Upload a Test</span>
                         </a>
                     </li>   
                 </ul>
                 <ul className="relative px-1">
                     <li className="relative" onClick={() => navigate("/students")}>
-                        <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
+                        <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-th-light-text text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
                             <span>Users</span>
                         </a>
                     </li>   
                 </ul>
                 <ul className="relative px-1">
                     <li className="relative" onClick={() => navigate("/testdata")}>
-                        <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
+                        <a className="flex items-center text-md font-semibold py-4 px-6 h-12 overflow-hidden text-th-light-text text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
                             <span>Testing Data</span>
                         </a>
                     </li>   
@@ -74,7 +74,7 @@ function NavBar({ onSignOut }) {
 
 
             
-                <a className="flex items-center text-md font-semibold py-4 px-7 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out cursor-pointer" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone" data-bs-toggle="collapse" data-bs-target="#collapseSidenavSecEx2" aria-expanded="false" aria-controls="collapseSidenavSecEx2">
+                <a className="flex items-center text-md font-semibold py-4 px-7 h-12 overflow-hidden text-th-light-text text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out cursor-pointer" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone" data-bs-toggle="collapse" data-bs-target="#collapseSidenavSecEx2" aria-expanded="false" aria-controls="collapseSidenavSecEx2">
                     <span>Tests</span>
                     <svg 
                         aria-hidden="true" 
@@ -90,7 +90,7 @@ function NavBar({ onSignOut }) {
                     return (
                         <ul key={category} className="relative accordion-collapse collapse" id="collapseSidenavSecEx2" aria-labelledby="sidenavSecEx2" data-bs-parent="#sidenavSecExample">
                             <li className="relative" onClick={() => navigate(`/tests/${category}`)}>
-                                <a className="flex items-center text-sm font-semibold mx-5 py-4 px-6 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
+                                <a className="flex items-center text-sm font-semibold mx-5 py-4 px-6 h-12 overflow-hidden text-th-light-text text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
                                     <span>{capitalizeFirstLetter(category)}</span>
                                 </a>
                             </li>   
@@ -104,7 +104,7 @@ function NavBar({ onSignOut }) {
                 
                 <ul className="relative px-1">
                     <li onClick={() => navigate("/mygrades")} className="relative">
-                    <a className="flex items-center text-base font-semibold py-4 px-6 h-12 overflow-hidden text-white text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
+                    <a className="flex items-center text-base font-semibold py-4 px-6 h-12 overflow-hidden text-th-light-text text-ellipsis whitespace-nowrap rounded hover:text-th-light-text hover:bg-th-button transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="stone">
                         <span>Grades</span>
                     </a>
                     </li>

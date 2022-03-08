@@ -19,6 +19,23 @@
   --correct: theme("colors.green.100");
   --border: theme("colors.gray.100");
   --transparent-bg: theme("colors.transparent.100");
+  --faded-highlight: theme("colors.viridian.100");
 }
+
+.spctc {
+  --primary: theme("colors.navy.50");
+  --secondary: theme("colors.spctc.dark-blue");
+  --card-bg: theme("colors.spctc.almond");
+  --light-text: theme("colors.navy.50");
+  --button: theme("colors.spctc.yellow");
+  --title-text: theme("colors.navy.700");
+  --table-header-bg: theme("colors.spctc.dark-green");
+  --warning: theme("colors.red.100");
+  --correct: theme("colors.green.100");
+  --border: theme("colors.gray.100");
+  --transparent-bg: theme("colors.transparent.100");
+  --faded-highlight: theme("colors.viridian.100");
+}
+
 
 

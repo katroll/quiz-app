@@ -12,13 +12,14 @@ function UserCard({ user, setPopUp }) {
     const [userToDelete, setUserToDelete] = useState("");
     const [updateAdminSuccess, setUpdateAdminSuccess] = useState(false);
     const [updatePasswordSuccess, setUpdatePasswordSuccess] = useState(false);
+    const [passwordUpdateResult, setPasswordUpdateResult] = useState("");
+    const [adminUpdateResult, setAdminUpdateResult] = useState("");
 
     const usersContext = useContext(UsersContext);
    
     function handleUpdateUserPassword(e) {
         e.preventDefault();
-        usersContext.updatePassword(user, newPassword);
-        setUpdatePasswordSuccess(true);
+        usersContext.updatePassword(user, newPassword, setUpdatePasswordResult);
         setUpdatePassword(false);
     }
 
@@ -32,9 +33,27 @@ function UserCard({ user, setPopUp }) {
     }
 
     function handleAdminToggle() {
-        usersContext.updateAdmin(user);
-        setUpdateAdminSuccess(true);
+        usersContext.updateAdmin(user, setUpdateAdminResult);
     }
+
+    function setUpdatePasswordResult(result) {
+        if(result) {
+            setPasswordUpdateResult("Password Updated!");
+        } else {
+            setPasswordUpdateResult("Password Update Failed.");
+        }
+        setTimeout(() => setPasswordUpdateResult(""), 2000);
+    }
+
+    function setUpdateAdminResult(result) {
+        if(result) {
+            setAdminUpdateResult(`${user.first_name} ${user.last_name} removed as admin.`);
+        } else {
+            setAdminUpdateResult(`Failed to remove ${user.first_name} ${user.last_name} as admin.`);
+        }
+        setTimeout(() => setAdminUpdateResult(""), 2000);
+    }
+
 
     return (
         <div className="flex flex-col w-full h-full p-10 pr-72">
@@ -76,17 +95,17 @@ function UserCard({ user, setPopUp }) {
                                     Make Admin
                             </button>
                         </div>
-                            {updateAdminSuccess ? (
+                            {adminUpdateResult ? (
                                 <div className="w-full flex justify-center mb-1">
                                     <div className="text-sm bg-th-border text-th-light-text w-1/2 text-center rounded">
-                                        Admin Updated!
+                                        {adminUpdateResult}
                                     </div>
                                 </div>
                             ) : null }
-                            {updatePasswordSuccess ? (
+                            {passwordUpdateResult ? (
                                 <div className="w-full flex justify-center mb-1">
                                 <div className="text-sm bg-th-border text-th-light-text w-1/2 text-center rounded">
-                                    Password Updated!
+                                    {passwordUpdateResult}
                                 </div>
                             </div>
                             ) : null }

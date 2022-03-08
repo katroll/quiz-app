@@ -55,6 +55,13 @@ module.exports = {
         transparent: {
           "100": "rgba(150, 152, 153, 0.7)"
         },
+        spctc: {
+          "almond": "#ffebcd",
+          "dark-blue": "#1f57be",  
+          "light-blue": "#95d6f5",
+          "yellow": "#f7fa68",
+          "dark-green": "#4CAF50" 
+        },
 
 
         'th-primary': 'var(--primary)',
@@ -67,8 +74,9 @@ module.exports = {
         "th-warning": "var(--warning)",
         "th-correct": "var(--correct)",
         "th-border": "var(--border)",
-        "th-transparent-bg": "var(--transparent-bg)"
-
+        "th-transparent-bg": "var(--transparent-bg)",
+        "th-faded-highlight": "var(--faded-highlight)"
+ 
         
 
       }

@@ -3,7 +3,7 @@ import { UsersContext } from "../context/Users";
 import { QuizzesContext } from "../context/Quizzes";
 
 function StudentTable({ setPopUp, setSelectedUser }) {
-    const students = useContext(UsersContext).users.filter(user => !user.admin);
+    const students = useContext(UsersContext).users.filter(user => !user.admin).sort((a,b) => (b.first_name.toLowerCase() < a.first_name.toLowerCase()) ? 1 : ((a.first_name.toLowerCase() < b.first_name.toLowerCase()) ? -1 : 0));
     const quizzes = useContext(QuizzesContext).quizzes;
 
     const [nameSearch, setNameSearch] = useState(""); 

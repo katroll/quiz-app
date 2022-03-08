@@ -1,10 +1,13 @@
 import { useState, useContext } from "react"
 import { UsersContext } from "../context/Users";
-
+import { UserContext } from "../context/User"
+ 
 function AdminTable() {
 
     const usersContext = useContext(UsersContext);
+    const user = useContext(UserContext).user;
     const users = usersContext.users;
+    const sortedAdmins = users.filter(user => user.admin).sort((a,b) => (b.first_name.toLowerCase() < a.first_name.toLowerCase()) ? 1 : ((a.first_name.toLowerCase() < b.first_name.toLowerCase()) ? -1 : 0));
 
     const [selectedUser, setSelectedUser] = useState({});
     const [deleteWarning, setDeleteWarning] = useState(false);
@@ -148,9 +151,9 @@ function AdminTable() {
                                 </thead>
 
                                 <tbody className="bg-th-card-bg">
-                                    {users.filter(user => user.admin).map(admin => {
+                                    {sortedAdmins.map(admin => {
                                         return (
-                                            <tr key={admin.id}>
+                                            <tr key={admin.id} className={`${ admin.id === user.id ? "bg-th-faded-highlight" : null }`}>
                                                 <td className="px-6 pb-3 whitespace-no-wrap border-b border-th-border">
                                                     <input 
                                                         type="radio"
@@ -159,7 +162,7 @@ function AdminTable() {
                                                         onChange={() => setSelectedUser(admin)}/>                                           
                                                 </td>
                                                 <td className="px-6 pb-3 whitespace-no-wrap border-b border-th-border">
-                                                    <div className="text-sm font-semibold leading-5 text-gray bg-th-card-bg">
+                                                    <div className={`${ admin.id === user.id ? "bg-th-faded-highlight" : null } text-sm font-semibold leading-5 text-gray bg-th-card-bg`}>
                                                         {admin.first_name} {admin.last_name}
                                                     </div>
                                                 </td>

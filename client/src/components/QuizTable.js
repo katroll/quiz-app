@@ -8,6 +8,8 @@ function QuizTable({ quizzes }) {
 
     const user = useContext(UserContext).user;
 
+    console.log(quizzes)
+
     return (
 
             <div className="">
@@ -28,6 +30,16 @@ function QuizTable({ quizzes }) {
                                         <th className="px-6 py-3 text-sm font-bold leading-4 tracking-wider text-left uppercase border-b border-th-border bg-th-table-header-bg">
                                             {user.admin? "Times Taken" : "Completed"}
                                         </th>
+                                        {!user.admin ? (
+                                            <>
+                                                <th className="px-6 py-3 text-sm font-bold leading-4 tracking-wider text-left uppercase border-b border-th-border bg-th-table-header-bg">
+                                                    Grade
+                                                </th>
+                                                <th className="px-6 py-3 text-sm font-bold leading-4 tracking-wider text-left uppercase border-b border-th-border bg-th-table-header-bg">
+                                                    Date
+                                                </th>
+                                            </>
+                                        ) : null}
                                     </tr>
                                 </thead>
 
@@ -53,11 +65,21 @@ function QuizTable({ quizzes }) {
                                                         </td>
                                                     </>
                                                 ) : (
-                                                    user.grades.find(grade => grade.quiz_data.quiz.name === quiz.name) ? (
-                                                        <td className="text-xl border-b border-th-border text-center">✔</td> 
-                                                    ) : (
-                                                        <td className="text-xl border-b border-th-border text-center">-</td> 
-                                                    )                                                 
+                                                    <>
+                                                        {user.grades.find(grade => grade.quiz_data.quiz.name === quiz.name) ? (
+                                                            <>
+                                                                <td className="text-xl border-b border-th-border text-center">✔</td> 
+                                                                <td className="text-sm border-b border-th-border text-center">{user.grades.find(grade => grade.quiz_data.quiz.name === quiz.name).score}/{quiz.questions.length}</td> 
+                                                                <td className="text-sm px-5 border-b border-th-border text-center">{user.grades.find(grade => grade.quiz_data.quiz.name === quiz.name).updated_at.slice(0,10)}</td> 
+                                                            </>
+                                                        ) : (
+                                                            <>
+                                                                <td className="text-xl border-b border-th-border text-center">-</td> 
+                                                                <td className="text-xl border-b border-th-border text-center">-</td>
+                                                                <td className="text-xl border-b border-th-border text-center">-</td>
+                                                            </>
+                                                        )}    
+                                                    </>
                                                 )}
                                             </tr>
                                     )})}
