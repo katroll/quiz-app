@@ -4,6 +4,8 @@ import * as Excel from "exceljs";
 import {saveAs} from "file-saver";
 
 import SelectColumnFilter from "./SelectColumnFilter";
+import DefaultColumnFilter from "./DefaultColumnFilter";
+import CorrectAnswerFilter from "./CorrectAnswerFilter";
 
 import FilteredDataTable from "./FilteredDataTable";
 
@@ -41,24 +43,27 @@ function TestDataContainer() {
             {
             Header: 'First Name',
             accessor: 'firstName',
+            Filter: DefaultColumnFilter,
             },
             {
             Header: 'Last Name',
             accessor: 'lastName',
-            // Use our custom `fuzzyText` filter on this column
-            filter: 'fuzzyText',
+            Filter: DefaultColumnFilter,
             },
             {
                 Header: 'Username',
                 accessor: 'username',
+                Filter: DefaultColumnFilter,
             },
             {
                 Header: 'Student ID',
                 accessor: 'studentId',
+                Filter: DefaultColumnFilter,
             },
             {
                 Header: 'Test Name',
                 accessor: 'testName',
+                Filter: DefaultColumnFilter,
             },
             {
                 Header: 'Test Category',
@@ -68,22 +73,27 @@ function TestDataContainer() {
             {
                 Header: 'Grade ID',
                 accessor: 'gradeId',
+                Filter: DefaultColumnFilter,
             },
             {
                 Header: 'Test Score',
                 accessor: 'testScore',
+                Filter: DefaultColumnFilter,
             },
             {
                 Header: 'Question Number',
                 accessor: 'questionNumber',
+                Filter: DefaultColumnFilter,
             },
             {
-                Header: 'Correct?',
+                Header: 'Answer',
                 accessor: 'correct',
+                Filter: CorrectAnswerFilter,
             },
             {
                 Header: 'Day/Time Completed',
                 accessor: 'completedAt',
+                Filter: DefaultColumnFilter,
             },
         ],
         []
@@ -104,7 +114,7 @@ function TestDataContainer() {
                 testScore: grade.score,
                 questionNumber: index + 1,
                 correct: results[index] === question.answer ? "Yes" : "No",
-                completedAt: grade.updated_at
+                completedAt: `${grade.updated_at.slice(0,10)} - ${grade.updated_at.slice(11, 19)}`
             }
         })
     }).flat();

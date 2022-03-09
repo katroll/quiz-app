@@ -1,54 +1,8 @@
-import { useTable, useFilters, useGlobalFilter, useAsyncDebounce, useSortBy } from "react-table";
-import { useMemo, useState } from "react";
+import { useTable, useFilters, useGlobalFilter, useSortBy } from "react-table";
+import { useMemo } from "react";
 
+import DefaultColumnFilter from "./DefaultColumnFilter";
 
-
-function GlobalFilter({
-    preGlobalFilteredRows,
-    globalFilter,
-    setGlobalFilter,
-  }) {
-    const count = preGlobalFilteredRows.length
-    const [value, setValue] = useState(globalFilter)
-    const onChange = useAsyncDebounce(value => {
-      setGlobalFilter(value || undefined)
-    }, 200)
-  
-    return (
-      <span>
-        Search:{' '}
-        <input
-          value={value || ""}
-          onChange={e => {
-            setValue(e.target.value);
-            onChange(e.target.value);
-          }}
-          placeholder={`${count} records...`}
-          style={{
-            fontSize: '1.1rem',
-            border: '0',
-          }}
-        />
-      </span>
-    )
-  }
-
-function DefaultColumnFilter({
-    column: { filterValue, preFilteredRows, setFilter },
-  }) {
-    const count = preFilteredRows.length
-  
-    return (
-      <input
-        value={filterValue || ''}
-        onChange={e => {
-          setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
-        }}
-        placeholder={`Search ${count} records...`}
-        className="rounded ml-3"
-      />
-    )
-  }
 
 
 function FilteredDataTable({ data, columns, handleExcelExport }) {
@@ -87,15 +41,11 @@ function FilteredDataTable({ data, columns, handleExcelExport }) {
         headerGroups,
         rows,
         prepareRow,
-        state,
-        visibleColumns,
-        preGlobalFilteredRows,
-        setGlobalFilter,
     } = useTable(
         {
         columns,
         data,
-        defaultColumn, // Be sure to pass the defaultColumn option
+        //defaultColumn, // Be sure to pass the defaultColumn option
         filterTypes,
         },
         useFilters, // useFilters!
@@ -136,20 +86,6 @@ function FilteredDataTable({ data, columns, handleExcelExport }) {
                           ))}
                           </tr>
                       ))}
-                      {/* <tr>
-                          <th
-                          colSpan={visibleColumns.length}
-                          style={{
-                              textAlign: 'left',
-                          }}
-                          >
-                          <GlobalFilter
-                              preGlobalFilteredRows={preGlobalFilteredRows}
-                              globalFilter={state.globalFilter}
-                              setGlobalFilter={setGlobalFilter}
-                          />
-                          </th>
-                      </tr> */}
                       </thead>
                       <tbody {...getTableBodyProps()}>
                       {rows.map((row, i) => {

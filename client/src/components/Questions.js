@@ -7,22 +7,14 @@ function Questions( { questions, onSubmitScore }) {
     const [results, setResults] = useState((new Array(questions.length)).fill(-1));
     const [correctIndex, setCorrentIndex] = useState([]);
     const [complete, setComplete] = useState(false);
-    const [error, setError] = useState(false);
 
 
     function handleNextClick() {
-        // if(results.length <= questionNumber) {
-        //     setError("Answer required to move on");
-        //     return;
-        // }
-
         if(questionNumber < questions.length - 1) {
             setQuestionNumber(questionNumber += 1);
-            setError("");
         }
         else {
             setComplete(true);
-            console.log(results);
             calculateScore();
         }
     }
@@ -57,11 +49,6 @@ function Questions( { questions, onSubmitScore }) {
         newAnswer[questionNumber] = index;
         setResults(newAnswer);
     }
-
-    console.log("results: ", results)
-    console.log("correct index array: ", correctIndex)
-
-   
 
     return (
         <div className="p-10 w-3/4">
@@ -101,10 +88,6 @@ function Questions( { questions, onSubmitScore }) {
                         })}
                     </div>
                     <div className="flex flex-col w-full items-center">
-                            {error ? (
-                                <div className="p-1 px-2 bg-th-warning text-th-light-text rounded">{error}</div>
-                            ) : null }
-                       
                         <div className="w-full flex justify-center items-center">
                             <button 
                                 type="button" 
