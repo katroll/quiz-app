@@ -1,10 +1,9 @@
 import { useState } from "react";
-import "../index.css"
 import * as Excel from "exceljs";
 import * as Base64 from "base64-arraybuffer"
 
 import {useContext} from "react"
-import { QuizzesContext } from "../context/Quizzes"
+import { QuizzesContext } from "../../context/Quizzes"
 
 
 function UplaodQuiz({ handleSubmitNewQuiz }) {

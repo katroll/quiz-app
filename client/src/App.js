@@ -39,17 +39,17 @@ function App() {
                       <SignInRoutes setLoggedIn={setLoggedIn} />
                     ) : (
                       user.user.admin ? (
-                        <>
+                        <div className=''>
                           <NavBar onSignOut={handleSignOut} />
                           <AdminRoutes />
-                        </>
+                        </div>
                       ) : (
-                        <>
+                        <div className=''>
                           {!takingQuiz ? (
                             <NavBar onSignOut={handleSignOut} />
                           ) : null }
                           <StudentRoutes setTakingQuiz={setTakingQuiz} takingQuiz={takingQuiz} />
-                        </>
+                        </div>
                       )
                     )
                   )}

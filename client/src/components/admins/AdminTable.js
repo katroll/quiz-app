@@ -1,6 +1,6 @@
 import { useState, useContext } from "react"
-import { UsersContext } from "../context/Users";
-import { UserContext } from "../context/User"
+import { UsersContext } from "../../context/Users";
+import { UserContext } from "../../context/User"
  
 function AdminTable() {
 
@@ -50,6 +50,7 @@ function AdminTable() {
         console.log(userToDelete);
         if (userToDelete.replace(/\s+/g, '') === selectedUser.username.replace(/\s+/g, '')) {
             usersContext.deleteUser(selectedUser);
+            setDeleteWarning(false);
         } else {
             console.log("type the username as exact match")
         }

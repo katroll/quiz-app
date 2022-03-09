@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
-import { UsersContext } from "../context/Users";
-import { QuizzesContext } from "../context/Quizzes";
+import { UsersContext } from "../../context/Users";
+import { QuizzesContext } from "../../context/Quizzes";
 
 function StudentTable({ setPopUp, setSelectedUser }) {
     const students = useContext(UsersContext).users.filter(user => !user.admin).sort((a,b) => (b.first_name.toLowerCase() < a.first_name.toLowerCase()) ? 1 : ((a.first_name.toLowerCase() < b.first_name.toLowerCase()) ? -1 : 0));

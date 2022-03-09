@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
-import StudentGrades from "./StudentGrades";
-import { UsersContext } from "../context/Users"
+import StudentGrades from "../StudentGrades";
+import { UsersContext } from "../../context/Users"
 
 
 
@@ -10,8 +10,6 @@ function UserCard({ user, setPopUp }) {
     const [newPassword, setNewPassword] = useState("");
     const [deleteWarning, setDeleteWarning] = useState(false);
     const [userToDelete, setUserToDelete] = useState("");
-    const [updateAdminSuccess, setUpdateAdminSuccess] = useState(false);
-    const [updatePasswordSuccess, setUpdatePasswordSuccess] = useState(false);
     const [passwordUpdateResult, setPasswordUpdateResult] = useState("");
     const [adminUpdateResult, setAdminUpdateResult] = useState("");
 
@@ -47,9 +45,9 @@ function UserCard({ user, setPopUp }) {
 
     function setUpdateAdminResult(result) {
         if(result) {
-            setAdminUpdateResult(`${user.first_name} ${user.last_name} removed as admin.`);
+            setAdminUpdateResult(`${user.first_name} ${user.last_name} promoted to admin.`);
         } else {
-            setAdminUpdateResult(`Failed to remove ${user.first_name} ${user.last_name} as admin.`);
+            setAdminUpdateResult(`Failed to promote ${user.first_name} ${user.last_name} to admin.`);
         }
         setTimeout(() => setAdminUpdateResult(""), 2000);
     }

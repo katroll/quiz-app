@@ -1,5 +1,5 @@
 import { useState } from "react";
-import QuizViewer from "./QuizViewer";
+import QuizViewer from "../QuizViewer";
 
 function Questions( { questions, onSubmitScore }) {
     let [questionNumber, setQuestionNumber] = useState(0);

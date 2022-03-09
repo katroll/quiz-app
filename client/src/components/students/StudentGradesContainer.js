@@ -1,7 +1,7 @@
-import StudentGrades from "./StudentGrades";
+import StudentGrades from "../StudentGrades";
 
 import { useContext } from "react";
-import { UserContext } from "../context/User";
+import { UserContext } from "../../context/User";
 
 
 function StudentGradesContainer() {

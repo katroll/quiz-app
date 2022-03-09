@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "../index.css"
 import StudentTable from "./StudentTable";
 import UserCard from "./UserCard";
 import AdminTable from "./AdminTable";

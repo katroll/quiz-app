@@ -1,15 +1,15 @@
 import { Routes, Route } from "react-router-dom"
 
-import UplaodQuiz from '../UploadQuiz';
+import UplaodQuiz from '../admins/UploadQuiz';
 import QuizViewer from '../QuizViewer';
-import UserContainer from '../UserContainer';
-import AdminHome from '../AdminHome';
-import TestDataContainer from '../testData/TastDataContainer';
+import UserContainer from '../admins/UserContainer';
+import AdminHome from '../admins/AdminHome';
+import TestDataContainer from '../admins/testData/TastDataContainer';
 import TestList from '../TestList';
 
 import { UsersProvider } from "../../context/Users"
 
-function AdminRoutes({  }) {
+function AdminRoutes() {
 
     return (
         <div className="pl-60 w-full">

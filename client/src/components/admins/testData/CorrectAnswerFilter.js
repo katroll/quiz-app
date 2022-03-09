@@ -15,7 +15,7 @@ function CorrectAnswerFilter({ column: { filterValue, setFilter, preFilteredRows
 
     // Render a multi-select box
     return (
-        <div className="flex flex-col items-start font-normal px-4">
+        <div className="flex flex-col items-start font-normal px-4 text-sm">
         
             <div className="space-x-2">
                 <input 

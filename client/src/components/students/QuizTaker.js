@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
-import { QuizzesContext } from "../context/Quizzes";
-import { UserContext } from "../context/User";
+import { QuizzesContext } from "../../context/Quizzes";
+import { UserContext } from "../../context/User";
 
 import Questions from "./Questions";
 

@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom"
 
 import TestList from '../TestList';
-import QuizTaker from '../QuizTaker';
-import StudentGradesContainer from '../StudentGradesContainer';
+import QuizTaker from '../students/QuizTaker';
+import StudentGradesContainer from '../students/StudentGradesContainer';
 import StudentHome from '../students/StudentHome';
 
 

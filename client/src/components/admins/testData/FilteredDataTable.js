@@ -2,6 +2,7 @@ import { useTable, useFilters, useGlobalFilter, useSortBy } from "react-table";
 import { useMemo } from "react";
 
 import DefaultColumnFilter from "./DefaultColumnFilter";
+import SelectColumnFilter from "./SelectColumnFilter";
 
 
 
@@ -9,10 +10,6 @@ function FilteredDataTable({ data, columns, handleExcelExport }) {
 
     const filterTypes = useMemo(
         () => ({
-        // Add a new fuzzyTextFilterFn filter type.
-        //fuzzyText: fuzzyTextFilterFn,
-        // Or, override the default text filter to use
-        // "startWith"
         text: (rows, id, filterValue) => {
             return rows.filter(row => {
             const rowValue = row.values[id]
@@ -26,14 +23,8 @@ function FilteredDataTable({ data, columns, handleExcelExport }) {
         }),
         []
     )
-    
-    const defaultColumn = useMemo(
-        () => ({
-        // Let's set up our default Filter UI
-        Filter: DefaultColumnFilter,
-        }),
-        []
-    )
+
+
     
     const {
         getTableProps,
@@ -45,7 +36,6 @@ function FilteredDataTable({ data, columns, handleExcelExport }) {
         {
         columns,
         data,
-        //defaultColumn, // Be sure to pass the defaultColumn option
         filterTypes,
         },
         useFilters, // useFilters!
@@ -72,7 +62,7 @@ function FilteredDataTable({ data, columns, handleExcelExport }) {
                       {headerGroups.map(headerGroup => (
                           <tr key={headerGroup} {...headerGroup.getHeaderGroupProps()}>
                           {headerGroup.headers.map(column => (
-                            <th key={column.Header} className="bg-th-table-header-bg shadow px-3 h-14">
+                            <th key={column.Header} className="bg-th-table-header-bg shadow px-3 h-10 text-lg">
                                 <div {...column.getHeaderProps(column.getSortByToggleProps())} className="w-48">
                                   {column.render("Header")}
                                   <span className="ml-3">
