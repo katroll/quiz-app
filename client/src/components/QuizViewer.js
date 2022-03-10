@@ -9,6 +9,8 @@ function QuizViewer() {
     const quizzes = useContext(QuizzesContext).quizzes;
     const user = useContext(UserContext).user;
 
+    console.log(user);
+
     const { name } = useParams();
     const quiz = quizzes.find(quiz => quiz.name.replace(/\s+/g, '') === name.replace(/\s+/g, ''));
 

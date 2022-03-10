@@ -44,6 +44,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   def destroy
     @user.destroy
+    render json: {}, status: :ok
   end
 
   private
@@ -54,13 +55,13 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.permit(:first_name, :last_name, :username, :password, :admin)
+      params.permit(:first_name, :last_name, :username, :password, :admin, :role)
     end
 
     def check_admin
-      user = User.find_by(id: session[:user_id])
+      curr_user = User.find_by(id: session[:user_id])
       
-      if user.admin 
+      if curr_user.role == "head-admin"
         return true 
       else 
         render json: {error: "This action is not permitted for this account"}, status: :unprocessable_entity

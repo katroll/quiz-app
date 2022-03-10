@@ -62,15 +62,24 @@ function UsersProvider({ children }) {
           });
     }
 
-    function deleteUser(userToUpdate) {
+    function deleteUser(userToUpdate, setDeleteUserResult) {
         fetch(`/users/${userToUpdate.id}`, {
             method: "DELETE",
         })
-        .then(() => {
-            const updatedUsers = users.filter(user => user.id !== userToUpdate.id)
-            setUsers(updatedUsers);
-        })
-        }
+        .then((resp) => {
+            if (resp.ok) {
+              resp.json().then(() => {
+                const updatedUsers = users.filter(user => user.id !== userToUpdate.id)
+                setUsers(updatedUsers);
+                setDeleteUserResult(true);
+
+              });
+            } else {
+              resp.json().then(errors => console.log(errors))
+              setDeleteUserResult(false);
+            }
+        });
+    }
 
     function usersContext(users, setValue) {
         return {

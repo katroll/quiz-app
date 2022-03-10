@@ -12,6 +12,8 @@ function UserCard({ user, setPopUp }) {
     const [userToDelete, setUserToDelete] = useState("");
     const [passwordUpdateResult, setPasswordUpdateResult] = useState("");
     const [adminUpdateResult, setAdminUpdateResult] = useState("");
+    const [deleteResult, setDeleteResult] = useState("");
+    const [userNoMatch, setUserNoMatch] = useState(false)
 
     const usersContext = useContext(UsersContext);
    
@@ -23,10 +25,10 @@ function UserCard({ user, setPopUp }) {
 
     function handleDeleteUser() {
         if (userToDelete.replace(/\s+/g, '') === user.username.replace(/\s+/g, '')) {
-            usersContext.deleteUser(user);
-            setPopUp(false);
+            usersContext.deleteUser(user, setDeleteUserResult);
+            setUserNoMatch(false);
         } else {
-            console.log("type the username as exact match")
+            setUserNoMatch(true);
         }
     }
 
@@ -41,6 +43,20 @@ function UserCard({ user, setPopUp }) {
             setPasswordUpdateResult("Password Update Failed.");
         }
         setTimeout(() => setPasswordUpdateResult(""), 2000);
+    }
+
+    function setDeleteUserResult(result) {
+        if(result) {
+            setDeleteResult("User Deleted!");
+        } else {
+            setDeleteResult("Failed to delete user.");
+        }
+        setTimeout(() => {
+            setDeleteResult("");
+            if(result) {
+                setPopUp(false);
+            }
+        }, 2000);
     }
 
     function setUpdateAdminResult(result) {
@@ -154,6 +170,21 @@ function UserCard({ user, setPopUp }) {
                                 Cancel 
                             </button>
                         </div>
+                        {deleteResult ? (
+                                <div className="w-full flex justify-center my-2">
+                                    <div className="text-sm bg-th-border text-th-light-text w-1/2 text-center rounded">
+                                        {deleteResult}
+                                    </div>
+                                </div>
+                        ) : null }
+
+                        {userNoMatch ? (
+                                <div className="w-full flex justify-center my-2">
+                                    <div className="text-sm bg-th-border text-th-light-text w-1/2 text-center rounded">
+                                        Type the username as exact match.
+                                    </div>
+                                </div>
+                        ) : null }                      
                     </div>
                 ) : null}
                 </div>
