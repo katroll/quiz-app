@@ -99,7 +99,7 @@ function Questions( { questions, onSubmitScore }) {
                                 type="button" 
                                 className="mt-5 w-1/3 text-th-light-text bg-th-button rounded-r hover:bg-th-secondary font-medium text-sm px-5 py-2.5 text-center mb-4"
                                 onClick={handleNextClick}>
-                                    {questionNumber < questions.length - 1 ? "Next →" : "Submit Quiz"}
+                                    {questionNumber < questions.length - 1 ? "Next →" : "Submit Test"}
                             </button>
                         </div>
                     </div>

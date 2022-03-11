@@ -20,7 +20,7 @@ function SelectColumnFilter({ column: { filterValue, setFilter, preFilteredRows,
         onChange={e => {
             setFilter(e.target.value || undefined)
         }}
-        className="rounded ml-8 text-sm"
+        className="rounded ml-8 text-sm text-th-title-text"
         >
         <option value="">All</option>
         {options.map((option, i) => (

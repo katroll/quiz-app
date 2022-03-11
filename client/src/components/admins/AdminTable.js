@@ -98,7 +98,7 @@ function AdminTable() {
                                             <input 
                                                 type="password" 
                                                 placeholder="Enter New Password"
-                                                className="p-1 border border-th-secondary rounded text-xs mr-2"
+                                                className="p-1 border border-th-secondary rounded text-sm mr-2"
                                                 onChange={(e) => setNewPassword(e.target.value)}
                                             />
                                             <button
@@ -170,10 +170,10 @@ function AdminTable() {
                                         <th className="px-6 py-3 border-b text-gray tracking-wider border-th-border bg-th-table-header-bg text-left">
                                         
                                         </th>
-                                        <th className="px-6 py-3 border-b text-gray tracking-wider border-th-border bg-th-table-header-bg w-40 text-left">
+                                        <th className="px-6 py-3 border-b text-th-light-text tracking-wider border-th-border bg-th-table-header-bg w-40 text-left">
                                             <div className="w-40">Name</div>
                                         </th>
-                                        <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray uppercase border-b border-th-border bg-th-table-header-bg">
+                                        <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-th-light-text uppercase border-b border-th-border bg-th-table-header-bg">
                                             <div className="w-40">Username</div>
                                         </th>
                                     </tr>

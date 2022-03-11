@@ -150,7 +150,7 @@ function UserCard({ user, setPopUp }) {
                         </button>
                     </div>
                     {deleteWarning ? (
-                    <div className="flex flex-col items-center bg-th-primary p-3 w-full">
+                    <div className="flex flex-col items-center bg-th-card-bg p-3 w-full">
                         <p>Are you sure you would like to delete this user? All associated data will be deleted.</p>
                         <div className="flex items-center">
                             <label>To confirm, enter username: </label>
@@ -192,7 +192,7 @@ function UserCard({ user, setPopUp }) {
                     <div className="w-full text-2xl py-4 font-bold bg-th-table-header-bg flex justify-center items-center">
                         Tests
                     </div>
-                    <div className="bg-th-primary w-full rounded-b flex justify-center overflow-y-scroll">
+                    <div className="bg-th-card-bg w-full rounded-b flex justify-center overflow-y-scroll">
                         <div className="overflow-hidden">
                             <StudentGrades user={user} height="max-h-[30vh]" />
                         </div>

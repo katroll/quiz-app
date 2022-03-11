@@ -62,7 +62,7 @@ function FilteredDataTable({ data, columns, handleExcelExport }) {
                       {headerGroups.map(headerGroup => (
                           <tr key={headerGroup} {...headerGroup.getHeaderGroupProps()}>
                           {headerGroup.headers.map(column => (
-                            <th key={column.Header} className="bg-th-table-header-bg shadow px-3 h-10 text-lg">
+                            <th key={column.Header} className="bg-th-table-header-bg text-th-light-text shadow px-3 h-10 text-lg">
                                 <div {...column.getHeaderProps(column.getSortByToggleProps())} className="w-48">
                                   {column.render("Header")}
                                   <span className="ml-3">

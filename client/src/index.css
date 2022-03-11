@@ -8,7 +8,7 @@
 }
 
 :root {
-  --primary: theme("colors.navy.100");
+  --primary: theme("colors.spctc.almond");
   --secondary: theme("colors.navy.300");
   --card-bg: theme("colors.navy.50");
   --light-text: theme("colors.navy.50");
@@ -22,13 +22,23 @@
   --faded-highlight: theme("colors.viridian.100");
 }
 
+
+.spctc-login {
+  --primary: theme("colors.spctc.almond");
+  --secondary: theme("colors.spctc.dark-blue");
+  --card-bg: theme("colors.navy.50");
+  --light-text: theme("colors.navy.50");
+  --button: theme("colors.spctc.dark-green");
+}
+
 .spctc-admin {
   --primary: theme("colors.spctc.almond");
   --secondary: theme("colors.spctc.dark-green");
   --card-bg: theme("colors.navy.50");
   --light-text: theme("colors.navy.50");
-  --button: theme("colors.spctc.yellow");
-  --title-text: theme("colors.navy.700");
+  --button: theme("colors.spctc.dark-green");
+  --navbar-hover: theme("colors.spctc.yellow");
+  --title-text: theme("colors.spctc.dark-blue");
   --table-header-bg: theme("colors.spctc.dark-blue");
   --warning: theme("colors.red.100");
   --correct: theme("colors.green.100");
@@ -42,14 +52,15 @@
   --secondary: theme("colors.spctc.dark-blue");
   --card-bg: theme("colors.navy.50");
   --light-text: theme("colors.navy.50");
-  --button: theme("colors.spctc.yellow");
-  --title-text: theme("colors.navy.700");
+  --button: theme("colors.spctc.dark-green");
+  --title-text: theme("colors.spctc.dark-blue");
   --table-header-bg: theme("colors.spctc.dark-green");
   --warning: theme("colors.red.100");
   --correct: theme("colors.green.100");
   --border: theme("colors.gray.100");
   --transparent-bg: theme("colors.transparent.100");
   --faded-highlight: theme("colors.viridian.100");
+  --navbar-hover: theme("colors.spctc.yellow");
 }
 
 

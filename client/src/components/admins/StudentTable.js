@@ -62,12 +62,12 @@ function StudentTable({ setPopUp, setSelectedUser }) {
                             <table className="reletive">
                                 <thead className="">
                                     <tr>
-                                        <th className="px-6 py-3 border-b text-gray tracking-wider border-th-border bg-th-table-header-bg">
+                                        <th className="px-6 py-3 border-b text-th-light-text tracking-wider border-th-border bg-th-table-header-bg">
                                             <div className="w-40">Name</div>
                                         </th>
                                         {quizzes.map(quiz => {
                                             return (
-                                                <th key={quiz.id} className="px-6 py-3 text-xs font-medium w-48 leading-4 tracking-wider text-left text-gray uppercase border-b border-th-border bg-th-table-header-bg">
+                                                <th key={quiz.id} className="px-6 py-3 text-xs font-medium w-48 leading-4 tracking-wider text-left text-th-light-text uppercase border-b border-th-border bg-th-table-header-bg">
                                                    <div className="w-36"> {quiz.name}</div>
                                                 </th>
                                             )

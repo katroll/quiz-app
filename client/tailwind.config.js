@@ -75,7 +75,8 @@ module.exports = {
         "th-correct": "var(--correct)",
         "th-border": "var(--border)",
         "th-transparent-bg": "var(--transparent-bg)",
-        "th-faded-highlight": "var(--faded-highlight)"
+        "th-faded-highlight": "var(--faded-highlight)",
+        "th-navbar-hover": "var(--navbar-hover)",
  
         
 

@@ -19,23 +19,23 @@ function QuizTable({ quizzes }) {
                             <table className="reletive">
                                 <thead className="">
                                     <tr>
-                                        <th className="px-6 py-3 text-sm font-bold leading-4 tracking-wider text-left uppercase border-b border-th-border bg-th-table-header-bg">
+                                        <th className="px-6 py-3 text-sm font-bold leading-4 tracking-wider text-left uppercase border-b border-th-border bg-th-table-header-bg text-th-light-text">
                                             Test
                                         </th>
                                         {user.admin ? (
-                                            <th className="px-6 py-3 text-sm font-bold leading-4 tracking-wider text-left uppercase border-b border-th-border bg-th-table-header-bg">
+                                            <th className="px-6 py-3 text-sm font-bold leading-4 tracking-wider text-left uppercase border-b border-th-border bg-th-table-header-bg text-th-light-text">
                                                 Date Created
                                             </th>
                                         ) : null}
-                                        <th className="px-6 py-3 text-sm font-bold leading-4 tracking-wider text-left uppercase border-b border-th-border bg-th-table-header-bg">
+                                        <th className="px-6 py-3 text-sm font-bold leading-4 tracking-wider text-left uppercase border-b border-th-border bg-th-table-header-bg text-th-light-text">
                                             {user.admin? "Times Taken" : "Completed"}
                                         </th>
                                         {!user.admin ? (
                                             <>
-                                                <th className="px-6 py-3 text-sm font-bold leading-4 tracking-wider text-left uppercase border-b border-th-border bg-th-table-header-bg">
+                                                <th className="px-6 py-3 text-sm font-bold leading-4 tracking-wider text-left uppercase border-b border-th-border bg-th-table-header-bg text-th-light-text">
                                                     Grade
                                                 </th>
-                                                <th className="px-6 py-3 text-sm font-bold leading-4 tracking-wider text-left uppercase border-b border-th-border bg-th-table-header-bg">
+                                                <th className="px-6 py-3 text-sm font-bold leading-4 tracking-wider text-left uppercase border-b border-th-border bg-th-table-header-bg text-th-light-text">
                                                     Date
                                                 </th>
                                             </>

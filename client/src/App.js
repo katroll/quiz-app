@@ -36,15 +36,17 @@ function App() {
                 <UserContext.Consumer>
                   {user => (
                     loggedIn === false ? (
-                      <SignInRoutes setLoggedIn={setLoggedIn} />
+                      <div className='spctc-login'>
+                        <SignInRoutes setLoggedIn={setLoggedIn} />
+                      </div>
                     ) : (
                       user.user.admin ? (
-                        <div className=''>
+                        <div className='spctc-admin'>
                           <NavBar onSignOut={handleSignOut} />
                           <AdminRoutes />
                         </div>
                       ) : (
-                        <div className=''>
+                        <div className='spctc-student'>
                           {!takingQuiz ? (
                             <NavBar onSignOut={handleSignOut} />
                           ) : null }
