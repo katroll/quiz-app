@@ -167,9 +167,11 @@ function AdminTable() {
                             <table className="reletive">
                                 <thead className="">
                                     <tr>
+                                    {user.role === "head-admin" ? (
                                         <th className="px-6 py-3 border-b text-gray tracking-wider border-th-border bg-th-table-header-bg text-left">
-                                        
+                            
                                         </th>
+                                    ) : null }
                                         <th className="px-6 py-3 border-b text-th-light-text tracking-wider border-th-border bg-th-table-header-bg w-40 text-left">
                                             <div className="w-40">Name</div>
                                         </th>
@@ -183,13 +185,15 @@ function AdminTable() {
                                     {sortedAdmins.map(admin => {
                                         return (
                                             <tr key={admin.id} className={`${ admin.id === user.id ? "bg-th-faded-highlight" : null }`}>
-                                                <td className="px-6 pb-3 whitespace-no-wrap border-b border-th-border">
-                                                    <input 
-                                                        type="radio"
-                                                        name="select"
-                                                        className="mt-2 bg-th-card-bg"
-                                                        onChange={() => setSelectedUser(admin)}/>                                           
-                                                </td>
+                                                {user.role === "head-admin" ? (
+                                                    <td className="px-6 pb-3 whitespace-no-wrap border-b border-th-border">
+                                                        <input 
+                                                            type="radio"
+                                                            name="select"
+                                                            className="mt-2 bg-th-card-bg"
+                                                            onChange={() => setSelectedUser(admin)}/>                                           
+                                                    </td>
+                                                ) : null }
                                                 <td className="px-6 pb-3 whitespace-no-wrap border-b border-th-border">
                                                     <div className={`${ admin.id === user.id ? "bg-th-faded-highlight" : null } text-sm font-semibold leading-5 text-gray bg-th-card-bg`}>
                                                         {admin.first_name} {admin.last_name}
