@@ -49,7 +49,7 @@ function QuizTaker({ setTakingQuiz, takingQuiz }) {
                     <Questions questions={quiz.questions} onSubmitScore={handleSubmitScore}/> 
                     <button 
                         type="button" 
-                        className="w-1/3 mt-1 mb-5 py-2 text-th-light-text bg-th-button rounded hover:bg-th-secondary text-md px-1 text-center"
+                        className="w-1/3 mt-1 mb-5 py-2 text-th-light-text bg-th-button rounded hover:bg-th-green-button-hover text-md px-1 text-center"
                         onClick={() => setTakingQuiz(false)}>
                             Exit Test 
                     </button>
@@ -61,7 +61,7 @@ function QuizTaker({ setTakingQuiz, takingQuiz }) {
                     <p>This test has {quiz.questions.length} questions. When you are ready to begin click the button below.</p>
                     <button 
                         type="button" 
-                        className="justify-end mt-5 mb-5 text-th-light-text bg-th-button rounded hover:bg-th-secondary text-md font-semibold px-5 py-2.5 text-center"
+                        className="justify-end mt-5 mb-5 text-th-light-text bg-th-button rounded hover:bg-th-green-button-hover text-md font-semibold px-5 py-2.5 text-center"
                         onClick={() => setTakingQuiz(true)}>
                             Begin Test
                     </button>

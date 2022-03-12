@@ -155,7 +155,7 @@ function TestDataContainer() {
 
 
     return (
-        <div className="pt-10 flex justify-center">
+        <div className="pt-5 flex justify-center">
         <div className="flex flex-col items-center">
             <p className="font-bold text-4xl text-th-title-text">Testing Data</p>
             <div className="w-full overflow-x-hidden overflow-x-scroll">

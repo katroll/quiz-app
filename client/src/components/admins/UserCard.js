@@ -75,12 +75,12 @@ function UserCard({ user, setPopUp }) {
                 <div className="flex items-center bg-th-table-header-bg p-1 h-[60px] rounded-t border-r border-th-border">
                     <div className="pl-2 pt-1">
                         <button 
-                            className="text-sm p-1 text-th-light-text bg-th-button hover:bg-th-secondary rounded shadow" 
+                            className="text-sm p-1 text-th-light-text bg-th-button rounded shadow hover:bg-th-green-button-hover" 
                             onClick={() => setPopUp(false)}>
                                 Close
                         </button>
                     </div>
-                    <div className="flex w-full justify-center uppercase font-bold text-2xl py-4">
+                    <div className="flex w-full justify-center uppercase font-bold text-2xl py-4 text-th-light-text">
                         {user.first_name} {user.last_name}
                     </div>
                 </div>
@@ -99,12 +99,12 @@ function UserCard({ user, setPopUp }) {
                     <div className="flex flex-col">
                         <div className="px-3 py-2 border-th-border flex justify-center">
                             <button 
-                                className="text-sm text-th-light-text bg-th-button hover:bg-th-secondary rounded-l p-1 border-r border-th-border"
+                                className="text-sm text-th-light-text bg-th-button hover:bg-th-green-button-hover rounded-l p-1 border-r border-th-border"
                                 onClick={() => setUpdatePassword(true)}>
                                     Reset Password
                             </button>
                             <button 
-                                className="text-sm text-th-light-text bg-th-button hover:bg-th-secondary rounded-r p-1 " 
+                                className="text-sm text-th-light-text bg-th-button hover:bg-th-green-button-hover rounded-r p-1 " 
                                 onClick={handleAdminToggle}>
                                     Make Admin
                             </button>
@@ -130,12 +130,12 @@ function UserCard({ user, setPopUp }) {
                                     <input 
                                         type="password" 
                                         placeholder="Enter New Password"
-                                        className="p-1 border border-th-secondary rounded text-sm mr-2"
+                                        className="p-1 border border-th-secondary rounded text-sm mr-2 focus:outline-none"
                                         onChange={(e) => setNewPassword(e.target.value)}
                                     />
                                     <button
                                         type="submit"
-                                        className="bg-th-button hover:bg-th-secondary text-th-light-text p-1 rounded text-sm">
+                                        className="bg-th-button hover:bg-th-green-button-hover text-th-light-text p-1 rounded text-sm">
                                         Update
                                     </button>
                                 </form>
@@ -157,7 +157,7 @@ function UserCard({ user, setPopUp }) {
                             <input 
                                 type="text" 
                                 placeholder="Username to delete"
-                                className="rounded ml-2 pl-2 text-sm"
+                                className="rounded ml-2 pl-2 text-sm border border-th-secondary focus:outline-none"
                                 onChange={(e) => setUserToDelete(e.target.value)}/>
                             <button
                                 onClick={handleDeleteUser} 
@@ -189,8 +189,8 @@ function UserCard({ user, setPopUp }) {
                 ) : null}
                 </div>
                 <div className="flex flex-col items-center mt-1">
-                    <div className="w-full text-2xl py-4 font-bold bg-th-table-header-bg flex justify-center items-center">
-                        Tests
+                    <div className="w-full text-2xl py-4 font-bold bg-th-table-header-bg flex justify-center items-center text-th-light-text">
+                        TESTS
                     </div>
                     <div className="bg-th-card-bg w-full rounded-b flex justify-center overflow-y-scroll">
                         <div className="overflow-hidden">

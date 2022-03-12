@@ -47,7 +47,7 @@ function FilteredDataTable({ data, columns, handleExcelExport }) {
       <div className="flex flex-col">
         <div className="flex w-full justify-end">
             <button
-                className="p-2 rounded text-white bg-th-button hover:bg-th-secondary text-th-light-text"
+                className="p-2 rounded text-white bg-th-button hover:bg-th-green-button-hover text-th-light-text"
                 onClick={() => handleExcelExport(rows)}>
                 Export Table to Excel
             </button>

@@ -77,17 +77,17 @@ function AdminTable() {
                     <div>
                         <div>
                             <button 
-                                className="bg-th-secondary rounded py-1 px-4 mr-3"
+                                className="bg-th-secondary rounded py-1 px-4 mr-3 text-th-light-text hover:bg-th-green-button-hover"
                                 onClick={handleAdminToggle}>
                                 Remove as Admin
                             </button>
                             <button 
-                                className="bg-th-secondary rounded py-1 px-4 mr-3"
+                                className="bg-th-secondary rounded py-1 px-4 mr-3 text-th-light-text hover:bg-th-green-button-hover"
                                 onClick={() => setDeleteWarning(true)}>
                                 Delete User
                             </button>
                             <button 
-                                className="bg-th-secondary rounded py-1 px-4"
+                                className="bg-th-secondary rounded py-1 px-4 text-th-light-text hover:bg-th-green-button-hover"
                                 onClick={() => setUpdatePassword(true)}>
                                 Reset Password
                             </button>
@@ -98,12 +98,12 @@ function AdminTable() {
                                             <input 
                                                 type="password" 
                                                 placeholder="Enter New Password"
-                                                className="p-1 border border-th-secondary rounded text-sm mr-2"
+                                                className="p-1 border border-th-secondary rounded text-sm mr-2 focus:outline-none"
                                                 onChange={(e) => setNewPassword(e.target.value)}
                                             />
                                             <button
                                                 type="submit"
-                                                className="bg-th-button hover:bg-th-secondary text-th-light-text p-1 rounded text-sm">
+                                                className="bg-th-button hover:bg-th-green-button-hover text-th-light-text p-1 rounded text-sm">
                                                 Update
                                             </button>
                                         </form>
@@ -131,11 +131,11 @@ function AdminTable() {
                                     <input 
                                         type="text" 
                                         placeholder="Enter Username to Delete"
-                                        className="rounded mr-2 w-60 p-1"
+                                        className="rounded mr-2 w-60 p-1 focus:outline-none border border-th-secondary"
                                         onChange={(e) => setUserToDelete(e.target.value)}>
                                     </input>
                                     <button 
-                                        className="bg-th-warning rounded w-60 p-1"
+                                        className="bg-th-warning rounded w-60 p-1 text-th-light-text"
                                         onClick={handleDeleteAdmin}>
                                         Confirm 
                                     </button>
@@ -173,9 +173,9 @@ function AdminTable() {
                                         </th>
                                     ) : null }
                                         <th className="px-6 py-3 border-b text-th-light-text tracking-wider border-th-border bg-th-table-header-bg w-40 text-left">
-                                            <div className="w-40">Name</div>
+                                            <div className="w-40 text-xs font-semibold">NAME</div>
                                         </th>
-                                        <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-th-light-text uppercase border-b border-th-border bg-th-table-header-bg">
+                                        <th className="px-6 py-3 text-xs font-semibold leading-4 tracking-wider text-left text-th-light-text uppercase border-b border-th-border bg-th-table-header-bg">
                                             <div className="w-40">Username</div>
                                         </th>
                                     </tr>

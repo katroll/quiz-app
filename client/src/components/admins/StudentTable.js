@@ -34,22 +34,22 @@ function StudentTable({ setPopUp, setSelectedUser }) {
     return (
         <div>
             <div className="flex w-full pl-5 py-2 bg-th-secondary rounded">
-                <form className="">
-                    <label>Search For A Student:</label>
+                <form>
+                    <label className="text-th-light-text">Search For A Student:</label>
                     <input
                         type="text"
                         placeholder="Student's Name"
                         name="name"
-                        className="mx-3 pl-3 rounded"
+                        className="mx-3 pl-3 rounded focus:outline-none"
                         onChange={handleStudentSearch}
                         value={nameSearch}
                     />
-                    <label>OR</label>
+                    <label className="text-th-light-text">OR</label>
                     <input
                         type="text"
                         placeholder="Student's Username"
                         name="username"
-                        className="mx-3 pl-3 rounded"
+                        className="mx-3 pl-3 rounded focus:outline-none"
                         onChange={handleStudentSearch}
                         value={usernameSearch}
                     />
@@ -62,13 +62,13 @@ function StudentTable({ setPopUp, setSelectedUser }) {
                             <table className="reletive">
                                 <thead className="">
                                     <tr>
-                                        <th className="px-6 py-3 border-b text-th-light-text tracking-wider border-th-border bg-th-table-header-bg">
+                                        <th className="px-6 py-3 border-b text-xs text-left text-th-light-text tracking-wider border-th-border bg-th-table-header-bg uppercase font-semibold">
                                             <div className="w-40">Name</div>
                                         </th>
                                         {quizzes.map(quiz => {
                                             return (
                                                 <th key={quiz.id} className="px-6 py-3 text-xs font-medium w-48 leading-4 tracking-wider text-left text-th-light-text uppercase border-b border-th-border bg-th-table-header-bg">
-                                                   <div className="w-36"> {quiz.name}</div>
+                                                   <div className="w-36 font-semibold"> {quiz.name}</div>
                                                 </th>
                                             )
                                         })}

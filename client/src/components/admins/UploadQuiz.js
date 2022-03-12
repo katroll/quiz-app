@@ -131,7 +131,7 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
                                         type="text" 
                                         name="name" id="name" 
                                         onChange={(e) => setQuizName(e.target.value)} 
-                                        className="px-2 py-2 placeholder-blueGray-300 text-blueGray-600 relative rounded text-sm shadow border border-th-table-heading-bg ring ring-th-table-header-bg focus:outline-none focus:ring w-full" 
+                                        className="px-2 py-2 relative rounded text-sm shadow border-2 border-th-light-blue-bg focus:outline-none w-full" 
                                         placeholder="Enter Test Name">
                                     </input>
                             </div>
@@ -172,7 +172,7 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
                 <div className="flex space-x-5 pl-10 mt-5">   
                     {questions.length > 0 ? (
                         <button 
-                            className="bg-th-button hover:bg-th-secondary text-th-light-text p-2 rounded"
+                            className="bg-th-button hover:bg-th-green-button-hover text-th-light-text p-2 rounded"
                             onClick={handleViewPreview}>
                                 {preview ? "Hide Preview" : "View Preview"}
                         </button>
@@ -180,7 +180,7 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
 
 
                     <button 
-                            className="bg-th-button hover:bg-th-secondary text-th-light-text p-2 rounded"
+                            className="bg-th-button hover:bg-th-green-button-hover text-th-light-text p-2 rounded"
                             onClick={onSubmitQuiz}>
                                 Submit Test
                     </button>

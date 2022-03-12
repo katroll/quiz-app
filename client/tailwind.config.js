@@ -56,11 +56,12 @@ module.exports = {
           "100": "rgba(150, 152, 153, 0.7)"
         },
         spctc: {
-          "almond": "#ffebcd",
+          "almond": "#f0e0c9",
           "dark-blue": "#1f57be",  
           "light-blue": "#95d6f5",
           "yellow": "#f7fa68",
-          "dark-green": "#4CAF50" 
+          "dark-green": "#4CAF50",
+          "dark-green-hover": "#47a14a"
         },
 
 
@@ -69,6 +70,7 @@ module.exports = {
         "th-card-bg": "var(--card-bg)",
         "th-light-text": "var(--light-text)",
         "th-button": "var(--button)",
+        "th-green-button-hover": "var(--green-button-hover)",
         "th-title-text": "var(--title-text)",
         "th-table-header-bg": "var(--table-header-bg)",
         "th-warning": "var(--warning)",
@@ -77,6 +79,7 @@ module.exports = {
         "th-transparent-bg": "var(--transparent-bg)",
         "th-faded-highlight": "var(--faded-highlight)",
         "th-navbar-hover": "var(--navbar-hover)",
+        "th-light-blue-bg": "var(--light-blue-bg)",
  
         
 

@@ -10,7 +10,7 @@ function DefaultColumnFilter({
           setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
         }}
         placeholder={`Search ${count} records...`}
-        className="rounded ml-3 py-1 text-sm"
+        className="rounded ml-3 py-1 text-xs text-navy-900"
       />
     )
   }

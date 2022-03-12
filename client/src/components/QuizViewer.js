@@ -43,12 +43,12 @@ function QuizViewer() {
 
     return (
         <div className="flex flex-col pt-10 items-center min-h-screen w-full pl-12 pr-10">
-            <h1 className="text-4xl text-th-title-text font-bold">{user.admin ? `${quiz.name}` : "Results"}</h1>
+            <h1 className="text-4xl text-th-title-text font-bold uppercase tracking-wider">{user.admin ? `${quiz.name}` : "Results"}</h1>
             <ul className="flex flex-col justify-start mt-5 w-full">
                 {quiz.questions.map((question, i) => {
                     return (
                         <li key={question.question} className="mb-3">
-                            <div className="flex flex-col w-full p-2 bg-th-card-bg items-center border-2 rounded border-th-table-header-bg">
+                            <div className="flex flex-col w-full p-2 bg-th-card-bg items-center border-2 rounded border-th-light-blue-bg">
                                 {question.imageUrl ? (
                                     <img
                                         src={question.imageUrl}

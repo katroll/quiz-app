@@ -20,7 +20,7 @@ function UserContainer() {
 
             <div className="pt-5 flex justify-center w-full">
                 <div className="flex flex-col items-center w-full">
-                    <p className="font-bold text-4xl text-th-title-text mb-5">{showStudents ? "Students" : "Admins"}</p>
+                    <p className="font-bold text-4xl text-th-title-text mb-5 tracking-wider">{showStudents ? "STUDENTS" : "ADMINS"}</p>
                     <div className="flex justify-start w-full pl-5 mb-5 ml-5">
                         <input 
                             type="radio" 

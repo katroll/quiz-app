@@ -69,7 +69,7 @@ export default function SignIn({ setLoggedIn }) {
               <div className="text-center mt-6">
                 <button 
                   type="submit" 
-                  className="bg-th-button text-th-light-text active:bg-text-blue text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-xl mr-1 mb-1 w-full ease-linear transition-all duration-150"> 
+                  className="bg-th-button text-th-light-text active:bg-text-blue text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-xl hover:bg-th-green-button-hover mr-1 mb-1 w-full ease-linear transition-all duration-150"> 
                     Sign In 
                 </button>
               </div>

@@ -56,7 +56,7 @@ function Questions( { questions, onSubmitScore }) {
             {complete ? (
                 <div>
                     <div className="flex flex-col items-center bg-th-secondary py-3 rounded">
-                        <p className="text-2xl text-th-title-text">You got {score} out of {questionNumber + 1} correct!</p>
+                        <p className="text-2xl text-th-light-text">You got {score} out of {questionNumber + 1} correct!</p>
                         <p className="text-3xl font-bold text-th-light-text">{Math.floor(score / (questionNumber + 1) * 100 )} %</p>
                      </div>
                      <QuizViewer />
@@ -91,13 +91,13 @@ function Questions( { questions, onSubmitScore }) {
                         <div className="w-full flex justify-center items-center">
                             <button 
                                 type="button" 
-                                className="mt-5 w-1/3 text-th-light-text bg-th-button rounded-l border-r hover:bg-th-secondary font-medium text-sm px-5 py-2.5 text-center mb-4"
+                                className="mt-5 w-1/3 text-th-light-text bg-th-button rounded-l border-r hover:bg-th-green-button-hover font-medium text-sm px-5 py-2.5 text-center mb-4"
                                 onClick={handlePreviousClick}>
                                     ← Previous
                             </button>
                             <button 
                                 type="button" 
-                                className="mt-5 w-1/3 text-th-light-text bg-th-button rounded-r hover:bg-th-secondary font-medium text-sm px-5 py-2.5 text-center mb-4"
+                                className="mt-5 w-1/3 text-th-light-text bg-th-button rounded-r hover:bg-th-green-button-hover font-medium text-sm px-5 py-2.5 text-center mb-4"
                                 onClick={handleNextClick}>
                                     {questionNumber < questions.length - 1 ? "Next →" : "Submit Test"}
                             </button>
