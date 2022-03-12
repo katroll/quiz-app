@@ -5,10 +5,6 @@ function CorrectAnswerFilter({ column: { filterValue, setFilter, preFilteredRows
     // using the preFilteredRows
     const options = useMemo(() => {
         const options = ["Yes", "No"]
-        preFilteredRows.forEach(row => {
-        // options.add(row.values[id])
-        })
-
         return [...options.values()]
     }, [preFilteredRows])
 

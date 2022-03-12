@@ -91,6 +91,11 @@ function TestDataContainer() {
                 Filter: CorrectAnswerFilter,
             },
             {
+                Header: 'Day/Time Started',
+                accessor: 'startedAt',
+                Filter: DefaultColumnFilter,
+            },
+            {
                 Header: 'Day/Time Completed',
                 accessor: 'completedAt',
                 Filter: DefaultColumnFilter,
@@ -114,7 +119,8 @@ function TestDataContainer() {
                 testScore: grade.score,
                 questionNumber: index + 1,
                 correct: results[index] === question.answer ? "Yes" : "No",
-                completedAt: `${grade.updated_at.slice(0,10)} - ${grade.updated_at.slice(11, 19)}`
+                completedAt: `${grade.updated_at.slice(0,10)} - ${grade.updated_at.slice(11, 19)}`,
+                startedAt: `${grade.start_time.slice(0,10)} - ${grade.start_time.slice(11, 19)}`,
             }
         })
     }).flat();
@@ -130,14 +136,15 @@ function TestDataContainer() {
         worksheet.columns = [
             {header: 'First Name', key: 'firstName', width: 10},
             {header: 'Last Name', key: 'lastName', width: 32}, 
-            {header: 'Username', key: 'username', width: 15,},
-            {header: 'Student ID', key: 'studentId', width: 15,},
-            {header: 'Test Name', key: 'testName', width: 15,},
-            {header: 'Test Category', key: 'testCategory', width: 15,},
-            {header: 'Test Score', key: 'testScore', width: 15,},
-            {header: 'Question Number', key: 'questionNumber', width: 15,},
-            {header: 'Correct?', key: 'correct', width: 15,},
-            {header: 'Day/Time Completed', key: 'completedAt', width: 15,},
+            {header: 'Username', key: 'username', width: 15},
+            {header: 'Student ID', key: 'studentId', width: 15},
+            {header: 'Test Name', key: 'testName', width: 15},
+            {header: 'Test Category', key: 'testCategory', width: 15},
+            {header: 'Test Score', key: 'testScore', width: 15},
+            {header: 'Question Number', key: 'questionNumber', width: 15},
+            {header: 'Correct?', key: 'correct', width: 15},
+            {header: 'Day/Time Started', key: 'startedAt', width: 15},
+            {header: 'Day/Time Completed', key: 'completedAt', width: 15},
           ];
 
       

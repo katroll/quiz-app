@@ -1,3 +1,5 @@
+
+
 function DefaultColumnFilter({
     column: { filterValue, preFilteredRows, setFilter },
   }) {
@@ -10,7 +12,7 @@ function DefaultColumnFilter({
           setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
         }}
         placeholder={`Search ${count} records...`}
-        className="rounded ml-3 py-1 text-xs text-navy-900"
+        className="rounded ml-3 py-1 text-xs text-navy-900 pl-2 focus:outline-none"
       />
     )
   }

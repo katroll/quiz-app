@@ -8,10 +8,13 @@ function AdminHome() {
         fetch("/grades")
         .then(resp => resp.json())
         .then(grades => {
+            console.log(grades);
             const gradesByDate = grades.reverse();
             setGrades(gradesByDate.slice(0, 5));
         });
     }, [])
+
+    console.log(grades);
 
     return (
         <div className="pt-10 pl-12 flex flex-col justify-start">

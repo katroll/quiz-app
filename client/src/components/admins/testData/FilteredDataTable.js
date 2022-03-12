@@ -1,15 +1,12 @@
 import { useTable, useFilters, useGlobalFilter, useSortBy } from "react-table";
 import { useMemo } from "react";
 
-import DefaultColumnFilter from "./DefaultColumnFilter";
-import SelectColumnFilter from "./SelectColumnFilter";
-
-
 
 function FilteredDataTable({ data, columns, handleExcelExport }) {
 
+
     const filterTypes = useMemo(
-        () => ({
+        () => ({  
         text: (rows, id, filterValue) => {
             return rows.filter(row => {
             const rowValue = row.values[id]

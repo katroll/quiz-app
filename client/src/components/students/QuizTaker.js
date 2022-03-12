@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { QuizzesContext } from "../../context/Quizzes";
 import { UserContext } from "../../context/User";
 
@@ -10,7 +10,8 @@ function QuizTaker({ setTakingQuiz, takingQuiz }) {
     const userContext = useContext(UserContext);
     const { name } = useParams();
 
-    console.log(quizzes);
+    const [startTime, setStartTime] = useState("");
+
 
     const quiz = quizzes.find(quiz => quiz.name === name);
 
@@ -18,7 +19,7 @@ function QuizTaker({ setTakingQuiz, takingQuiz }) {
         fetch("/grades", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({user_id: userContext.user.id, quiz_id: quiz.id, results: results, score: score})
+            body: JSON.stringify({user_id: userContext.user.id, quiz_id: quiz.id, results: results, score: score, start_time: startTime})
           })
           .then(resp => resp.json())
           .then(grade => {
@@ -27,6 +28,13 @@ function QuizTaker({ setTakingQuiz, takingQuiz }) {
             userContext.setValue({...userContext.user, grades: updatedGrades});
           }) 
     }
+
+    function handleStartTest() {
+      setTakingQuiz(true);
+      setStartTime(new Date());
+    }
+
+    console.log(startTime);
     
 
     if(!quiz) {
@@ -62,7 +70,7 @@ function QuizTaker({ setTakingQuiz, takingQuiz }) {
                     <button 
                         type="button" 
                         className="justify-end mt-5 mb-5 text-th-light-text bg-th-button rounded hover:bg-th-green-button-hover text-md font-semibold px-5 py-2.5 text-center"
-                        onClick={() => setTakingQuiz(true)}>
+                        onClick={handleStartTest}>
                             Begin Test
                     </button>
                 </div>
