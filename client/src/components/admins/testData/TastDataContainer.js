@@ -127,7 +127,10 @@ function TestDataContainer() {
 
     async function handleExcelExport(rows) {
         const exportData = rows.map(row => {
-            return row.values
+            console.log(row)
+            row.values.startedAt = `${row.values.startedAt.slice(0,10)}T${row.values.startedAt.slice(13)}Z`
+            row.values.completedAt = `${row.values.completedAt.slice(0,10)}T${row.values.completedAt.slice(13)}Z`
+            return row.values;
         })
        
         const workbook = new Excel.Workbook();
@@ -156,7 +159,7 @@ function TestDataContainer() {
 
         const blob = new Blob([buffer], {type: fileType});
 
-        saveAs(blob, 'test-data' + fileExtension);
+        saveAs(blob, `${new Date()}-test-data` + fileExtension);
 
     }
 

@@ -47,6 +47,6 @@ class GradesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def grade_params
-      params.require(:grade).permit(:user_id, :quiz_id, :score, :results)
+      params.require(:grade).permit(:user_id, :quiz_id, :score, :results, :start_time)
     end
 end

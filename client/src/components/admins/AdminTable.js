@@ -1,8 +1,12 @@
-import { useState, useContext } from "react"
+import { useState, useContext, useRef, useEffect } from "react"
 import { UsersContext } from "../../context/Users";
-import { UserContext } from "../../context/User"
+import { UserContext } from "../../context/User";
+
+//import { gsap } from "gsap";
  
 function AdminTable() {
+
+    const tableRef = useRef();
 
     const usersContext = useContext(UsersContext);
     const user = useContext(UserContext).user;
@@ -18,6 +22,12 @@ function AdminTable() {
     const [adminUpdateResult, setAdminUpdateResult] = useState("");
     const [deleteResult, setDeleteResult] = useState("");
     const [userNoMatch, setUserNoMatch] = useState(false);
+
+    // useEffect(() => {
+    //     if(updatePassword) {
+    //         gsap.to(tableRef.current, { y: -500, ease: Power0, duration: 2, delay: 0 })
+    //     }
+    // }, [updatePassword])
 
     function setUpdatePasswordResult(result) {
         if(result) {
@@ -160,7 +170,7 @@ function AdminTable() {
                     </div>
                 ) : null }
             </div>
-            <div className="mt-2 overflow-x-scroll overflow-y-scroll w-full flex flex-col items-center">
+            <div ref={tableRef} className="mt-2 overflow-x-scroll overflow-y-scroll w-full flex flex-col items-center">
                 <div className="flex flex-col max-h-[70vh] max-w-[75vw]">
                     <div className="sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                         <div className="inline-block overflow-hidden align-middle border-b border-th-border shadow sm:rounded-lg">

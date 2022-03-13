@@ -4,7 +4,6 @@ import { UsersContext } from "../../context/Users"
 
 
 
-
 function UserCard({ user, setPopUp }) {
     const [updatePassword, setUpdatePassword] = useState(false);
     const [newPassword, setNewPassword] = useState("");
