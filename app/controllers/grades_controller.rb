@@ -8,6 +8,12 @@ class GradesController < ApplicationController
     render json: @grades
   end
 
+  def export_grades
+    @grades = Grade.all
+    render json: @grades, each_serializer: ExportGradeSerializer
+  end
+
+
   # GET /grades/1
   # def show
   #   render json: @grade

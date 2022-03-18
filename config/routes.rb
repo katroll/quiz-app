@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
 
   get "/me", to: "users#show"
+  get "/exportusers", to: "users#export_user"
+  get "/exportgrades", to: "grades#export_grades"
   post "/signin", to: "sessions#create"
   delete "/signout", to: "sessions#destroy"
   

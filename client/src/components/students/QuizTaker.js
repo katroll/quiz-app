@@ -23,7 +23,6 @@ function QuizTaker({ setTakingQuiz, takingQuiz }) {
           })
           .then(resp => resp.json())
           .then(grade => {
-            console.log(userContext)
             const updatedGrades = [...userContext.user.grades, grade];
             userContext.setValue({...userContext.user, grades: updatedGrades});
           }) 
@@ -33,8 +32,6 @@ function QuizTaker({ setTakingQuiz, takingQuiz }) {
       setTakingQuiz(true);
       setStartTime(new Date());
     }
-
-    console.log(startTime);
     
 
     if(!quiz) {

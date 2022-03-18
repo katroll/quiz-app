@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ExportAll from "./ExportAll";
 
 function AdminHome() {
 
@@ -8,17 +9,19 @@ function AdminHome() {
         fetch("/grades")
         .then(resp => resp.json())
         .then(grades => {
-            console.log(grades);
             const gradesByDate = grades.reverse();
             setGrades(gradesByDate.slice(0, 5));
         });
     }, [])
 
-    console.log(grades);
 
     return (
         <div className="pt-10 pl-12 flex flex-col justify-start">
             <div className="flex flex-col justify-start">
+            <div className="mb-5">
+                <h1 className="text-4xl text-th-title-text font-bold mb-5">Shortcut Actions</h1>
+                <ExportAll />
+            </div>
             <h1 className="text-4xl text-th-title-text font-bold mb-10">This Weeks Activity</h1>
             <div className="flex bg-th-card-bg rounded-md p-5 mr-5">
                 <div className="text-slate-800 text-lg">Recently Taken Tests</div>

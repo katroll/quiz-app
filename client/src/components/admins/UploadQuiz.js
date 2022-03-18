@@ -83,7 +83,7 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
       }
     
       function handleSubmitNewQuizQuestions(quizId, questions, quiz) {
-        const allFetches = questions.map((question) => {
+        const allFetches = questions.map(question => {
           return fetch("/questions", {
             method: "POST",
             headers: {"Content-Type": "application/json"},

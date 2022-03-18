@@ -10,6 +10,11 @@ class UsersController < ApplicationController
     render json: @users
   end
 
+  def export_user
+    @users = User.all
+    render json: @users, each_serializer: ExportUserSerializer
+  end
+
   # GET /users/1
   def show
     user = User.find_by(id: session[:user_id])

@@ -73,7 +73,7 @@ function StudentTable({ setPopUp, setSelectedUser }) {
                                             )
                                         })}
                                         <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray uppercase border-b border-th-border bg-th-table-header-bg">
-                                        <div className="w-24">Tests Taken</div>
+                                        <div className="w-24 text-th-light-text">Tests Taken</div>
                                         </th>
                                     </tr>
                                 </thead>
