@@ -15,7 +15,7 @@ class QuestionsController < ApplicationController
 
   # POST /questions
   def create
-    question = Question.new(question_params)
+    question = Question.create(question_params)
     question.choices = params[:choices]
 
     if question.save

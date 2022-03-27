@@ -66,7 +66,7 @@ function QuizTable({ quizzes }) {
                                                     </>
                                                 ) : (
                                                     <>
-                                                        {user.grades.find(grade => grade.quiz_data.quiz.name === quiz.name) ? (
+                                                        {user.grades.find(grade => grade.quiz_data.quiz.id === quiz.id) ? (
                                                             <>
                                                                 <td className="text-xl border-b border-th-border text-center">✔</td> 
                                                                 <td className="text-sm border-b border-th-border text-center">{user.grades.find(grade => grade.quiz_data.quiz.name === quiz.name).score}/{quiz.questions.length}</td> 

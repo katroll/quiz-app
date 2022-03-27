@@ -170,7 +170,7 @@ function AdminTable() {
                             <table className="reletive">
                                 <thead className="">
                                     <tr>
-                                    {user.role === "head-admin" ? (
+                                    {user.role === "head_admin" ? (
                                         <th className="px-6 py-3 border-b text-gray tracking-wider border-th-border bg-th-table-header-bg text-left">
                             
                                         </th>
@@ -188,7 +188,7 @@ function AdminTable() {
                                     {sortedAdmins.map(admin => {
                                         return (
                                             <tr key={admin.id} className={`${ admin.id === user.id ? "bg-th-faded-highlight" : null }`}>
-                                                {user.role === "head-admin" ? (
+                                                {user.role === "head_admin" ? (
                                                     <td className="px-6 pb-3 whitespace-no-wrap border-b border-th-border">
                                                         <input 
                                                             type="radio"

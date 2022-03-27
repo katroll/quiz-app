@@ -28,6 +28,7 @@ function App() {
     });
   }
 
+
   return (
     <div className="flex flex-row min-h-screen max-w-[100vw] bg-th-primary">
       <div className='flex flex-col w-full justify-between'>

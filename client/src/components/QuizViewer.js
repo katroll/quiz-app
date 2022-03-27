@@ -16,6 +16,8 @@ function QuizViewer() {
 
     const [answers, setAnswers] = useState([])
 
+    console.log(quiz)
+
     useEffect(() => {
         if(!user.admin) {
             if(user.grades.length > 0) {
@@ -39,7 +41,6 @@ function QuizViewer() {
           </div>
         )
       }
-    
 
     return (
         <div className="flex flex-col pt-10 items-center min-h-screen w-full pl-12 pr-10">
@@ -58,7 +59,7 @@ function QuizViewer() {
                                 ) : null }
                                 <div className="flex flex-col justify-start pb-2 pt-2">
                                     <div className="flex flex-row">
-                                        {!user.admin ? (
+                                        {!user.admin && quiz.kind === "quiz" ? (
                                              <div>{question.answer === answers[i] ? (
                                                 <div className="text-2xl mr-2 text-th-correct">✔</div>
                                                 ) : (

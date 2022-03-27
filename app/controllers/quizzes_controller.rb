@@ -16,7 +16,6 @@ class QuizzesController < ApplicationController
   # POST /quizzes
   def create
     quiz = Quiz.create(quiz_params)
-
     if quiz
       render json: quiz, status: :created
     else
@@ -46,6 +45,6 @@ class QuizzesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def quiz_params
-      params.require(:quiz).permit(:name, :category)
+      params.require(:quiz).permit(:name, :category, :kind)
     end
 end

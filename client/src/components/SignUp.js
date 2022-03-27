@@ -14,7 +14,9 @@ export default function SignUp({ setLoggedIn }) {
         last_name: "",
         username: "",
         password: "",
-        admin: 0
+        spctc_pin_code: 0,
+        admin: 0,
+        role: "student"
     })
     const [errors, setErrors] = useState([]);
     const setUser = useContext(UserContext).setValue;
@@ -72,7 +74,8 @@ export default function SignUp({ setLoggedIn }) {
                   <input 
                     type="text" 
                     name="last_name"
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-black bg-white rounded text-sm shadow focus:outline-none focus:ring w-full" placeholder="Last Name"
+                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-black bg-white rounded text-sm shadow focus:outline-none focus:ring w-full" 
+                    placeholder="Last Name"
                     onChange={handleSignUpFormChange}/>
                 </div>
               </div>
@@ -82,7 +85,8 @@ export default function SignUp({ setLoggedIn }) {
                 <input 
                   type="text" 
                   name="username"
-                  className="border-0 px-3 py-3 placeholder-blueGray-300 text-black bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Username"
+                  className="border-0 px-3 py-3 placeholder-blueGray-300 text-black bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" 
+                  placeholder="Username"
                   onChange={handleSignUpFormChange}/>
               </div>
               <div className="relative w-full mb-3">
@@ -90,7 +94,17 @@ export default function SignUp({ setLoggedIn }) {
                 <input 
                   type="password" 
                   name="password"
-                  className="border-0 px-3 py-3 placeholder-blueGray-300 text-black bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Password"
+                  className="border-0 px-3 py-3 placeholder-blueGray-300 text-black bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" 
+                  placeholder="Password"
+                  onChange={handleSignUpFormChange}/>
+              </div>
+              <div className="relative w-full mb-3">
+                <label className="block uppercase text-th-light-text text-sm font-bold mb-2">SPCTC Pin Code</label>
+                <input 
+                  type="text" 
+                  name="spctc_pin_code"
+                  className="border-0 px-3 py-3 placeholder-blueGray-300 text-black bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" 
+                  placeholder="SPCTC Pin Code"
                   onChange={handleSignUpFormChange}/>
               </div>
               <div className="text-center mt-6">

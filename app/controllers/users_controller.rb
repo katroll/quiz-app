@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ destroy update ]
-
+  before_action :check_spctc_pin_code, only: %i[ create ]
   before_action :check_admin, only: %i[ destroy update ]
 
 
@@ -66,10 +66,19 @@ class UsersController < ApplicationController
     def check_admin
       curr_user = User.find_by(id: session[:user_id])
       
-      if curr_user.role == "head-admin"
+      if curr_user.role == "head_admin"
         return true 
       else 
         render json: {error: "This action is not permitted for this account"}, status: :unprocessable_entity
+      end
+    end
+
+    def check_spctc_pin_code
+      params.permit(:spctc_pin_code)
+      if params[:spctc_pin_code] == "01234"
+        return true 
+      else 
+        render json: {errors: [error: "Check that the SPCTC Pin entered is correct."]}, status: :unprocessable_entity
       end
     end
 end

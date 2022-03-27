@@ -11,13 +11,26 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
 
     const urlCreator = window.URL || window.webkitURL;
 
-    const [quizName, setQuizName] = useState("");
-    const [quizCategory, setQuizCategory] = useState("");
+    const [testFormData, setTestFormData] = useState({
+        name: "",
+        category: "",
+        kind: ""
+    })
     const [preview, setPreview] = useState(false);
     const [questions, setQuestions] = useState([]);
     const [error, setError] = useState([]);
-
     const categories = ["Beginner", "Intermediate", "Advanced", "English", "Misc"];
+
+    function handleFormChange(e) {
+        const key = e.target.name;
+        if(key === "name") {
+            setTestFormData({...testFormData, [key]: e.target.value});
+            return;
+        }
+        setTestFormData({...testFormData, [key]: e.target.id});
+    }
+
+    console.log(testFormData)
 
     function loadQuizFile(e) {
         const selectedFile = e.target.files[0];
@@ -61,23 +74,24 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
     }
 
     function onSubmitQuiz() {
-        if(!quizName || questions.length === 0 || !quizCategory) {
+        if(!testFormData.category || questions.length === 0 || !testFormData.name || !testFormData.kind) {
             setError("All fields are required")
         } else {
             setError("")
-            handleSubmitNewQuiz(quizName, questions, quizCategory);
+            handleSubmitNewQuiz(testFormData, questions);
         }
     }
 
-    function handleSubmitNewQuiz(name, questions, category) {
-    
+    function handleSubmitNewQuiz(testFormData, questions) {
+        console.log(testFormData)
         fetch("/quizzes", {
           method: "POST",
           headers: {"Content-Type": "application/json"},
-          body: JSON.stringify({name: name, category: category})
+          body: JSON.stringify({name: testFormData.name, category: testFormData.category, kind: testFormData.kind})
         })
         .then(resp => resp.json())
         .then(quiz => {
+        console.log(quiz);
           handleSubmitNewQuizQuestions(quiz.id, questions, quiz);
         })
       }
@@ -129,8 +143,9 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
                             <div className="w-full rounded-md p-2">
                                     <input 
                                         type="text" 
-                                        name="name" id="name" 
-                                        onChange={(e) => setQuizName(e.target.value)} 
+                                        name="name" 
+                                        id="name" 
+                                        onChange={handleFormChange} 
                                         className="px-2 py-2 relative rounded text-sm shadow border-2 border-th-light-blue-bg focus:outline-none w-full" 
                                         placeholder="Enter Test Name">
                                     </input>
@@ -142,11 +157,41 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
                                 {categories.map(category => {
                                     return (
                                         <div key={category} className="flex flex-row rounded-md pt-2 pl-3">
-                                            <input type="radio" name="category" id={category.toLowerCase()} onChange={(e) => setQuizCategory(e.target.id)} className=" bg-stone-100 px-2 mt-1 mr-2"/>
+                                            <input 
+                                                type="radio" 
+                                                name="category" 
+                                                id={category.toLowerCase()} 
+                                                onChange={handleFormChange} 
+                                                className=" bg-stone-100 px-2 mt-1 mr-2"/>
                                             <label>{category}</label>  
                                         </div>
                                     )
                                 })}
+                            </div>
+                        </div>
+                        <div className="flex">
+                            <label className="p-2 text-stone-800">This is a... </label>
+                            <div className="flex flex-col space-x-1">
+                                <div className="flex flex-row rounded-md pt-2 pl-3">
+                                    <input 
+                                        type="radio" 
+                                        name="kind" 
+                                        id="test" 
+                                        onChange={handleFormChange} 
+                                        className=" bg-stone-100 px-2 mt-1 mr-2"
+                                    />
+                                    <label>Test (students cannot view which answers are correct / incorrect)</label>  
+                                </div>
+                                <div className="flex flex-row rounded-md pt-2 pl-3">
+                                    <input 
+                                        type="radio" 
+                                        name="kind" 
+                                        id="quiz" 
+                                        onChange={handleFormChange} 
+                                        className=" bg-stone-100 px-2 mt-1 mr-2"
+                                    />
+                                    <label>Quiz (students can view which answers are correct / incorrect)</label>  
+                                </div>
                             </div>
                         </div>
                         <div htmlFor="upload" className="flex flex-row space-x-1 items-center mt-2">
@@ -190,7 +235,7 @@ function UplaodQuiz({ handleSubmitNewQuiz }) {
 
             {preview ? (
                 <div className="flex flex-col pt-10 items-center min-h-screen w-full pl-12 pr-10">
-                <h1 className="text-4xl text-th-title-text font-bold">{quizName}</h1>
+                <h1 className="text-4xl text-th-title-text font-bold">{testFormData.name}</h1>
                 <ul className="flex flex-col justify-start mt-5 w-full">
                     {questions.map(question => {
                         return (
