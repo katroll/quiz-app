@@ -17,4 +17,5 @@ test:
 
 production:
   <<: *default
+  adapter: postgresql
   database: quiz_app_production
