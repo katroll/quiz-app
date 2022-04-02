@@ -158,6 +158,8 @@ GEM
     racc (1.6.0)
     racc (1.6.0-java)
     rack (2.2.3)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (7.0.2.2)
@@ -234,6 +236,7 @@ DEPENDENCIES
   faker
   pg
   puma (~> 5.0)
+  rack-cors
   rails (~> 7.0.2)
   rails_12factor
   roo (~> 2.8)
