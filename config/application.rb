@@ -1,5 +1,4 @@
 require_relative "boot"
-require "rack/cors"
 
 require "rails"
 # Pick the frameworks you want:
@@ -18,13 +17,6 @@ require "action_view/railtie"
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
-
-config.middleware.insert_before 0, Rack::Cors do
-  allow do
-    origins '*'
-    resource '*', headers: :any, methods: [:get, :post, :delete, :patch, :options]
-  end
-end
 
 module QuizApp
   class Application < Rails::Application
