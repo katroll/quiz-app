@@ -6,15 +6,9 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-30.times do
-    first_name = Faker::Name.first_name
-    last_name = Faker::Name.last_name
-    username = Faker::Internet.username
 
-    User.create(first_name: first_name, last_name: last_name, username: username, password: "password", admin: 0)
-end
 
-admin1 = User.create(first_name: "Kat", last_name: "Roll", username: "admin", password: "admin", admin: 1)
+admin1 = User.create(first_name: "Margie", last_name: "Bose", username: "admin", password: "admin", admin: 1, role: "head_admin")
 
 
 puts "done seeding"
