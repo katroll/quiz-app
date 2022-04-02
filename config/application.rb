@@ -18,6 +18,13 @@ require "action_view/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+config.middleware.insert_before 0, Rack::Cors do
+  allow do
+    origins '*'
+    resource '*', headers: :any, methods: [:get, :post, :options]
+  end
+end
+
 module QuizApp
   class Application < Rails::Application
     
@@ -30,3 +37,4 @@ module QuizApp
     config.action_dispatch.cookies_same_site_protection = :strict
   end
 end
+
