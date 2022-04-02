@@ -1,5 +1,5 @@
 require_relative "boot"
-require "rack-cors"
+require "rack/cors"
 
 require "rails"
 # Pick the frameworks you want:
