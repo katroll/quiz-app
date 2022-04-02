@@ -1,4 +1,5 @@
 require_relative "boot"
+require "rack-cors"
 
 require "rails"
 # Pick the frameworks you want:
@@ -18,7 +19,7 @@ require "action_view/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-Rails.application.config.middleware.insert_before 0, Rack::Cors do
+config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins '*'
     resource '*', headers: :any, methods: [:get, :post, :delete, :patch, :options]
