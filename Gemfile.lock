@@ -184,6 +184,9 @@ GEM
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
+    rails_same_site_cookie (0.1.9)
+      rack (>= 1.5)
+      user_agent_parser (~> 2.6)
     rails_serve_static_assets (0.0.5)
     rails_stdout_logging (0.0.5)
     railties (7.0.2.2)
@@ -210,6 +213,7 @@ GEM
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2022.1)
       tzinfo (>= 1.0.0)
+    user_agent_parser (2.9.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-driver (0.7.5-java)
@@ -239,6 +243,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 7.0.2)
   rails_12factor
+  rails_same_site_cookie (~> 0.1.0)
   roo (~> 2.8)
   tzinfo-data
 
