@@ -35,6 +35,7 @@ class QuizzesController < ApplicationController
   # DELETE /quizzes/1
   def destroy
     @quiz.destroy
+    render json: {}, status: :ok
   end
 
   private
