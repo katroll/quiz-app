@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   resources :grades, only: [:create, :index]
   resources :questions, only: [:create,]
-  resources :quizzes, only: [:create, :index]
+  resources :quizzes, only: [:create, :index, :destroy]
   resources :users, only: [:index, :create, :destroy, :update]
 
 
