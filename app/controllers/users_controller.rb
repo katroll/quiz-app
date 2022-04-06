@@ -67,7 +67,7 @@ class UsersController < ApplicationController
 
     def check_admin
       curr_user = User.find_by(id: request.headers["user-id"])
-      puts curr_user.first_name
+      puts request.headers["user-id"]
       
       if curr_user.role == "head_admin"
         return true 
