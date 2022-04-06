@@ -79,7 +79,7 @@ class UsersController < ApplicationController
       if params[:spctc_pin_code] == "01234"
         return true 
       else 
-        render json: {errors: [error: "Check that the SPCTC Pin entered is correct."]}, status: :unprocessable_entity
+        render json: {error: "Check that the SPCTC Pin entered is correct."}, status: :unprocessable_entity
       end
     end
 end
