@@ -57,7 +57,6 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
-      puts @user.first_name
     end
 
     # Only allow a list of trusted parameters through.
@@ -67,7 +66,6 @@ class UsersController < ApplicationController
 
     def check_admin
       curr_user = User.find_by(id: request.headers["user-id"])
-      puts request.headers["user-id"]
       
       if curr_user.role == "head_admin"
         return true 
