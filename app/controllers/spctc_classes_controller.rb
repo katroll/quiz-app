@@ -15,6 +15,7 @@ class SpctcClassesController < ApplicationController
 
   # POST /spctc_classes
   def create
+    puts params
     @spctc_class = SpctcClass.new(spctc_class_params)
 
     if @spctc_class.save
@@ -46,6 +47,6 @@ class SpctcClassesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def spctc_class_params
-      params.permit(:name)
+      params.require(:spctc_class).permit(:name)
     end
 end
