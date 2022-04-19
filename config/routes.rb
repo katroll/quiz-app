@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :quizzes_classes
+  resources :users_classes
+
+  #resources :spctc_classes
   
   resources :grades, only: [:create, :index]
   resources :questions, only: [:create,]

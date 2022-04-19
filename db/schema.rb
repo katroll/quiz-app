@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_27_153432) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_19_161043) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,6 +47,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_27_153432) do
     t.string "kind"
   end
 
+  create_table "quizzes_classes", force: :cascade do |t|
+    t.bigint "quizzes_id", null: false
+    t.bigint "spctc_classes_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quizzes_id"], name: "index_quizzes_classes_on_quizzes_id"
+    t.index ["spctc_classes_id"], name: "index_quizzes_classes_on_spctc_classes_id"
+  end
+
+  create_table "spctc_classes", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -58,7 +73,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_27_153432) do
     t.string "role"
   end
 
+  create_table "users_classes", force: :cascade do |t|
+    t.bigint "users_id", null: false
+    t.bigint "spctc_classes_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["spctc_classes_id"], name: "index_users_classes_on_spctc_classes_id"
+    t.index ["users_id"], name: "index_users_classes_on_users_id"
+  end
+
   add_foreign_key "grades", "quizzes"
   add_foreign_key "grades", "users"
   add_foreign_key "questions", "quizzes"
+  add_foreign_key "quizzes_classes", "quizzes", column: "quizzes_id"
+  add_foreign_key "quizzes_classes", "spctc_classes", column: "spctc_classes_id"
+  add_foreign_key "users_classes", "spctc_classes", column: "spctc_classes_id"
+  add_foreign_key "users_classes", "users", column: "users_id"
 end

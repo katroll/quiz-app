@@ -1,0 +1,2 @@
+class SpctcClass < ApplicationRecord
+end
