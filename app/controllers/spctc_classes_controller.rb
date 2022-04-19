@@ -19,7 +19,7 @@ class SpctcClassesController < ApplicationController
     @spctc_class = SpctcClass.new(spctc_class_params)
 
     if @spctc_class.save
-      render json: @spctc_class, status: :created, location: @spctc_class
+      render json: @spctc_class, status: :created
     else
       render json: @spctc_class.errors, status: :unprocessable_entity
     end
