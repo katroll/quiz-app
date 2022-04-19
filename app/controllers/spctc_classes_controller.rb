@@ -46,6 +46,6 @@ class SpctcClassesController < ApplicationController
 
     Only allow a list of trusted parameters through.
     def spctc_class_params
-      params.require(:spctc_class).permit(:name)
+      params.permit(:name)
     end
 end
