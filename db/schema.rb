@@ -48,12 +48,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_161043) do
   end
 
   create_table "quizzes_classes", force: :cascade do |t|
-    t.bigint "quizzes_id", null: false
-    t.bigint "spctc_classes_id", null: false
+    t.bigint "quiz_id", null: false
+    t.bigint "spctc_class_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["quizzes_id"], name: "index_quizzes_classes_on_quizzes_id"
-    t.index ["spctc_classes_id"], name: "index_quizzes_classes_on_spctc_classes_id"
+    t.index ["quiz_id"], name: "index_quizzes_classes_on_quiz_id"
+    t.index ["spctc_class_id"], name: "index_quizzes_classes_on_spctc_class_id"
   end
 
   create_table "spctc_classes", force: :cascade do |t|
@@ -74,19 +74,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_161043) do
   end
 
   create_table "users_classes", force: :cascade do |t|
-    t.bigint "users_id", null: false
-    t.bigint "spctc_classes_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "spctc_class_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["spctc_classes_id"], name: "index_users_classes_on_spctc_classes_id"
-    t.index ["users_id"], name: "index_users_classes_on_users_id"
+    t.index ["spctc_class_id"], name: "index_users_classes_on_spctc_class_id"
+    t.index ["user_id"], name: "index_users_classes_on_user_id"
   end
 
   add_foreign_key "grades", "quizzes"
   add_foreign_key "grades", "users"
   add_foreign_key "questions", "quizzes"
-  add_foreign_key "quizzes_classes", "quizzes", column: "quizzes_id"
-  add_foreign_key "quizzes_classes", "spctc_classes", column: "spctc_classes_id"
-  add_foreign_key "users_classes", "spctc_classes", column: "spctc_classes_id"
-  add_foreign_key "users_classes", "users", column: "users_id"
+  add_foreign_key "quizzes_classes", "quizzes"
+  add_foreign_key "quizzes_classes", "spctc_classes"
+  add_foreign_key "users_classes", "spctc_classes"
+  add_foreign_key "users_classes", "users"
 end

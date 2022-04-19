@@ -1,5 +1,6 @@
 class User < ApplicationRecord
     has_many :grades, dependent: :destroy
+    
     has_many :users_classes
     has_many :spctc_classes, through: :users_classes
 
