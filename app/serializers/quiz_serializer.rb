@@ -3,6 +3,5 @@ class QuizSerializer < ActiveModel::Serializer
 
   has_many :questions
   has_many :grades
-  has_many :quizzes_classes
-  has_many :spctc_classes, through: :quizzes_classes
+  has_many :spctc_classes
 end
