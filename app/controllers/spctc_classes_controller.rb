@@ -39,12 +39,12 @@ class SpctcClassesController < ApplicationController
   # end
 
   private
-    Use callbacks to share common setup or constraints between actions.
+    # Use callbacks to share common setup or constraints between actions.
     def set_spctc_class
       @spctc_class = SpctcClass.find(params[:id])
     end
 
-    Only allow a list of trusted parameters through.
+    # Only allow a list of trusted parameters through.
     def spctc_class_params
       params.permit(:name)
     end
