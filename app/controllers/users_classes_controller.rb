@@ -1,7 +1,11 @@
 class UsersClassesController < ApplicationController
 
     def create
+        puts "testing here"
+        puts params
         @users_class = UsersClass.new(users_class_params)
+
+        puts @users_class
     
         if @users_class.save
           render json: @users_class, status: :created
