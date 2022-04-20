@@ -1,11 +1,7 @@
 class UsersClassesController < ApplicationController
 
     def create
-        puts "testing here"
-        puts params
-        @users_class = UsersClass.new(user_id: params[:user_id], spctc_class_id: params[:spctc_class_id])
-
-        puts @users_class
+        @users_class = UsersClass.new(users_class_params)
     
         if @users_class.save
           render json: @users_class, status: :created
@@ -17,7 +13,7 @@ class UsersClassesController < ApplicationController
     private 
 
     def users_class_params
-        params.require(:users_class).permit(:users_id, :spctc_class_id)
+        params.require(:users_class).permit(:user_id, :spctc_class_id)
     end
     
   
