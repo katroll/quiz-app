@@ -15,7 +15,6 @@ class SpctcClassesController < ApplicationController
 
   # POST /spctc_classes
   def create
-    puts params
     @spctc_class = SpctcClass.new(spctc_class_params)
 
     if @spctc_class.save
