@@ -36,6 +36,7 @@ class SpctcClassesController < ApplicationController
   # DELETE /spctc_classes/1
   def destroy
     @spctc_class.destroy
+    render json: {}, status: :ok
   end
 
   private
