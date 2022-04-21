@@ -33,7 +33,7 @@ class SpctcClassesController < ApplicationController
   #   end
   # end
 
-  DELETE /spctc_classes/1
+  # DELETE /spctc_classes/1
   def destroy
     @spctc_class.destroy
   end
