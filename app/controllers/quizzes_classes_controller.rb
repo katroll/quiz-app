@@ -13,11 +13,11 @@ class QuizzesClassesController < ApplicationController
     def remove_quiz_from_class
       quizzes_class = QuizzesClass.find_quizzes_class(params[:spctc_class_id], params[:quiz_id])
 
-      if users_class
+      if quizzes_class
         QuizzesClass.destroy(quizzes_class)
         render json: {}, status: :ok
       else
-        render json: {error: "cannot find users_class"}, status: :not_found
+        render json: {error: "cannot find quizzes_class"}, status: :not_found
       end
     end
 
