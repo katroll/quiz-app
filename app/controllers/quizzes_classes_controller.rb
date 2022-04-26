@@ -11,7 +11,7 @@ class QuizzesClassesController < ApplicationController
     end
 
     def remove_quiz_from_class
-      quizzes_class = QuizzesClass.find_quizzes_class(params[:spctc_class_id, :quiz_id])
+      quizzes_class = QuizzesClass.find_quizzes_class(params[:spctc_class_id], params[:quiz_id])
 
       if users_class
         QuizzesClass.destroy(quizzes_class)

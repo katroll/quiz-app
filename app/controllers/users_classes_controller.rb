@@ -11,8 +11,6 @@ class UsersClassesController < ApplicationController
     end
 
     def remove_student_from_class
-      puts "made it here"
-      puts params
       users_class = UsersClass.find_users_class(params[:spctc_class_id], params[:user_id])
 
       if users_class
