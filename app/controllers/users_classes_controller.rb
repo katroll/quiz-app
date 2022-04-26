@@ -10,6 +10,17 @@ class UsersClassesController < ApplicationController
         end
     end
 
+    def remove_student_from_class
+      users_class = UsersClass.find_users_class(users_class_params)
+
+      if users_class
+        UsersClass.destroy(users_class)
+        render json: {}, status: :ok
+      else
+        render json: {error: "cannot find users_class"}, status: :not_found
+      end
+    end
+
     private 
 
     def users_class_params

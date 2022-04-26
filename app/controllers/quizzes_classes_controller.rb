@@ -10,6 +10,18 @@ class QuizzesClassesController < ApplicationController
         end
     end
 
+    def remove_quiz_from_class
+      quizzes_class = QuizzesClass.find_quizzes_class(quizzes_class_params)
+
+      if users_class
+        QuizzesClass.destroy(quizzes_class)
+        render json: {}, status: :ok
+      else
+        render json: {error: "cannot find users_class"}, status: :not_found
+      end
+    end
+
+
     private 
 
     def quizzes_class_params

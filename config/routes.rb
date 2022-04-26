@@ -12,8 +12,20 @@ Rails.application.routes.draw do
 
   get "/me", to: "users#show"
   get "/exportusers", to: "users#export_user"
+
   get "/exportgrades", to: "grades#export_grades"
+
+  post "/remove_student_from_class", to: "users_classes#remove_student_from_class"
+  post "/remove_quiz_from_class", to: "quizzes_classes#remove_quiz_from_class"
+
   post "/signin", to: "sessions#create"
   delete "/signout", to: "sessions#destroy"
+
+  
+
+
+
+
+  
   
 end
