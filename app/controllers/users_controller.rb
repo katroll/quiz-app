@@ -30,6 +30,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
+    SpctcClass.enroll_new_student(@user)
+
     if @user.save
       render json: @user, status: :created, location: @user
     else
